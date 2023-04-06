@@ -29,6 +29,7 @@ function Header() {
     } else if (menuName === "burger") {
       setDropMenu((prevDropMenu) => !prevDropMenu);
       setDropPages(false);
+      setDropShop(false);
       setDropSoon(false);
     }
   };
