@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import hamburger from "../../assets/menu.svg";
 import { Link } from "react-router-dom";
 import glass from "../../assets/glass.webp";
@@ -7,169 +7,225 @@ import HeaderSignIn from "./headerSignIn";
 import love from "../../assets/icon-love.svg";
 import cart from "../../assets/icon-cart.svg";
 import search from "../../assets/icon-search.svg";
+import dropdown from "../../assets/icon-dropdown.svg";
+import arrow from "../../assets/icon-arrow.svg";
 
 function Header() {
-  const token = 1;
+  const [dropPages, setDropPages] = useState(false);
+  const [dropShop, setDropShop] = useState(false);
+  const [dropSoon, setDropSoon] = useState(false);
+  const [dropMenu, setDropMenu] = useState(false);
+  const handleMenuClick = (menuName) => {
+    if (menuName === "pages") {
+      setDropPages((prevDropPages) => !prevDropPages);
+      setDropShop(false);
+      setDropSoon(false);
+      setDropMenu(false);
+    } else if (menuName === "shop") {
+      setDropShop((prevDropShop) => !prevDropShop);
+      setDropPages(false);
+      setDropSoon(false);
+      setDropMenu(false);
+    } else if (menuName === "burger") {
+      setDropMenu((prevDropMenu) => !prevDropMenu);
+      setDropPages(false);
+      setDropSoon(false);
+    }
+  };
+  const handleSoon = () => {
+    setDropSoon((prevDropSoon) => !prevDropSoon);
+  };
+  const token = 0;
   return (
     <>
-      <header className="navbar px-2 md:px-12 lg:px-20 lg:py-8 bg-base-100">
+      <header className="navbar px-2 md:px-8 lg:px-20 py-8 lg:py-[3.15rem] ">
         <div className="navbar-start">
-          <h1 className="text-2xl lg:text-4xl font-bold">RAZ</h1>
+          <h1 className="cursor-pointer select-none font-bold text-xl lg:text-[2.82rem]">
+            RAZYR
+          </h1>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link to="/">
-                <p>HOME</p>
-              </Link>
-            </li>
-            <li tabIndex={0}>
-              <Link>
-                PAGES
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                </svg>
-              </Link>
-              <ul className="p-2 mt-8 bg-black text-white">
-                <li>
-                  <Link>About Us</Link>
-                </li>
-                <li>
-                  <Link>Contact Us</Link>
-                </li>
-                <li>
-                  <Link>Coming Soon</Link>
-                </li>
-                <li>
-                  <Link>404 Page</Link>
-                </li>
-                <li>
-                  <Link>FAQ Page</Link>
-                </li>
-              </ul>
-            </li>
-            <li tabIndex={0}>
-              <Link>
-                SHOP
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                </svg>
-              </Link>
-              <ul className="p-2 -translate-x-1/2">
-                <div className="flex flex-row mt-6 w-fit px-10 py-12 gap-20 bg-black text-white">
+        <div className="hidden lg:flex navbar-center gap-[4.3rem] text-lg font-bold">
+          <div className="navlink">
+            <Link to="/">HOME</Link>
+          </div>
+          <div className="relative">
+            <div
+              className="navlink flex items-center justify-end"
+              onClick={() => handleMenuClick("pages")}
+            >
+              PAGES
+              <img
+                src={dropdown}
+                alt="icon-dropdown"
+                className="absolute translate-x-5"
+              />
+            </div>
+            {dropPages && (
+              <div className="relative">
+                <div className="absolute z-10 flex flex-col gap-8 justify-center translate-y-[3.2rem] px-8 bg-zinc-900 w-[18.75rem] h-[21.875rem] py-6 font-normal text-white shadow-xl">
+                  <Link to="/login">
+                    <div className="cursor-pointer hover:text-slate-200">
+                      About Us
+                    </div>
+                  </Link>
+                  <div className="cursor-pointer hover:text-slate-200">
+                    Contact Us
+                  </div>
+                  <div
+                    className="flex justify-between cursor-pointer hover:text-slate-200"
+                    onClick={handleSoon}
+                  >
+                    Comming Soon
+                    <img src={arrow} alt="icon-arrow" />
+                  </div>
+                  <div className="cursor-pointer hover:text-slate-200">
+                    404 Page
+                  </div>
+                  <div className="cursor-pointer hover:text-slate-200">FAQ</div>
+                </div>
+              </div>
+            )}
+          </div>
+          {dropSoon && (
+            <div className="absolute flex flex-col px-10 gap-4 text-[#919191] translate-x-[26.3rem] translate-y-60 justify-center shadow-xl z-20 w-[16.25rem] h-[11.25rem] bg-[#353535]">
+              <div>Cooming Soon 01</div>
+              <div>Cooming Soon 02</div>
+            </div>
+          )}
+          <div className="relative">
+            <div
+              className="navlink flex items-center justify-end"
+              onClick={() => handleMenuClick("shop")}
+            >
+              SHOP
+              <img
+                src={dropdown}
+                alt="icon-dropdown"
+                className="absolute translate-x-5"
+              />
+            </div>
+            {dropShop && (
+              <div className="relative">
+                <div className="absolute z-10 flex gap-8 items-center justify-between translate-y-[3.2rem] -translate-x-[22rem] bg-zinc-900 w-[699px] h-[341px] pl-20 pr-10 font-normal shadow-xl">
                   <div>
-                    <p>Other Page</p>
-                    <li>
-                      <Link>Shopping Cart</Link>
-                    </li>
-                    <li>
-                      <Link>Check Out</Link>
-                    </li>
-                    <li>
-                      <Link>My Account</Link>
-                    </li>
-                    <li>
-                      <Link>Order Tracking</Link>
-                    </li>
-                  </div>
-                  <div className="flex gap-11 items-center justify-center px-12 py-8 bg-white w-fit h-fit ">
-                    <div className="grid place-items-center w-36 h-36">
-                      <img src={glass} alt="img-glass" />
+                    <p className="text-white mb-6">Other Page</p>
+                    <div className="flex flex-col gap-2 text-[#B4B4B4] text-sm">
+                      <Link to="/cart">
+                        <div>Shopping Cart</div>
+                      </Link>
+                      <Link to="/checkout">
+                        <div>Check Out</div>
+                      </Link>
+                      <Link to="">
+                        <div>My Account</div>
+                      </Link>
+                      <Link to="/tracking">
+                        <div>Order Tracking</div>
+                      </Link>
                     </div>
-                    <div>
-                      <p className="text-black text-xs">
-                        Decorative Ceramic Accent Vases
-                      </p>
-                      <p className="text-red-600 text-3xl">Off 50%</p>
-                      <div className="btn">Shop now</div>
+                  </div>
+                  <div className="flex items-center gap-14 bg-[#F9F9F9] w-[25rem] h-56 px-10">
+                    <div className="w-32 h-32">
+                      <img
+                        src={glass}
+                        alt="glass"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <p>Decorative Ceramic Accent Vases</p>
+                      <p className="text-[#D94141] text-3xl">Off 50%</p>
+                      <div className="btn bg-[#262626]">Shop now</div>
                     </div>
                   </div>
                 </div>
-              </ul>
-            </li>
-            <li>
-              <Link>
-                <p>BLOG</p>
-              </Link>
-            </li>
-          </ul>
+              </div>
+            )}
+          </div>
+          <div className="navlink">BLOG</div>
         </div>
-        <div className="navbar-end gap-[1.5rem] items-start">
-          <button className="hidden btn btn-ghost btn-circle lg:grid place-content-center">
-            <img src={search} alt="icon-search" />
-          </button>
-          <div className="hidden lg:block dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <div className="indicator">
-                <img src={love} alt="icon-love" />
-                <span className="badge rounded-full indicator-item -translate-y-4">
-                  8
+        <div className="navbar-end relative">
+          <div className="flex gap-12">
+            <div className="hidden lg:flex lg:gap-12">
+              <div className="cursor-pointer w-6 h-6">
+                <img
+                  src={search}
+                  alt="icon-search"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="relative w-6 h-6 cursor-pointer">
+                <img
+                  src={love}
+                  alt="icon-love"
+                  className="w-full h-full object-cover"
+                />
+                <span className="absolute w-[1.625rem] h-[1.625rem] -top-6 left-4 grid place-items-center rounded-full text-white bg-black">
+                  01
                 </span>
               </div>
-            </label>
-            <div
-              tabIndex={0}
-              className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body">
-                <span className="font-bold text-lg">8 Favorite</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="hidden lg:block dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <div className="indicator">
-                <img src={cart} alt="icon-cart" />
-                <span className="badge rounded-full indicator-item -translate-y-4">
-                  8
+              <div className="relative cursor-pointer w-6 h-6">
+                <img
+                  src={cart}
+                  alt="icon-cart"
+                  className="w-full h-full object-cover"
+                />
+                <span className="absolute w-[1.625rem] h-[1.625rem] -top-6 left-4 grid place-items-center rounded-full text-white bg-black">
+                  01
                 </span>
               </div>
-            </label>
+            </div>
             <div
-              tabIndex={0}
-              className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
+              className="cursor-pointer w-6 h-6"
+              onClick={() => handleMenuClick("burger")}
             >
-              <div className="card-body">
-                <span className="font-bold text-lg">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
-                </div>
-              </div>
+              <img
+                src={hamburger}
+                alt="icon-humberger"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
-          <div className="w-11 h-8">
-            <div className="dropdown">
-              <label tabIndex={0} className="btn btn-ghost btn-square ">
-                <div className="w-9 h-6 md:w-11 md:h-8">
-                  <img
-                    src={hamburger}
-                    alt="hamburger"
-                    className="w-3/4 h-3/4 md:h-full md:w-full object-contain"
-                  />
-                </div>
-              </label>
-              {token === 0 ? <HeaderLogin /> : <HeaderSignIn />}
+          {token === 1
+            ? dropMenu && <HeaderLogin />
+            : dropMenu && <HeaderSignIn />}
+        </div>
+        <div className="flex flex-col absolute z-20 translate-x-[14.2rem] translate-y-[11.4rem] md:translate-x-[33rem] bg-black text-white lg:hidden ">
+          <div className="flex flex-col gap-4  px-16 py-5">
+            <div className="navlink">HOME</div>
+            <div className="navlink">PAGES</div>
+            <div className="navlink">SHOP</div>
+            <div className="navlink">BLOG</div>
+          </div>
+          <div className="bg-white w-full h-full">
+            <div className="flex justify-center items-center gap-6 my-8 bg-white">
+              <div className="cursor-pointer w-6 h-6">
+                <img
+                  src={search}
+                  alt="icon-search"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="relative w-6 h-6 cursor-pointer">
+                <img
+                  src={love}
+                  alt="icon-love"
+                  className="w-full h-full object-cover"
+                />
+                <span className="absolute w-[1.625rem] h-[1.625rem] -top-6 left-4 grid place-items-center rounded-full text-white bg-black">
+                  01
+                </span>
+              </div>
+              <div className="relative cursor-pointer w-6 h-6">
+                <img
+                  src={cart}
+                  alt="icon-cart"
+                  className="w-full h-full object-cover"
+                />
+                <span className="absolute w-[1.625rem] h-[1.625rem] -top-6 left-4 grid place-items-center rounded-full text-white bg-black">
+                  01
+                </span>
+              </div>
             </div>
           </div>
         </div>
