@@ -27,6 +27,7 @@ input[type="radio"]:checked + label {
   color: black;
 }
 
+
 @layer components {
   .hero-home {
     background-image: url(./assets/banner-home.png);
@@ -36,5 +37,9 @@ input[type="radio"]:checked + label {
   .hero-login {
     background-image: url(./assets/Background/bgLogin.svg);
     opacity: 20%;
+  }
+
+  .navlink {
+    @apply cursor-pointer select-none
   }
 }
