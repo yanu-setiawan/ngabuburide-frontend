@@ -7,6 +7,10 @@ import imgProdLima from "../../assets/p5.png";
 import imgProdEnam from "../../assets/p6.png";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Bitmap from "../../assets/Medsos/Bitmap.svg";
+import Bitmap2 from "../../assets/Medsos/Bitmap (1).svg";
+import Bitmap3 from "../../assets/Medsos/Bitmap (2).svg";
+import Bitmap4 from "../../assets/Medsos/Bitmap (3).svg";
 
 function DisplayProducts(props) {
   return (
@@ -114,7 +118,35 @@ function Home() {
           desc={product.desc}
         />
       ))}
-      <section></section>
+      <section className=" w-full  bg-[#161616] flex flex-col px-20 py-16 lg:px-[8.7rem] lg:py-[5.8rem]">
+        <div className="w-full flex justify-center items-center flex-col gap-9">
+          <p className=" text-lg font-PlayFairDisplay w-[89%] text-center text-white lg:text-3xl lg:leading-[55px]">
+            Gave 5 stars for excellent customer service. I had a couple of
+            questions which they replied quickly to answer. If I could give
+            multiple reasons for my rating it would also be for the design
+            quality and customization to go along with the great service. The
+            theme is excellent, keep up the great work.
+          </p>
+          <div className=" w-[4.5rem] h-[2px] bg-greyFont"></div>
+          <p className=" font-bold font-OpenSans text-white text-lg text-center">
+            Trevor Rivera - CEO IKEA
+          </p>
+        </div>
+        <div className="w-full gap-[10.4rem] flex-wrap flex flex-col md:flex-row sm:grid sm:grid-cols-2 md:flex justify-center justify-items-center items-center mt-32 mb-3">
+          <div className="our-partner-img h-[8.9rem] ">
+            <img src={Bitmap} alt="" className="w-full" />
+          </div>
+          <div className="our-partner-img h-[8.9rem]">
+            <img src={Bitmap2} alt="" className="w-full" />
+          </div>
+          <div className="our-partner-img h-[8.9rem]">
+            <img src={Bitmap3} alt="" className="w-full" />
+          </div>
+          <div className="our-partner-img h-[8.9rem]">
+            <img src={Bitmap4} alt="" className="w-full" />
+          </div>
+        </div>
+      </section>
       <Footer />
     </>
   );
