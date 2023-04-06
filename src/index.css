@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Arimo", sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+input[type="radio"] + label span {
+  transition: background 0.2s, transform 0.2s;
+}
+
+input[type="radio"] + label span:hover,
+input[type="radio"] + label:hover span {
+  transform: scale(1.2);
+}
+
+input[type="radio"]:checked + label span {
+  background-color: black;
+  box-shadow: 0px 0px 0px 2px white inset;
+}
+
+input[type="radio"]:checked + label {
+  color: black;
+}
+
+@layer components {
+  .hero-home {
+    background-image: url(./assets/banner-home.png);
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-login {
+    background-image: url(./assets/Background/bgLogin.svg);
+    opacity: 20%;
+  }
+}
