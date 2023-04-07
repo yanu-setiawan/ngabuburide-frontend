@@ -14,7 +14,9 @@ function Footer() {
     <footer className="bg-blackSec">
       <section className=" w-full p-6 md:p-[5rem] flex gap-14 xl:gap-[9.3rem] flex-col lg:flex-row  justify-around">
         <div className="">
-          <p className=" font-bold text-white text-[3.75rem] mb-[1rem]">RAZ</p>
+          <p className=" font-bold text-white text-[3.75rem] mb-[1rem]">
+            RAZYR
+          </p>
           <p className="text-[1.125rem]  text-greyFont mb-[2rem] ">
             Worldwide furniture store since <br />
             2023. We sell over 1000+ branded <br />
