@@ -55,11 +55,11 @@ function Checkout() {
                     placeholder="Phone Number*"
                   />
                 </label>
-                <div className="absolute  top-1 border-r-2 pr-4">
+                <div className="absolute  top-1 left-8 lg:left-0 border-r-2 lg:pr-4">
                   <select
                     id="region"
                     name="region"
-                    class="h-16 rounded-md border-0 bg-transparent  pl-4 pr-7 outline-none "
+                    class="h-16 w-fit border-0 bg-transparent pl-4 pr-7 lg:pl-0 lg:pr-2 outline-none "
                   >
                     <option>+62</option>
                     <option>+63</option>
