@@ -54,6 +54,19 @@ input[type="radio"]:checked + label {
     @apply cursor-pointer select-none h-full flex-col justify-center items-start md:items-center flex w-fit;
   }
 
+  .navlink:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    border-bottom: 2px solid black;
+    transform: scale(0);
+    transition: 0.2s linear;
+  }
+  .navlink:hover::after {
+    transform: scale(1);
+  }
+
   .loading {
     @apply text-white font-bold flex gap-2;
   }
