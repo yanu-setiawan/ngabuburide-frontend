@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import arrow from "../../assets/icon-arrow-right.svg";
-import chair from "../../assets/chair.png";
+import CartCard from "./cartCard";
 
 function Cart() {
   return (
@@ -31,30 +31,10 @@ function Cart() {
                 <h2>QUANTITY</h2>
                 <h2 className="mr-10">TOTAL</h2>
               </div>
-              <div className="flex flex-col gap-8 mb-10">
-                <div className="flex gap-2 md:gap-8 lg:gap-12 text-xs lg:text-base flex-row items-center ustify-between">
-                  <div className="flex items-center lg:gap-4 md:w-fit">
-                    <p>x</p>
-                    <div className="">
-                      <img src={chair} alt="chair" />
-                    </div>
-                    <p className="w-28 md:w-52">Fabric Mid Century Chair</p>
-                  </div>
-                  <div className="w-32">
-                    <p>Rp.10.000.000</p>
-                  </div>
-                  <div className="mr-4 lg:mr-0">
-                    <div className="flex gap-4">
-                      <p>-</p>
-                      <p>02</p>
-                      <p>+</p>
-                    </div>
-                  </div>
-                  <div className="w-32">
-                    <p>Rp.100.000.000</p>
-                  </div>
-                </div>
-              </div>
+              <CartCard />
+              <CartCard />
+              <CartCard />
+              <CartCard />
             </div>
           </div>
           <div className="flex-1">
