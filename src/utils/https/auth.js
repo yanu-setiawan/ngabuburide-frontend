@@ -13,3 +13,27 @@ export const authLogin = (email, password, controller) => {
   const body = { email, password };
   return axios.post(url, body, { signal: controller.signal });
 };
+
+export const getProfile = (token, controller) => {
+  const url = `${baseUrl}profile`;
+  return axios.get(url, {
+    signal: controller.signal,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+export const updateProfile = (token, form, file, controller) => {
+  const url = `${baseUrl}profile`;
+  const body = new FormData();
+  if (file !== "") {
+    body.append("image", file);
+  }
+  Object.keys(form).forEach((key) => {
+    body.set(key, form[key]);
+  });
+  console.log(body);
+  return axios.patch(url, body, {
+    signal: controller.signal,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};

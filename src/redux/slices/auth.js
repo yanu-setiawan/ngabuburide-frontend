@@ -7,6 +7,8 @@ const initialState = {
     id: null,
     display_name: null,
     phone: null,
+    address: null,
+    role: null,
   },
   isLoading: false,
   isRejected: false,
@@ -53,6 +55,8 @@ const userSlice = createSlice({
           id: action.payload.id,
           display_name: action.payload.display_name,
           phone: action.payload.phone,
+          address: action.payload.address,
+          role: action.payload.role_id,
         },
       };
     },
