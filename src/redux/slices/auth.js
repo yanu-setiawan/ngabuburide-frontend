@@ -29,7 +29,11 @@ const loginThunk = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    authLogout: () => {
+      return initialState;
+    },
+  },
   extraReducers: {
     [loginThunk.pending]: (prevState) => {
       return {

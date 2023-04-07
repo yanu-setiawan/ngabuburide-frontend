@@ -77,24 +77,24 @@ function Login() {
             </p>
           </div>
         </section>
-        <section className=" mt-20 flex flex-col gap-20 lg:gap-32 lg:flex-row justify-center">
-          <aside className=" flex gap-20 justify-center lg:flex-col lg:justify-normal p-2">
-            <p className=" text-[1.20rem] md:text-[2rem]  text-blackSec border-b-2 border-[#C2C2C2] p-3 text-center">
-              Login Account
-            </p>
-            <Link to="/register">
-              <p className="text-[1.20rem] md:text-[2rem] text-greyFont  p-3 text-center">
-                Register Account
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <section className=" mt-20 flex flex-col gap-20 lg:gap-32 lg:flex-row justify-center">
+            <aside className=" flex gap-20 justify-center lg:flex-col lg:justify-normal p-2">
+              <p className=" text-[1.20rem] md:text-[2rem]  text-blackSec border-b-2 border-[#C2C2C2] p-3 text-center">
+                Login Account
               </p>
-            </Link>
-          </aside>
-          <div className="isForm flex flex-col pb-[10rem] ">
-            <h1 className=" text-[2rem] flex justify-center lg:justify-start">
-              Login
-            </h1>
-            {isLoading ? (
-              <Loader />
-            ) : (
+              <Link to="/register">
+                <p className="text-[1.20rem] md:text-[2rem] text-greyFont  p-3 text-center">
+                  Register Account
+                </p>
+              </Link>
+            </aside>
+            <div className="isForm flex flex-col pb-[10rem] ">
+              <h1 className=" text-[2rem] flex justify-center lg:justify-start">
+                Login
+              </h1>
               <form className=" w-full justify-center flex flex-col gap-3">
                 <label htmlFor="email" className="flex justify-center mt-11">
                   <input
@@ -155,9 +155,9 @@ function Login() {
                   </div>
                 </div>
               </form>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
       </section>
       {isErrModal && (
         <ModalMsg
