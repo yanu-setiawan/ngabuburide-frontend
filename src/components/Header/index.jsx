@@ -13,18 +13,19 @@ function DropDownPages({ isOpen, onClose }) {
     <>
       {isOpen && (
         <div className="md:w-72 flex flex-col gap-2 pl-8 py-3 md:p-10 top-28 md:absolute bg-black text-white font-normal">
-          <Link>About Us</Link>
-          <Link>Contact Us</Link>
-          <Link className="flex justify-between">
+          <Link to={"/about"}>About Us</Link>
+          <Link to={"/contact"}>Contact Us</Link>
+          <Link to={"/commingsoon"} className="flex justify-between">
             Comming Soon <i className="bi bi-caret-right"></i>
           </Link>
-          <Link>404 Page</Link>
-          <Link>FAQ Page</Link>
+          <Link to={"/notfound"}>404 Page</Link>
+          <Link to={"/faq"}>FAQ Page</Link>
         </div>
       )}
     </>
   );
 }
+
 function DropDownShop({ isOpen, onClose }) {
   return (
     <>
@@ -33,9 +34,11 @@ function DropDownShop({ isOpen, onClose }) {
           <section className="flex flex-col gap-5 mr-10">
             <Link to={"/product"}>Products</Link>
             <Link to={"/cart"}>Shopping Cart</Link>
-            <Link className="flex justify-between">Check Out</Link>
+            <Link to={"/checkout"} className="flex justify-between">
+              Check Out
+            </Link>
             <Link to={"/profile"}>My Account</Link>
-            <Link>Order Tracking</Link>
+            <Link to={"/tracking"}>Order Tracking</Link>
           </section>
           <span className="w-96 h-52 flex justify-center items-center bg-white">
             <img src={imgGlass} alt="img-promo" />
@@ -50,6 +53,7 @@ function DropDownShop({ isOpen, onClose }) {
     </>
   );
 }
+
 function DropDownMenu({ isOpen, onToggle, onClose }) {
   const stateStore = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -89,6 +93,7 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
     </>
   );
 }
+
 function Header() {
   const [linkPages, setLinkPages] = useState(0);
   const [isToggle, setIsToggle] = useState(false);
