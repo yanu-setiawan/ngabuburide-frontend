@@ -8,7 +8,7 @@ function cartCard() {
         <div className="flex gap-2 md:gap-8 lg:gap-12 text-xs lg:text-base flex-row items-center ustify-between">
           <div className="flex items-center lg:gap-4 md:w-fit">
             <p>x</p>
-            <div className="w-[4.313rem] h-[5.188rem]">
+            <div className="md:w-[4.313rem] md:h-[5.188rem]">
               <img
                 src={chair}
                 alt="chair"
