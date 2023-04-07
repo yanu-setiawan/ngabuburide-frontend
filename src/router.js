@@ -12,6 +12,7 @@ import Chat from "./Pages/Chat";
 import Profile from "./Pages/Profile";
 
 import Cart from "./Pages/Cart";
+import Checkout from "./Pages/Checkout";
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
   { path: "/profile", element: <Profile /> },
 
   { path: "/cart", element: <Cart /> },
+  { path: "/checkout", element: <Checkout /> },
 
 ]);
 
