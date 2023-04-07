@@ -9,6 +9,11 @@ import Product from "./Pages/Product";
 import Notifications from "./Pages/Notification";
 import Chat from "./Pages/Chat";
 
+import Profile from "./Pages/Profile";
+
+import Cart from "./Pages/Cart";
+
+
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/register", element: <Register /> },
@@ -17,6 +22,11 @@ const router = createBrowserRouter([
   { path: "/product", element: <Product /> },
   { path: "/notification", element: <Notifications /> },
   { path: "/chat", element: <Chat /> },
+
+  { path: "/profile", element: <Profile /> },
+
+  { path: "/cart", element: <Cart /> },
+
 ]);
 
 export default router;
