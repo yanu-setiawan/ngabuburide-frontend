@@ -7,7 +7,7 @@ function Product() {
   return (
     <>
       <Header />
-      <main>
+      <main className="">
         <section className="relative">
           <div className=" hero-login w-full h-[15.6rem] opacity-20 flex justify-center items-center "></div>
           <div className=" absolute flex justify-center items-center text-center flex-col top-16 w-full ">
@@ -17,7 +17,7 @@ function Product() {
             </p>
           </div>
         </section>
-        <section className="w-full h-full flex gap-12 lg:px-20 lg:py-16 ">
+        <section className="w-full h-full flex flex-col md:flex-row justify-center gap-12 lg:px-20 lg:py-16 ">
           <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-4 ">
               <h1 className="font-bold text-2xl mb-4">Categories</h1>
@@ -102,7 +102,7 @@ function Product() {
                 <p>Sort by</p>
               </div>
             </div>
-            <div className="w-full grid grid-cols-3 gap-5 place-content-between">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-content-between">
               <Card />
               <Card />
               <Card />
