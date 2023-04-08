@@ -5,6 +5,7 @@ import withSearchParams from "../../utils/wrapper/withSearchParams";
 import Card from "./card";
 import { getDataProducts, getMetaCategories } from "../../utils/https/products";
 import Loader from "../../components/Loader";
+import arrow from "../../assets/icon-arrow-right.svg";
 
 function DataNotFound() {
   return (
@@ -125,7 +126,7 @@ function Product(props) {
         <section className="relative">
           <div className="absolute flex gap-4 px-20 pt-10">
             <p>Shop</p>
-            <img src="" alt="icon-arrow" />
+            <img src={arrow} alt="icon-arrow" />
             <p>Shop Right Sidebar</p>
           </div>
           <div className=" hero-login w-full h-[15.6rem] opacity-20 flex justify-center items-center "></div>
@@ -238,7 +239,9 @@ function Product(props) {
               </div>
               <div>
                 <div className="flex justify-between mb-10">
-                  <p>Showing 1-16 of {metaData.total} Results</p>
+                  <p>
+                    Showing 1-{metaData.total} of {metaData.total} Results
+                  </p>
                   <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost m-1">
                       Short By
