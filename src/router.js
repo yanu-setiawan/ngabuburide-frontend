@@ -11,22 +11,71 @@ import Chat from "./Pages/Chat";
 import Profile from "./Pages/Profile";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
-import Tracking from "./Pages/OrderTracking"
-
+import Tracking from "./Pages/OrderTracking";
+import PublicRoute from "./utils/wrapper/publicRoute";
+import PrivateRoute from "./utils/wrapper/privateRoute";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
-  { path: "/register", element: <Register /> },
-  { path: "/login", element: <Login /> },
-  { path: "/forgot", element: <Forgot /> },
+  {
+    path: "/register",
+    element: (
+      <PublicRoute>
+        <Register />
+      </PublicRoute>
+    ),
+  },
+  {
+    path: "/login",
+    element: (
+      <PublicRoute>
+        <Login />
+      </PublicRoute>
+    ),
+  },
+  {
+    path: "/forgot",
+    element: (
+      <PublicRoute>
+        <Forgot />
+      </PublicRoute>
+    ),
+  },
   { path: "/product", element: <Product /> },
   { path: "/notification", element: <Notifications /> },
   { path: "/chat", element: <Chat /> },
-  { path: "/profile", element: <Profile /> },
-  { path: "/cart", element: <Cart /> },
-  { path: "/checkout", element: <Checkout /> },
-  { path: "/tracking", element: <Tracking /> },
-
+  {
+    path: "/profile",
+    element: (
+      <PrivateRoute>
+        <Profile />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/cart",
+    element: (
+      <PrivateRoute>
+        <Cart />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/checkout",
+    element: (
+      <PrivateRoute>
+        <Checkout />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/tracking",
+    element: (
+      <PrivateRoute>
+        <Tracking />
+      </PrivateRoute>
+    ),
+  },
 ]);
 
 export default router;
