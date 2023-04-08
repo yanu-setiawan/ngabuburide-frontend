@@ -8,6 +8,8 @@ import imgGlass from "../../assets/glass.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../../redux/slices/auth";
 
+import { searchAction } from "../../redux/slices/search";
+
 function DropDownPages({ isOpen, onClose }) {
   return (
     <>
@@ -30,7 +32,7 @@ function DropDownShop({ isOpen, onClose }) {
   return (
     <>
       {isOpen && (
-        <div className="max-w-[700px] flex md:p-10 top-28 left-[30%] md:absolute bg-black text-white font-normal">
+        <div className="max-w-[700px] flex md:p-10 top-28 left-[40%] md:absolute bg-black text-white font-normal">
           <section className="flex flex-col gap-5 mr-10">
             <Link to={"/product"}>Products</Link>
             <Link to={"/cart"}>Shopping Cart</Link>
@@ -95,8 +97,15 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
 }
 
 function Header() {
+  // const stateSearch = useSelector((state) => state.search);
+  const dispatch = useDispatch();
   const [linkPages, setLinkPages] = useState(0);
   const [isToggle, setIsToggle] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
+  const [inputSearch, setInputSearch] = useState("");
+  const handleSearch = () => {
+    dispatch(searchAction.addSearch(inputSearch));
+  };
   return (
     <>
       <nav className="fixed top-0 left-0 z-40 bg-white w-full h-16 md:h-28 flex items-center px-4 md:px-10 border-b border-black">
@@ -144,7 +153,10 @@ function Header() {
           <Link className="navlink">BLOG</Link>
         </div>
         <div className={`nav-icon ${isToggle ? "right-0" : "right-[-100%]"}`}>
-          <span className="relative cursor-pointer">
+          <span
+            onClick={() => setIsSearch(!isSearch)}
+            className="relative cursor-pointer"
+          >
             <img src={icoSearch} alt="icon-search" />
           </span>
           <span className="relative cursor-pointer">
@@ -182,6 +194,21 @@ function Header() {
           />
         </div>
       </nav>
+      <div
+        className={`nav-search ${isSearch ? "top-2 md:top-36" : "top-[-7rem]"}`}
+      >
+        <button onClick={handleSearch} className="btn">
+          <i className="bi bi-search text-white"></i>
+        </button>
+        <input
+          type="text"
+          name="search"
+          value={inputSearch}
+          onChange={(e) => setInputSearch(e.target.value)}
+          placeholder="Search*"
+          className="input input-bordered input-secondary w-full"
+        />
+      </div>
       <section className="w-full h-16 md:h-28"></section>
     </>
   );

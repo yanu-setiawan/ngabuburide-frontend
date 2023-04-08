@@ -13,7 +13,7 @@ import storage from "redux-persist/lib/storage";
 
 import reducer from "./slices";
 
-const persistConfig = { key: "RAZYR", storage };
+const persistConfig = { key: "RAZYR", storage, blacklist: ["search"] };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 
