@@ -6,7 +6,7 @@ function Card() {
   return (
     <>
       <div>
-        <div className="w-48 h-64 lg:w-[18.3rem] lg:h-[25rem]">
+        <div className="md:w-48 md:h-64 lg:w-[18.3rem] lg:h-[25rem]">
           <img src={product} className="w-full h-full" />
         </div>
         <div className="w-52">
