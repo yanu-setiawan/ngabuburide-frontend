@@ -6,7 +6,12 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import EditProfile from "../../components/Profile/ProfileComp";
 import MyProduct from "../../components/Profile/MyProdComp";
+
+import SellingOrder from "../../components/Profile/Selling Order";
+import MyOrder from "../../components/Profile/MyOrder";
+
 import { useSelector } from "react-redux";
+
 
 function Profile() {
   const stateUser = useSelector((state) => state.user);
@@ -80,8 +85,15 @@ function Profile() {
               </p>
             </div>
           </section>
+
+          {/* <EditProfile /> */}
+          {/* <MyProduct /> */}
+          {/* <SellingOrder /> */}
+          {/* <MyOrder /> */}
+
           {showContent === 1 && <EditProfile />}
           {showContent === 2 && <MyProduct />}
+
         </section>
       </section>
       <Footer />

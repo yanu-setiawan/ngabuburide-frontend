@@ -14,6 +14,9 @@ import Checkout from "./Pages/Checkout";
 import Tracking from "./Pages/OrderTracking";
 import PublicRoute from "./utils/wrapper/publicRoute";
 import PrivateRoute from "./utils/wrapper/privateRoute";
+import AboutUs from "./Pages/AboutUs";
+import CommingSoon from "./components/CoomingSoon";
+import NotFound from "./components/NotFound";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -76,6 +79,9 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
+  { path: "/about", element: <AboutUs /> },
+  { path: "/commingsoon", element: <CommingSoon /> },
+  { path: "/notfound", element: <NotFound /> },
 ]);
 
 export default router;
