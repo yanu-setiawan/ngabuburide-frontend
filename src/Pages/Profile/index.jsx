@@ -6,7 +6,8 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import EditProfile from "../../components/Profile/ProfileComp";
 import MyProduct from "../../components/Profile/MyProdComp";
-
+import SellingOrder from "../../components/Profile/Selling Order";
+import MyOrder from "../../components/Profile/MyOrder";
 function Profile() {
   return (
     <>
@@ -66,8 +67,10 @@ function Profile() {
               </div>
             </div>
           </section>
-          <EditProfile />
+          {/* <EditProfile /> */}
           {/* <MyProduct /> */}
+          {/* <SellingOrder /> */}
+          {/* <MyOrder /> */}
         </section>
       </section>
       <Footer />
