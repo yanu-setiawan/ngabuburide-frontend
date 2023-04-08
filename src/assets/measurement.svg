@@ -1,0 +1,7 @@
+<svg width="23" height="16" viewBox="0 0 23 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17 16V13" stroke="#111111" stroke-width="2" stroke-linecap="square"/>
+<path d="M12 16V13" stroke="#111111" stroke-width="2" stroke-linecap="square"/>
+<path d="M7 16V13" stroke="#111111" stroke-width="2" stroke-linecap="square"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5 16C2.239 16 0 14.657 0 13V3C0 4.657 2.239 6 5 6H22V16H5Z" stroke="#111111" stroke-width="2" stroke-linecap="square"/>
+<ellipse cx="5" cy="3" rx="5" ry="3" stroke="#111111" stroke-width="2"/>
+</svg>

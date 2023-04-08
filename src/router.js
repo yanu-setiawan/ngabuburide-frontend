@@ -6,13 +6,14 @@ import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Forgot from "./Pages/Forgot";
 import Product from "./Pages/Product";
-import ProductDetail from "./Pages/ProductDetail";
 import Notifications from "./Pages/Notification";
 import Chat from "./Pages/Chat";
 import Profile from "./Pages/Profile";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import Tracking from "./Pages/OrderTracking";
+import ProductDetails from "./Pages/ProductDetail";
+import Faq from "./Pages/FAQ";
 import PublicRoute from "./utils/wrapper/publicRoute";
 import PrivateRoute from "./utils/wrapper/privateRoute";
 import AboutUs from "./Pages/AboutUs";
@@ -46,9 +47,11 @@ const router = createBrowserRouter([
     ),
   },
   { path: "/product", element: <Product /> },
-  { path: "/product/:id", element: <ProductDetail /> },
   { path: "/notification", element: <Notifications /> },
   { path: "/chat", element: <Chat /> },
+  { path: "/details", element: <ProductDetails /> },
+  { path: "/FAQ", element: <Faq /> },
+
   {
     path: "/profile",
     element: (
