@@ -11,7 +11,7 @@ function Card(props) {
   return (
     <>
       <div
-        onClick={() => navigate(`/product/${props.id}`)}
+        onClick={() => navigate(`/details/${props.id}`)}
         className="cursor-pointer"
       >
         <div className="w-48 h-64 lg:w-[18.3rem] lg:h-[25rem]">

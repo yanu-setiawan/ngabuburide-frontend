@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../../redux/slices/auth";
 
 import { searchAction } from "../../redux/slices/search";
+import { cartAction } from "../../redux/slices/cart";
 
 function DropDownPages({ isOpen, onClose }) {
   return (
@@ -62,6 +63,7 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
 
   const handleLogout = () => {
     dispatch(userAction.authLogout());
+    dispatch(cartAction.resetCart());
   };
   return (
     <>

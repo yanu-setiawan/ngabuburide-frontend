@@ -13,3 +13,8 @@ export const getMetaCategories = (controller) => {
   // console.log(url);
   return axios.get(url, { signal: controller.signal });
 };
+
+export const getDetailProduct = (id, controller) => {
+  const url = `${baseUrl}product/${id}`;
+  return axios.get(url, { signal: controller.signal });
+};

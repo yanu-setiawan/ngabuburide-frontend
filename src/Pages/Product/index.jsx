@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import withSearchParams from "../../utils/wrapper/withSearchParams";
@@ -17,7 +17,6 @@ function DataNotFound() {
   );
 }
 function CategoriesContent(props) {
-  console.log(props.dataPar);
   const handleClick = () => {
     const paramsName = props.name.toLowerCase();
     props.onClick(paramsName);
@@ -37,7 +36,6 @@ function CategoriesContent(props) {
 
 function Product(props) {
   const controller = useMemo(() => new AbortController(), []);
-  const prevpropsRef = useRef();
   const searchState = useSelector((state) => state.search);
 
   const [isLoading, setLoading] = useState(true);
@@ -66,7 +64,7 @@ function Product(props) {
     });
   };
   const handleRangeParams = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setRangePrice(event.target.value);
     // setDataParams({ ...dataParams, price: event.target.value });
   };
@@ -94,7 +92,7 @@ function Product(props) {
     const newPar = new URLSearchParams(dataParams);
     try {
       const result = await getDataProducts(newPar, controller);
-      console.log(result.data);
+      // console.log(result.data);
       setMetaData({ ...metaData, total: result.data.totalData });
       setDataProducts(result.data.data);
       setLoading(false);
@@ -118,9 +116,6 @@ function Product(props) {
 
   useEffect(
     () => {
-      const searcPar = new URLSearchParams(window.location.search);
-      console.log(prevpropsRef);
-      console.log(JSON.stringify(searcPar));
       document.title = "RAZYR - Products";
       window.scrollTo(0, 0);
       const queryParams = new URLSearchParams(dataParams);
@@ -133,7 +128,8 @@ function Product(props) {
   );
 
   // console.log(countCategory);
-  // console.log(dataParams);
+  console.log(dataParams);
+  console.log(searchState.search);
   return (
     <>
       <Header />
