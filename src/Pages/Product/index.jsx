@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import withSearchParams from "../../utils/wrapper/withSearchParams";
@@ -6,6 +6,8 @@ import Card from "./card";
 import { getDataProducts, getMetaCategories } from "../../utils/https/products";
 import Loader from "../../components/Loader";
 import arrow from "../../assets/icon-arrow-right.svg";
+import { useSelector } from "react-redux";
+// import { searchAction } from "../../redux/slices/search";
 
 function DataNotFound() {
   return (
@@ -15,6 +17,7 @@ function DataNotFound() {
   );
 }
 function CategoriesContent(props) {
+  console.log(props.dataPar);
   const handleClick = () => {
     const paramsName = props.name.toLowerCase();
     props.onClick(paramsName);
@@ -24,7 +27,9 @@ function CategoriesContent(props) {
       onClick={handleClick}
       className="w-full flex justify-between cursor-pointer"
     >
-      <p>{props.name}</p>
+      <p className={props.dataPar === props.name.toLowerCase() && "font-bold"}>
+        {props.name}
+      </p>
       <p>{props.count}</p>
     </div>
   );
@@ -32,6 +37,8 @@ function CategoriesContent(props) {
 
 function Product(props) {
   const controller = useMemo(() => new AbortController(), []);
+  const prevpropsRef = useRef();
+  const searchState = useSelector((state) => state.search);
 
   const [isLoading, setLoading] = useState(true);
 
@@ -41,7 +48,7 @@ function Product(props) {
     price: "",
     order: "",
     categories: "",
-    keyword: "",
+    keyword: searchState.search,
     page: "",
     limit: "",
   });
@@ -91,6 +98,7 @@ function Product(props) {
       setMetaData({ ...metaData, total: result.data.totalData });
       setDataProducts(result.data.data);
       setLoading(false);
+      // dispatch(searchAction.resetSearch());
     } catch (error) {
       console.log(error);
     }
@@ -108,14 +116,21 @@ function Product(props) {
     }
   };
 
-  useEffect(() => {
-    document.title = "RAZYR - Products";
-    const queryParams = new URLSearchParams(dataParams);
-    props.setSearchParams(Object.fromEntries(queryParams));
-    fetchingData();
-    fetchingMetaCategories();
+  useEffect(
+    () => {
+      const searcPar = new URLSearchParams(window.location.search);
+      console.log(prevpropsRef);
+      console.log(JSON.stringify(searcPar));
+      document.title = "RAZYR - Products";
+      window.scrollTo(0, 0);
+      const queryParams = new URLSearchParams(dataParams);
+      props.setSearchParams(Object.fromEntries(queryParams));
+      fetchingData();
+      fetchingMetaCategories();
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataParams]);
+    [dataParams, searchState.search]
+  );
 
   // console.log(countCategory);
   // console.log(dataParams);
@@ -148,6 +163,7 @@ function Product(props) {
                   {countCategory.map((cat) => (
                     <CategoriesContent
                       key={cat.category_name}
+                      dataPar={dataParams.categories}
                       onClick={handleCategoryParams}
                       name={cat.category_name}
                       count={cat.totaldata}
@@ -157,7 +173,7 @@ function Product(props) {
                     <h1 className="font-bold text-2xl">Price</h1>
                     <div>
                       <div>
-                        price Rp.{" "}
+                        price Rp. 0 - Rp.{" "}
                         {(rangePrice * 1000000).toLocaleString("id-ID")}
                       </div>
                     </div>

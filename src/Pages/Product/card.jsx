@@ -22,7 +22,7 @@ function Card(props) {
           <p>{props.category}</p>
         </div>
         <div>
-          <p className="font-bold">{props.price}</p>
+          <p className="font-bold">Rp. {props.price.toLocaleString("id-ID")}</p>
         </div>
       </div>
     </>

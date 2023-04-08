@@ -6,6 +6,7 @@ import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Forgot from "./Pages/Forgot";
 import Product from "./Pages/Product";
+import ProductDetail from "./Pages/ProductDetail";
 import Notifications from "./Pages/Notification";
 import Chat from "./Pages/Chat";
 import Profile from "./Pages/Profile";
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
     ),
   },
   { path: "/product", element: <Product /> },
+  { path: "/product/:id", element: <ProductDetail /> },
   { path: "/notification", element: <Notifications /> },
   { path: "/chat", element: <Chat /> },
   {
