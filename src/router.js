@@ -11,8 +11,9 @@ import Chat from "./Pages/Chat";
 import Profile from "./Pages/Profile";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
-import Tracking from "./Pages/OrderTracking"
-
+import Tracking from "./Pages/OrderTracking";
+import ProductDetails from "./Pages/ProductDetail";
+import Faq from "./Pages/FAQ";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -26,7 +27,8 @@ const router = createBrowserRouter([
   { path: "/cart", element: <Cart /> },
   { path: "/checkout", element: <Checkout /> },
   { path: "/tracking", element: <Tracking /> },
-
+  { path: "/details", element: <ProductDetails /> },
+  { path: "/FAQ", element: <Faq /> },
 ]);
 
 export default router;
