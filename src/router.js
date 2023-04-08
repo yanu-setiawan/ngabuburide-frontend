@@ -13,6 +13,7 @@ import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import Tracking from "./Pages/OrderTracking"
 import AboutUs from "./Pages/AboutUs";
+import CommingSoon from "./components/CoomingSoon";
 
 
 const router = createBrowserRouter([
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
   { path: "/checkout", element: <Checkout /> },
   { path: "/tracking", element: <Tracking /> },
   { path: "/about", element: <AboutUs /> },
+  { path: "/commingsoon", element: <CommingSoon /> },
 
 ]);
 
