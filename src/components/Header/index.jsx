@@ -1,236 +1,188 @@
 import React, { useState } from "react";
-import hamburger from "../../assets/menu.svg";
 import { Link } from "react-router-dom";
-import glass from "../../assets/glass.webp";
-import HeaderLogin from "./headerLogin";
-import HeaderSignIn from "./headerSignIn";
-import love from "../../assets/icon-love.svg";
-import cart from "../../assets/icon-cart.svg";
-import search from "../../assets/icon-search.svg";
-import dropdown from "../../assets/icon-dropdown.svg";
-import arrow from "../../assets/icon-arrow.svg";
+import icoSearch from "../../assets/icon-search.svg";
+import icoHeart from "../../assets/icon-love.svg";
+import icoCart from "../../assets/icon-cart.svg";
+import icoMenu from "../../assets/menu.svg";
+import imgGlass from "../../assets/glass.webp";
+import { useDispatch, useSelector } from "react-redux";
+import { userAction } from "../../redux/slices/auth";
 
-function Header() {
-  const [dropPages, setDropPages] = useState(false);
-  const [dropShop, setDropShop] = useState(false);
-  const [dropSoon, setDropSoon] = useState(false);
-  const [dropMenu, setDropMenu] = useState(false);
-  const handleMenuClick = (menuName) => {
-    if (menuName === "pages") {
-      setDropPages((prevDropPages) => !prevDropPages);
-      setDropShop(false);
-      setDropSoon(false);
-      setDropMenu(false);
-    } else if (menuName === "shop") {
-      setDropShop((prevDropShop) => !prevDropShop);
-      setDropPages(false);
-      setDropSoon(false);
-      setDropMenu(false);
-    } else if (menuName === "burger") {
-      setDropMenu((prevDropMenu) => !prevDropMenu);
-      setDropPages(false);
-      setDropShop(false);
-      setDropSoon(false);
-    }
-  };
-  const handleSoon = () => {
-    setDropSoon((prevDropSoon) => !prevDropSoon);
-  };
-  const token = 0;
+function DropDownPages({ isOpen, onClose }) {
   return (
     <>
-      <header className="navbar px-2 md:px-8 lg:px-20 py-8 lg:py-[3.15rem] ">
-        <div className="navbar-start">
-          <h1 className="cursor-pointer select-none font-bold text-xl lg:text-[2.82rem]">
-            RAZYR
-          </h1>
+      {isOpen && (
+        <div className="md:w-72 flex flex-col gap-2 pl-8 py-3 md:p-10 top-28 md:absolute bg-black text-white font-normal">
+          <Link to={"/about"}>About Us</Link>
+          <Link to={"/contact"}>Contact Us</Link>
+          <Link to={"/commingsoon"} className="flex justify-between">
+            Comming Soon <i className="bi bi-caret-right"></i>
+          </Link>
+          <Link to={"/notfound"}>404 Page</Link>
+          <Link to={"/faq"}>FAQ Page</Link>
         </div>
-        <div className="hidden lg:flex navbar-center gap-[4.3rem] text-lg font-bold">
-          <div className="navlink">
-            <Link to="/">HOME</Link>
-          </div>
-          <div className="relative">
-            <div
-              className="navlink flex items-center justify-end"
-              onClick={() => handleMenuClick("pages")}
-            >
-              PAGES
-              <img
-                src={dropdown}
-                alt="icon-dropdown"
-                className="absolute translate-x-5"
-              />
+      )}
+    </>
+  );
+}
+
+function DropDownShop({ isOpen, onClose }) {
+  return (
+    <>
+      {isOpen && (
+        <div className="max-w-[700px] flex md:p-10 top-28 left-[30%] md:absolute bg-black text-white font-normal">
+          <section className="flex flex-col gap-5 mr-10">
+            <Link to={"/product"}>Products</Link>
+            <Link to={"/cart"}>Shopping Cart</Link>
+            <Link to={"/checkout"} className="flex justify-between">
+              Check Out
+            </Link>
+            <Link to={"/profile"}>My Account</Link>
+            <Link to={"/tracking"}>Order Tracking</Link>
+          </section>
+          <span className="w-96 h-52 flex justify-center items-center bg-white">
+            <img src={imgGlass} alt="img-promo" />
+            <div>
+              <p className="text-black">Decorative Ceramic Accent Vases</p>
+              <p className="text-4xl text-red-700">Off 50%</p>
+              <button className="btn">Shop now</button>
             </div>
-            {dropPages && (
-              <div className="relative">
-                <div className="absolute z-10 flex flex-col gap-8 justify-center translate-y-[3.2rem] px-8 bg-zinc-900 w-[18.75rem] h-[21.875rem] py-6 font-normal text-white shadow-xl">
-                  <Link to="/login">
-                    <div className="cursor-pointer hover:text-slate-200">
-                      About Us
-                    </div>
-                  </Link>
-                  <div className="cursor-pointer hover:text-slate-200">
-                    Contact Us
-                  </div>
-                  <div
-                    className="flex justify-between cursor-pointer hover:text-slate-200"
-                    onClick={handleSoon}
-                  >
-                    Comming Soon
-                    <img src={arrow} alt="icon-arrow" />
-                  </div>
-                  <div className="cursor-pointer hover:text-slate-200">
-                    404 Page
-                  </div>
-                  <div className="cursor-pointer hover:text-slate-200">FAQ</div>
-                </div>
-              </div>
-            )}
-          </div>
-          {dropSoon && (
-            <div className="absolute flex flex-col px-10 gap-4 text-[#919191] translate-x-[26.3rem] translate-y-60 justify-center shadow-xl z-20 w-[16.25rem] h-[11.25rem] bg-[#353535]">
-              <div>Cooming Soon 01</div>
-              <div>Cooming Soon 02</div>
-            </div>
+          </span>
+        </div>
+      )}
+    </>
+  );
+}
+
+function DropDownMenu({ isOpen, onToggle, onClose }) {
+  const stateStore = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(userAction.authLogout());
+  };
+  return (
+    <>
+      {isOpen && (
+        <div
+          className={`nav-menu ${
+            onToggle ? "-right-4" : "right-[-400%] md:right-4"
+          }`}
+        >
+          {stateStore.token === null ? (
+            <>
+              <Link to={"/login"}>Login</Link>
+              <Link to={"/register"}>Register</Link>
+            </>
+          ) : (
+            <>
+              <Link to={"/profile"}>Profile</Link>
+              <Link to={"/chat"}>Chat</Link>
+              <Link
+                to={"/notification"}
+                className="flex justify-between relative"
+              >
+                Notification{" "}
+                <i className="bi bi-circle-fill absolute right-28 md:static text-red-600"></i>
+              </Link>
+              <Link onClick={handleLogout}>Logout</Link>
+            </>
           )}
-          <div className="relative">
-            <div
-              className="navlink flex items-center justify-end"
-              onClick={() => handleMenuClick("shop")}
-            >
-              SHOP
-              <img
-                src={dropdown}
-                alt="icon-dropdown"
-                className="absolute translate-x-5"
-              />
-            </div>
-            {dropShop && (
-              <div className="relative">
-                <div className="absolute z-10 flex gap-8 items-center justify-between translate-y-[3.2rem] -translate-x-[22rem] bg-zinc-900 w-[699px] h-[341px] pl-20 pr-10 font-normal shadow-xl">
-                  <div>
-                    <p className="text-white mb-6">Other Page</p>
-                    <div className="flex flex-col gap-2 text-[#B4B4B4] text-sm">
-                      <Link to="/cart">
-                        <div>Shopping Cart</div>
-                      </Link>
-                      <Link to="/checkout">
-                        <div>Check Out</div>
-                      </Link>
-                      <Link to="">
-                        <div>My Account</div>
-                      </Link>
-                      <Link to="/tracking">
-                        <div>Order Tracking</div>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-14 bg-[#F9F9F9] w-[25rem] h-56 px-10">
-                    <div className="w-32 h-32">
-                      <img
-                        src={glass}
-                        alt="glass"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <p>Decorative Ceramic Accent Vases</p>
-                      <p className="text-[#D94141] text-3xl">Off 50%</p>
-                      <div className="btn bg-[#262626]">Shop now</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="navlink">BLOG</div>
         </div>
-        <div className="navbar-end relative">
-          <div className="flex gap-12">
-            <div className="hidden lg:flex lg:gap-12">
-              <div className="cursor-pointer w-6 h-6">
-                <img
-                  src={search}
-                  alt="icon-search"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="relative w-6 h-6 cursor-pointer">
-                <img
-                  src={love}
-                  alt="icon-love"
-                  className="w-full h-full object-cover"
-                />
-                <span className="absolute w-[1.625rem] h-[1.625rem] -top-6 left-4 grid place-items-center rounded-full text-white bg-black">
-                  01
-                </span>
-              </div>
-              <div className="relative cursor-pointer w-6 h-6">
-                <img
-                  src={cart}
-                  alt="icon-cart"
-                  className="w-full h-full object-cover"
-                />
-                <span className="absolute w-[1.625rem] h-[1.625rem] -top-6 left-4 grid place-items-center rounded-full text-white bg-black">
-                  01
-                </span>
-              </div>
+      )}
+    </>
+  );
+}
+
+function Header() {
+  const [linkPages, setLinkPages] = useState(0);
+  const [isToggle, setIsToggle] = useState(false);
+  return (
+    <>
+      <nav className="fixed top-0 left-0 z-40 bg-white w-full h-16 md:h-28 flex items-center px-4 md:px-10 border-b border-black">
+        <Link
+          to={"/"}
+          className="text-3xl md:text-5xl font-bold mr-auto md:mr-0 cursor-pointer"
+        >
+          RAZYR
+        </Link>
+        <div className={`navbar ${isToggle ? "right-0" : "right-[-100%]"}`}>
+          <Link to={"/"} className="navlink">
+            HOME
+          </Link>
+          <Link
+            className="navlink"
+            onMouseEnter={() => setLinkPages(1)}
+            onMouseLeave={() => {
+              setLinkPages(0);
+            }}
+          >
+            <div className="flex gap-1">
+              PAGES <i className="bi bi-caret-down"></i>
             </div>
-            <div
-              className="cursor-pointer w-6 h-6"
-              onClick={() => handleMenuClick("burger")}
-            >
-              <img
-                src={hamburger}
-                alt="icon-humberger"
-                className="w-full h-full object-cover"
-              />
+            <DropDownPages
+              isOpen={linkPages === 1}
+              onClose={() => setLinkPages(false)}
+            />
+          </Link>
+          <Link
+            className="navlink"
+            onMouseEnter={() => setLinkPages(2)}
+            onMouseLeave={() => {
+              setLinkPages(0);
+            }}
+          >
+            {" "}
+            <div className="flex gap-1">
+              SHOP <i className="bi bi-caret-down"></i>
             </div>
-          </div>
-          {token === 1
-            ? dropMenu && <HeaderLogin />
-            : dropMenu && <HeaderSignIn />}
+            <DropDownShop
+              isOpen={linkPages === 2}
+              onClose={() => setLinkPages(false)}
+            />
+          </Link>
+          <Link className="navlink">BLOG</Link>
         </div>
-        <div className="flex flex-col absolute z-20 translate-x-[14.2rem] translate-y-[11.4rem] md:translate-x-[33rem] bg-black text-white lg:hidden ">
-          <div className="flex flex-col gap-4  px-16 py-5">
-            <div className="navlink">HOME</div>
-            <div className="navlink">PAGES</div>
-            <div className="navlink">SHOP</div>
-            <div className="navlink">BLOG</div>
-          </div>
-          <div className="bg-white w-full h-full">
-            <div className="flex justify-center items-center gap-6 my-8 bg-white">
-              <div className="cursor-pointer w-6 h-6">
-                <img
-                  src={search}
-                  alt="icon-search"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="relative w-6 h-6 cursor-pointer">
-                <img
-                  src={love}
-                  alt="icon-love"
-                  className="w-full h-full object-cover"
-                />
-                <span className="absolute w-[1.625rem] h-[1.625rem] -top-6 left-4 grid place-items-center rounded-full text-white bg-black">
-                  01
-                </span>
-              </div>
-              <div className="relative cursor-pointer w-6 h-6">
-                <img
-                  src={cart}
-                  alt="icon-cart"
-                  className="w-full h-full object-cover"
-                />
-                <span className="absolute w-[1.625rem] h-[1.625rem] -top-6 left-4 grid place-items-center rounded-full text-white bg-black">
-                  01
-                </span>
-              </div>
-            </div>
-          </div>
+        <div className={`nav-icon ${isToggle ? "right-0" : "right-[-100%]"}`}>
+          <span className="relative cursor-pointer">
+            <img src={icoSearch} alt="icon-search" />
+          </span>
+          <span className="relative cursor-pointer">
+            <img src={icoHeart} alt="icon-search" />
+            <h2 className="absolute -top-6 left-4 w-6 h-6 flex justify-center items-center rounded-full text-xs bg-black text-white">
+              01
+            </h2>
+          </span>
+          <span className="relative cursor-pointer">
+            <img src={icoCart} alt="icon-search" />
+            <h2 className="absolute -top-6 left-4 w-6 h-6 flex justify-center items-center rounded-full text-xs bg-black text-white">
+              01
+            </h2>
+          </span>
         </div>
-      </header>
+        <div
+          className="relative hidden md:block h-fit btn btn-ghost md:py-4 ml-14 cursor-pointer"
+          onClick={() => setLinkPages(linkPages === 3 ? 0 : 3)}
+        >
+          <img src={icoMenu} alt="icon-menu" />
+          <DropDownMenu
+            isOpen={linkPages === 3}
+            onClose={() => setLinkPages(false)}
+          />
+        </div>
+        <div
+          className="relative md:hidden h-fit btn btn-ghost md:py-4 ml-14 cursor-pointer"
+          onClick={() => setIsToggle(!isToggle)}
+        >
+          <img src={icoMenu} alt="icon-menu" />
+          <DropDownMenu
+            isOpen={true}
+            onToggle={isToggle}
+            onClose={() => setLinkPages(false)}
+          />
+        </div>
+      </nav>
+      <section className="w-full h-16 md:h-28"></section>
     </>
   );
 }
