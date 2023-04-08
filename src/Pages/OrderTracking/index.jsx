@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import arrow from "../../assets/icon-arrow-right.svg";
 import map from "../../assets/mapTracking.png";
 import truck from "../../assets/truck.svg";
+import line from "../../assets/Line 2.svg";
 
 function Tracking() {
   const [details, setDetails] = useState(false);
@@ -91,7 +92,7 @@ function Tracking() {
                 </div>
                 <form className=" w-full justify-center flex flex-col gap-3 mt-8 md:px-14">
                   <div className="">
-                    <div className="flex gap-8 items-center mb-20">
+                    <div className="flex gap-3 items-center ">
                       <div className="grid place-items-center w-10 h-10 border rounded-full">
                         <img src={truck} alt="truck" />
                       </div>
@@ -100,11 +101,14 @@ function Tracking() {
                         <p>Kebun Jeruk, Jakarta Barat</p>
                       </div>
                     </div>
-                    <div className="flex gap-8 items-center">
+                    <div className="flex pl-5">
+                      <img src={line} alt="" />
+                    </div>
+                    <div className="flex gap-3 items-center">
                       <div className="grid place-items-center w-10 h-10 border rounded-full">
                         <img src={truck} alt="truck" />
                       </div>
-                      <div>
+                      <div className=" text-greyFont">
                         <p>Destination</p>
                         <p>Kebun Mangga, Jakarta Selatan</p>
                       </div>
