@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import imgProdSatu from "../../assets/p1.png";
 import imgProdDua from "../../assets/p2.png";
 import imgProdTiga from "../../assets/p3.png";
@@ -95,6 +95,9 @@ function Home() {
       desc: "Donec nunc nunc, gravida vitae diam vel, varius interdum erat. Quisque a nunc vel diam auctor commodo. Curabitur blandit ultrices ex. Curabitur ut magna dignissim, dignissim neque et, placerat risus. Morbi dictum lectus quam",
     },
   ];
+  useEffect(() => {
+    document.title = "RAZYR - Home";
+  }, []);
   return (
     <>
       <Header />
