@@ -30,7 +30,7 @@ function DropDownShop({ isOpen, onClose }) {
   return (
     <>
       {isOpen && (
-        <div className="max-w-[700px] flex md:p-10 top-28 left-[30%] md:absolute bg-black text-white font-normal">
+        <div className="max-w-[700px] flex md:p-10 top-28 left-[40%] md:absolute bg-black text-white font-normal">
           <section className="flex flex-col gap-5 mr-10">
             <Link to={"/product"}>Products</Link>
             <Link to={"/cart"}>Shopping Cart</Link>
