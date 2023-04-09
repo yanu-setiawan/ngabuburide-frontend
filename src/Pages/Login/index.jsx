@@ -30,11 +30,17 @@ function Login() {
 
   const handleLogin = (event) => {
     event.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (form.email === "" || form.password === "") {
       setMsgModal("Input Empty!");
       setErrModal(true);
       return;
+    } else if (!emailRegex.test(form.email)) {
+      setMsgModal("Invalid Email!");
+      setErrModal(true);
+      return;
     }
+
     console.log(form);
     setLoading(true);
     dispatch(
