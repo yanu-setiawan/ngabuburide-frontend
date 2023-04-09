@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import icoSearch from "../../assets/icon-search.svg";
 import icoHeart from "../../assets/icon-love.svg";
@@ -13,6 +13,7 @@ import { cartAction } from "../../redux/slices/cart";
 import { authLogout } from "../../utils/https/auth";
 import Loader from "../Loader";
 import { favoriteAction } from "../../redux/slices/favorite";
+import { getFavorite } from "../../utils/https/favorite";
 
 function DropDownPages({ isOpen, onClose }) {
   return (
@@ -120,16 +121,34 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
   );
 }
 
-function Header() {
+function Header(props) {
   // const stateSearch = useSelector((state) => state.search);
+  const controller = useMemo(() => new AbortController(), []);
+  const stateStore = useSelector((state) => state.user);
+  const stateCart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [linkPages, setLinkPages] = useState(0);
   const [isToggle, setIsToggle] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
+  const [countFavorite, setCountFav] = useState(0);
   const handleSearch = () => {
     dispatch(searchAction.addSearch(inputSearch));
   };
+  const fetching = async () => {
+    try {
+      const getFav = await getFavorite(stateStore.token, controller);
+      // console.log(getFav.data.data);
+      setCountFav(getFav.data.data.length);
+    } catch (error) {
+      setCountFav(0);
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetching();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.loved]);
   return (
     <>
       <nav className="fixed top-0 left-0 z-40 bg-white w-full h-16 md:h-28 flex items-center px-4 md:px-10 border-b border-black">
@@ -185,16 +204,24 @@ function Header() {
           </span>
           <span className="relative cursor-pointer">
             <img src={icoHeart} alt="icon-search" />
-            <h2 className="absolute -top-6 left-4 w-6 h-6 flex justify-center items-center rounded-full text-xs bg-black text-white">
-              01
+            <h2
+              className={`${
+                countFavorite === 0 && "hidden"
+              } absolute -top-6 left-4 w-6 h-6 flex justify-center items-center rounded-full text-xs bg-black text-white`}
+            >
+              {countFavorite}
             </h2>
           </span>
-          <span className="relative cursor-pointer">
+          <Link to={"/cart"} className="relative cursor-pointer">
             <img src={icoCart} alt="icon-search" />
-            <h2 className="absolute -top-6 left-4 w-6 h-6 flex justify-center items-center rounded-full text-xs bg-black text-white">
-              01
+            <h2
+              className={`${
+                stateCart.shoppingCart.length === 0 && "hidden"
+              } absolute -top-6 left-4 w-6 h-6 flex justify-center items-center rounded-full text-xs bg-black text-white`}
+            >
+              {stateCart.shoppingCart.length}
             </h2>
-          </span>
+          </Link>
         </div>
         <div
           className="relative hidden md:block h-fit btn btn-ghost md:py-4 ml-14 cursor-pointer"

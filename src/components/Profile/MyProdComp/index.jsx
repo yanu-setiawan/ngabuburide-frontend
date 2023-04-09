@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import ImgProduct2 from "../../../assets/product2.png";
 import CheckStock from "../../../assets/check-circle-08.svg";
 
 function MyProduct() {
+  useEffect(() => {
+    document.title = "RAZYR - My Products";
+  });
   return (
     <>
       <section className=" flex flex-col w-full mt-[6.3rem] gap-10">
