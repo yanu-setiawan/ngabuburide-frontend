@@ -92,6 +92,7 @@ const router = createBrowserRouter([
   { path: "/about", element: <AboutUs /> },
   { path: "/commingsoon", element: <CommingSoon /> },
   { path: "/notfound", element: <NotFound /> },
+  { path: "*", element: <NotFound /> },
 ]);
 
 export default router;
