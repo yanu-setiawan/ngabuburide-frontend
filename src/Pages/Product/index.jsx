@@ -156,8 +156,8 @@ function Product(props) {
           <Loader />
         ) : (
           <>
-            <section className="w-full h-full flex flex-col md:flex-row justify-center gap-12 lg:px-20 lg:py-16 ">
-              <div className="w-64 flex flex-col gap-10">
+            <section className="w-full h-full flex flex-col md:flex-row justify-center gap-12 px-4 lg:px-20 lg:py-16 ">
+              <div className="w-full md:w-48 lg:w-64 flex flex-col gap-10">
                 <div className="flex flex-col gap-4 ">
                   <h1 className="font-bold text-2xl mb-4">Categories</h1>
                   {countCategory.map((cat) => (
@@ -322,9 +322,100 @@ function Product(props) {
                     </div>
                   </div>
 
-                  <div>
-                    <h1>Size</h1>
-                    <div></div>
+                  <div className=" flex flex-col w-full mt-5 mb-10">
+                    <h1 className=" mb-5 mt-10 font-bold">Size</h1>
+                    <div className="flex flex-wrap justify-start gap-4">
+                      <div className="flex">
+                        <input
+                          id="s"
+                          type="radio"
+                          name="size"
+                          className="hidden"
+                        />
+                        <label
+                          for="s"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          S
+                        </label>
+                      </div>
+                      <div className="flex">
+                        <input
+                          id="m"
+                          type="radio"
+                          name="size"
+                          className="hidden"
+                        />
+                        <label
+                          for="m"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          M
+                        </label>
+                      </div>
+                      <div className="flex">
+                        <input
+                          id="l"
+                          type="radio"
+                          name="size"
+                          className="hidden"
+                        />
+                        <label
+                          for="l"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          L
+                        </label>
+                      </div>
+                      <div className="flex">
+                        <input
+                          id="xl"
+                          type="radio"
+                          name="size"
+                          className="hidden"
+                        />
+                        <label
+                          for="xl"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          XL
+                        </label>
+                      </div>
+                      <div className="flex">
+                        <input
+                          id="xxl"
+                          type="radio"
+                          name="size"
+                          className="hidden"
+                        />
+                        <label
+                          for="xxl"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          XXL
+                        </label>
+                      </div>
+                      <div className="flex">
+                        <input
+                          id="all_size"
+                          type="radio"
+                          name="size"
+                          className="hidden"
+                        />
+                        <label
+                          for="all_size"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          ALL SIZE
+                        </label>
+                      </div>
+                    </div>
                   </div>
 
                   <div>image</div>
