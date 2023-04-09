@@ -33,6 +33,36 @@ const cartSlice = createSlice({
         };
       }
     },
+    decremenQty: (prevState, action) => {
+      const { idx, price } = action.payload;
+      const existItem = prevState.shoppingCart[idx];
+      const updatedItem = {
+        ...existItem,
+        qty: existItem.qty - 1,
+        subtotal: existItem.subtotal - price,
+      };
+      const updatedCart = [
+        ...prevState.shoppingCart.slice(0, idx),
+        updatedItem,
+        ...prevState.shoppingCart.slice(idx + 1),
+      ];
+      return { ...prevState, shoppingCart: updatedCart };
+    },
+    incremenQty: (prevState, action) => {
+      const { idx, price } = action.payload;
+      const existItem = prevState.shoppingCart[idx];
+      const updatedItem = {
+        ...existItem,
+        qty: existItem.qty + 1,
+        subtotal: existItem.subtotal + price,
+      };
+      const updatedCart = [
+        ...prevState.shoppingCart.slice(0, idx),
+        updatedItem,
+        ...prevState.shoppingCart.slice(idx + 1),
+      ];
+      return { ...prevState, shoppingCart: updatedCart };
+    },
     resetCart: () => {
       return initialState;
     },

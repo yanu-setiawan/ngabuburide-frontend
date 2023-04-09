@@ -97,6 +97,7 @@ function Home() {
   ];
   useEffect(() => {
     document.title = "RAZYR - Home";
+    window.scrollTo(0, 0);
   }, []);
   return (
     <>
