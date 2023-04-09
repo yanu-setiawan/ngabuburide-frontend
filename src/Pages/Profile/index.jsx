@@ -52,7 +52,7 @@ function Profile() {
               <>
                 <div
                   onClick={() => setShowContent(2)}
-                  className={`flex w-max ${
+                  className={`flex w-max  ${
                     showContent === 2 && "border-b-2 border-greyBord"
                   } lg:gap-3 md:p-3`}
                 >

@@ -15,7 +15,10 @@ function Card(props) {
         className="cursor-pointer"
       >
         <div className="w-48 h-64 lg:w-[18.3rem] lg:h-[25rem]">
-          <img src={imgUrl + props.img} className="w-full h-full" />
+          <img
+            src={imgUrl + props.img}
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="w-52">
           <p>{props.prodName}</p>
