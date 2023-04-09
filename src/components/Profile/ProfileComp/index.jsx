@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect, useMemo, useState } from "react";
 import PhEdit from "../../../assets/profile/ppEdit.png";
 import Pencil from "../../../assets/edit-3 (1).svg";
 import imgLogout from "../../../assets/log-out.svg";
+import ChangePWD from "../../EditPassword";
 
 import Loader from "../../Loader";
 
@@ -16,7 +18,7 @@ function EditProfile() {
 
   const [isLoading, setLoading] = useState(true);
   const [canEdit, setCanEdit] = useState(false);
-
+  const [modal, setModal] = useState(false);
   const [dataProfile, setDataProfile] = useState();
   const [imgFile, setImgFile] = useState("");
   const [form, setForm] = useState({});
@@ -63,8 +65,13 @@ function EditProfile() {
   }, []);
   // console.log(dataProfile);
   // console.log(stateUser);
+
+  const handleChangePWD = (e) => {
+    setModal(true);
+  };
   return (
     <>
+      {modal && <ChangePWD modal={modal} setModal={setModal} />}
       {isLoading ? (
         <Loader />
       ) : (
@@ -217,8 +224,12 @@ function EditProfile() {
           </section>
           <section className=" flex flex-col-reverse lg:flex-row justify-between mb-9 gap-10 ">
             <div>
-              <button className="btn bg-blackSec flex w-full lg:w-[13.125rem] h-[4.375rem] gap-3 border-none justify-center items-center">
-                <p className="text-white font-bold">Edit Password</p>
+              <button
+                onClick={handleChangePWD}
+                className="btn bg-blackSec flex w-full lg:w-[13.125rem] h-[4.375rem] gap-3 border-none justify-center text-white font-bold items-center"
+              >
+                {/* <p className="text-white font-bold">Edit Password</p> */}
+                Edit Password
               </button>
             </div>
             <button

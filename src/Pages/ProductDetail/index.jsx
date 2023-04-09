@@ -158,8 +158,8 @@ function ProductDetails() {
           </section>
 
           <section className=" flex flex-col px-[2rem] lg:px-[5.3rem] xl:px-[8.75rem]">
-            <section className=" flex flex-col-reverse lg:flex-row gap-3 lg:gap-8 mb-[8.5rem]">
-              <section className=" flex  lg:flex-col justify-center gap-[1rem] md:gap-11 lg:gap-5 ">
+            <section className=" flex flex-col-reverse lg:flex-row gap-[1.75rem] lg:gap-8 mb-[8.5rem]">
+              <section className=" flex  lg:flex-col justify-center lg:justify-normal gap-[1rem] md:gap-11 lg:gap-5 ">
                 {/* <div className=" flex w-14 h-14 md:w-24 md:h-24 lg:w-[6.75rem] lg:h-[6.75rem]  xl:w-[8.75rem] xl:h-[8.375rem]">
                   <img src={sideImg} alt="" />
                 </div>
@@ -181,9 +181,13 @@ function ProductDetails() {
                   </div>
                 ))}
               </section>
-              <section className=" flex ">
+              <section className=" flex  justify-center">
                 <div className=" lg:w-[43.875rem] xl:w-[61.875rem] h-[50.313]">
-                  <img src={imgUrl + dataProduct.image[indexImg]} alt="" />
+                  <img
+                    src={imgUrl + dataProduct.image[indexImg]}
+                    alt=""
+                    className=" w-full"
+                  />
                 </div>
               </section>
             </section>

@@ -16,12 +16,10 @@ function Login() {
   const [isErrModal, setErrModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [msgModal, setMsgModal] = useState("");
-
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
   const onChangeForm = (event) => {
     setForm((form) => {
       return { ...form, [event.target.name]: event.target.value };
@@ -31,7 +29,7 @@ function Login() {
   const handleLogin = (event) => {
     event.preventDefault();
     if (form.email === "" || form.password === "") {
-      setMsgModal("Input Empty!");
+      setMsgModal("Input Empty !");
       setErrModal(true);
       return;
     }
