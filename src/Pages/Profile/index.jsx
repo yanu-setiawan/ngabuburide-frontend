@@ -12,7 +12,6 @@ import MyOrder from "../../components/Profile/MyOrder";
 
 import { useSelector } from "react-redux";
 
-
 function Profile() {
   const stateUser = useSelector((state) => state.user);
 
@@ -53,7 +52,7 @@ function Profile() {
               <>
                 <div
                   onClick={() => setShowContent(2)}
-                  className={`flex w-max ${
+                  className={`flex w-max  ${
                     showContent === 2 && "border-b-2 border-greyBord"
                   } lg:gap-3 md:p-3`}
                 >
@@ -93,7 +92,6 @@ function Profile() {
 
           {showContent === 1 && <EditProfile />}
           {showContent === 2 && <MyProduct />}
-
         </section>
       </section>
       <Footer />

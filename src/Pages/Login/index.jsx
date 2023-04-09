@@ -31,7 +31,7 @@ function Login() {
   const handleLogin = (event) => {
     event.preventDefault();
     if (form.email === "" || form.password === "") {
-      setMsgModal("Input Empty .!");
+      setMsgModal("Input Empty!");
       setErrModal(true);
       return;
     }

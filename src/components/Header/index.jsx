@@ -150,7 +150,9 @@ function Header() {
               onClose={() => setLinkPages(false)}
             />
           </Link>
-          <Link className="navlink">BLOG</Link>
+          <Link to="/blog" className="navlink">
+            BLOG
+          </Link>
         </div>
         <div className={`nav-icon ${isToggle ? "right-0" : "right-[-100%]"}`}>
           <span
