@@ -15,6 +15,7 @@ function EditProfile() {
   const token = stateUser.token;
 
   const [isLoading, setLoading] = useState(true);
+  const [canEdit, setCanEdit] = useState(false);
 
   const [dataProfile, setDataProfile] = useState();
   const [imgFile, setImgFile] = useState("");
@@ -30,11 +31,14 @@ function EditProfile() {
   };
 
   const handleSave = async () => {
+    setLoading(true);
     console.log(form);
-    if (!form) return console.log("INPUT KOSONG");
+    if (Object.keys(form).length === 0) return console.log("INPUT KOSONG");
     try {
       const result = await updateProfile(token, form, imgFile, controller);
       console.log(result);
+      setForm({});
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -54,6 +58,7 @@ function EditProfile() {
   };
   useEffect(() => {
     fetching();
+    document.title = "RAZYR - Profile";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // console.log(dataProfile);
@@ -100,10 +105,17 @@ function EditProfile() {
                 <h1>
                   <input
                     type="text"
-                    className=" w-min  text-blackSec text-2xl font-bold placeholder:text-greySec h-[2rem] text-center lg:text-start lg:placeholder:text-start outline-none  placeholder:p-2 p-2 placeholder:text-center "
-                    placeholder="Your Name*"
-                    value="Aisyahh"
                     id="name"
+                    name="display_name"
+                    value={
+                      form.display_name
+                        ? form.display_name
+                        : dataProfile.display_name
+                    }
+                    onChange={onChangeForm}
+                    disabled={!canEdit}
+                    placeholder="Your Name*"
+                    className=" w-min  text-blackSec text-2xl font-bold placeholder:text-greySec h-[2rem] text-center lg:text-start lg:placeholder:text-start outline-none  placeholder:p-2 p-2 placeholder:text-center "
                   />
                 </h1>
                 <p className=" p-[0.6rem] text-center">
@@ -113,17 +125,28 @@ function EditProfile() {
             </section>
           </section>
           <section className=" flex flex-col mt-10  border border-greyBord mb-10">
-            <form action="">
+            <form className="relative">
+              <button
+                type="button"
+                onClick={() => setCanEdit(!canEdit)}
+                className="absolute btn btn-ghost -top-14 right-0 z-30 cursor-pointer flex gap-2 items-center"
+              >
+                <p className=" text-xl font-bold">EDIT</p>
+                <i className="bi bi-pencil-square text-3xl"></i>
+              </button>
               <div className=" flex flex-col px-[3.8rem] py-10 border-b border-greyBord">
                 <label htmlFor="gender" className=" ml-4 text-greySec ">
                   Gender
                 </label>
                 <input
-                  className=" p-4 text-2xl text-blackSec outline-none "
+                  className={`p-4 text-2xl text-blackSec outline-none ${
+                    canEdit && "border-b-2"
+                  }`}
                   type="text"
                   id="gender"
                   name="gender"
                   value={form.gender ? form.gender : dataProfile.gender}
+                  disabled={!canEdit}
                   onChange={onChangeForm}
                   placeholder="unset*"
                 />
@@ -133,12 +156,15 @@ function EditProfile() {
                   Your Email
                 </label>
                 <input
-                  className=" p-4 text-2xl text-blackSec outline-none "
+                  className={`p-4 text-2xl text-blackSec outline-none ${
+                    canEdit && "border-b-2"
+                  }`}
                   type="text"
                   id="email"
                   name="email"
                   value={form.email ? form.email : dataProfile.email}
                   onChange={onChangeForm}
+                  disabled={!canEdit}
                 />
               </div>
               {stateUser.data.role === 2 && (
@@ -148,7 +174,9 @@ function EditProfile() {
                       Store Name
                     </label>
                     <input
-                      className=" p-4 text-2xl text-blackSec outline-none "
+                      className={`p-4 text-2xl text-blackSec outline-none ${
+                        canEdit && "border-b-2"
+                      }`}
                       type="text"
                       id="store-name"
                       name="store_name"
@@ -158,6 +186,7 @@ function EditProfile() {
                           : dataProfile.store_name
                       }
                       onChange={onChangeForm}
+                      disabled={!canEdit}
                       placeholder="set your store name*"
                     />
                   </div>
@@ -166,7 +195,9 @@ function EditProfile() {
                       Store Description
                     </label>
                     <input
-                      className=" p-4 text-2xl text-blackSec outline-none  "
+                      className={`p-4 text-2xl text-blackSec outline-none ${
+                        canEdit && "border-b-2"
+                      }`}
                       type="text"
                       id="store-desc"
                       name="store_desc"
@@ -176,6 +207,7 @@ function EditProfile() {
                           : dataProfile.store_desc
                       }
                       onChange={onChangeForm}
+                      disabled={!canEdit}
                       placeholder="set your store description*"
                     />
                   </div>
@@ -191,6 +223,7 @@ function EditProfile() {
             </div>
             <button
               onClick={handleSave}
+              disabled={!canEdit ? !canEdit : Object.keys(form).length === 0}
               className="btn bg-blackSec flex w-full lg:w-[13.125rem] h-[4.375rem] gap-3 border-none justify-center items-center"
             >
               <p className="text-white font-bold">Save Changes</p>

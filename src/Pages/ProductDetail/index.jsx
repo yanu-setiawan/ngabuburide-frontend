@@ -20,22 +20,31 @@ import { getDetailProduct } from "../../utils/https/products";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../redux/slices/cart";
-import { addFavorite, getFavorite } from "../../utils/https/favorite";
-import { userAction } from "../../redux/slices/auth";
+import {
+  addFavorite,
+  deleteFavorite,
+  getFavorite,
+} from "../../utils/https/favorite";
+// import { userAction } from "../../redux/slices/auth";
 // import { favoriteAction } from "../../redux/slices/favorite";
 
 function FavoriteComponent({ prodId, loved, setLoved }) {
   const controller = useMemo(() => new AbortController(), []);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
   const token = userState.token;
-  const [isFav, setFav] = useState(loved);
   const handleClick = async () => {
     try {
+      if (loved) {
+        const result = await deleteFavorite(token, prodId, controller);
+        console.log(result.data.msg);
+        setLoved();
+        return;
+      }
       const result = await addFavorite(token, prodId, controller);
       console.log(result);
-      setFav(true);
-      dispatch(userAction.addFavorite(prodId));
+      setLoved();
+      // dispatch(userAction.addFavorite(prodId));
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +57,7 @@ function FavoriteComponent({ prodId, loved, setLoved }) {
     //   })
     //   .catch((err) => console.log(err));
   };
-  console.log(isFav);
+  // console.log(isFav);
   return (
     <div>
       <button
@@ -92,9 +101,10 @@ function ProductDetails() {
       setDataProduct(result.data.data[0]);
       setLoading(false);
       const getFav = await getFavorite(token, controller);
-      // console.log(getFav);
-      const idToFind = 4;
-      const found = getFav.data.data.some((obj) => obj.id === idToFind);
+      console.log(getFav.data.msg);
+      const found = getFav.data.data.some(
+        (obj) => obj.prod_id === parseInt(id)
+      );
       console.log(found); // true/false
 
       setIsFavorite(found);
@@ -128,13 +138,13 @@ function ProductDetails() {
     setQty(qty - 1);
   };
 
-  console.log(dataProduct);
+  // console.log(dataProduct);
   const imgUrl =
     "https://res.cloudinary.com/dhikerrnk/image/upload/v1680940221/";
 
   return (
     <>
-      <Header />
+      <Header loved={isFavorite} />
       {isLoading ? (
         <Loader />
       ) : (
@@ -224,7 +234,11 @@ function ProductDetails() {
                         Add To Cart
                       </button>
                     </div>
-                    <FavoriteComponent prodId={id} loved={isFavorite} />
+                    <FavoriteComponent
+                      prodId={id}
+                      loved={isFavorite}
+                      setLoved={() => setIsFavorite(!isFavorite)}
+                    />
                     {/* <div>
                       <button className=" btn bg-blackSec font-bold w-[6rem] h-[3.8rem]">
                         <img src={love} alt="" />
