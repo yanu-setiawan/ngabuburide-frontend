@@ -9,6 +9,7 @@ function CommingSoon() {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
+    document.title = "RAZYR - Cooming Soon";
     const targetDate = new Date("2023-04-12T00:00:00Z"); // Set your target date and time here
     const intervalId = setInterval(() => {
       const now = new Date();

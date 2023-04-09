@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import arrow from "../../assets/icon-arrow-right.svg";
 
 function Checkout() {
+  useEffect(() => {
+    document.title = "RAZYR - Checkout";
+  }, []);
   return (
     <>
       <Header />

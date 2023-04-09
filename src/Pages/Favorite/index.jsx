@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ImgProduct2 from "../../assets/product2.png";
 import CheckStock from "../../assets/check-circle-08.svg";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 function Favorite() {
+  useEffect(() => {
+    document.title = "RAZYR - Favorite";
+  }, []);
   return (
     <>
       <Header />
