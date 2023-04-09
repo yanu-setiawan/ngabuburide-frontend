@@ -284,14 +284,31 @@ function Product(props) {
                         />
                       ))}
                     </div>
-                    <div className="mt-8">
+                    {/* <div className="mt-8">
                       <div className="btn-group">
                         <button className="btn btn-sm">1</button>
                         <button className="btn btn-sm btn-active">2</button>
                         <button className="btn btn-sm">3</button>
                         <button className="btn btn-sm">4</button>
                       </div>
-                    </div>
+                    </div> */}
+                    <section className=" flex gap-3 mt-[6.5rem] mb-24">
+                      <div className=" w-12 h-12 bg-blackSec text-white flex justify-center items-center text-center border border-[#D1D1D1]">
+                        01
+                      </div>
+                      <div className=" w-12 h-12  text-blackSec flex justify-center items-center text-center border border-[#D1D1D1]">
+                        02
+                      </div>
+                      <div className=" w-12 h-12  text-blackSec flex justify-center items-center text-center border border-[#D1D1D1]">
+                        03
+                      </div>
+                      <div className=" w-12 h-12  text-blackSec flex justify-center items-center text-center border border-[#D1D1D1]">
+                        04
+                      </div>
+                      <div className=" w-12 h-12  text-blackSec flex justify-center items-center text-center border border-[#D1D1D1]">
+                        05
+                      </div>
+                    </section>
                   </>
                 )}
               </div>

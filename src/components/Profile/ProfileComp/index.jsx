@@ -68,7 +68,7 @@ function EditProfile() {
             <section className="flex  relative justify-center flex-col items-center lg:justify-normal lg:flex-row gap-4">
               <label
                 htmlFor="avatar"
-                className=" w-32 h-32 flex justify-center items-center rounded-full bg-black hover:bg-opacity-50 hover:opacity-[80%] z-20 top-[1.9rem] opacity-0 cursor-pointer absolute "
+                className=" w-32 h-32 flex justify-center items-center rounded-full bg-black hover:bg-opacity-40 hover:opacity-[100%] z-20 top-[1.9rem] opacity-0 cursor-pointer absolute "
               >
                 <span className="absolute z-30 opacity-100 cursor-pointer flex">
                   <p className=" text-base text-white font-bold">EDIT</p>
