@@ -6,6 +6,7 @@ import imgAbout from "../../assets/aboutus.png";
 import img1 from "../../assets/profile1.jpg";
 import img2 from "../../assets/profile2.jpg";
 import img3 from "../../assets/profile3.jpg";
+import img4 from "../../assets/profile4.jpg";
 import testimoni from "../../assets/testimoni.png";
 
 function AboutUs() {
@@ -126,61 +127,71 @@ function AboutUs() {
           <h1 className="text-center font-bold text-5xl mb-20">
             Meet Our Team
           </h1>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 place-items-center gap-y-8 lg:gap-x-4 lg:gap-y-6">
-            <div>
-              <div className="md:w-64 md:h-80 lg:w-[22.5rem] lg:h-[28.125rem]">
+          <div className="flex flex-wrap justify-center gap-8">
+            <div className="flex flex-col gap-5">
+              <div className="w-64 h-80 md:w-64 md:h-80 lg:w-[20.5rem] lg:h-[26rem] transition duration-150 hover:scale-[1.1] hover:ease-in-out">
                 <img
                   src={img3}
                   alt="people"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="text-base">Afif Buchori</p>
-              <p className="text-xs text-[#919191]">Fullstuck Developer</p>
+              <div>
+                <p className="text-base">Afif Buchori</p>
+                <p className="text-xs text-[#919191]">Fullstuck Developer</p>
+              </div>
             </div>
-            <div>
-              <div className="md:w-64 md:h-80 lg:w-[22.5rem] lg:h-[28.125rem]">
+            <div className="flex flex-col gap-5">
+              <div className="w-64 h-80 md:w-64 md:h-80 lg:w-[20.5rem] lg:h-[26rem] transition duration-150 hover:scale-[1.1] hover:ease-in-out">
                 <img
                   src={img1}
                   alt="people"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="text-base">Zikri Aulia</p>
-              <p className="text-xs text-[#919191]">Fronted Developer</p>
+              <div>
+                <p className="text-base">Zikri Aulia</p>
+                <p className="text-xs text-[#919191]">Fronted Developer</p>
+              </div>
             </div>
-            <div>
-              <div className="md:w-64 md:h-80 lg:w-[22.5rem] lg:h-[28.125rem]">
+            <div className="flex flex-col gap-5">
+              <div className="w-64 h-80 md:w-64 md:h-80 lg:w-[20.5rem] lg:h-[26rem] transition duration-150 hover:scale-[1.1] hover:ease-in-out">
                 <img
-                  src={img1}
+                  src={img4}
                   alt="people"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="text-base">Yanu Setiawan</p>
-              <p className="text-xs text-[#919191]">Fronted Developer</p>
+              <div>
+                <p className="text-base">Yanu Setiawan</p>
+                <p className="text-xs text-[#919191]">Fronted Developer</p>
+              </div>
             </div>
-            <div>
-              <div className="md:w-64 md:h-80 lg:w-[22.5rem] lg:h-[28.125rem]">
+            <div className="flex flex-col gap-5">
+              <div className="w-64 h-80 md:w-64 md:h-80 lg:w-[20.5rem] lg:h-[26rem] transition duration-150 hover:scale-[1.1] hover:ease-in-out">
                 <img
                   src={img2}
                   alt="people"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="text-base">Abdul Rosyid</p>
-              <p className="text-xs text-[#919191]">Backend Developer</p>
+              <div>
+                <p className="text-base">Abdul Rosyid</p>
+                <p className="text-xs text-[#919191]">Backend Developer</p>
+              </div>
             </div>
-            <div>
-              <div className="md:w-64 md:h-80 lg:w-[22.5rem] lg:h-[28.125rem]">
+            <div className="flex flex-col gap-5">
+              <div className="w-64 h-80 md:w-64 md:h-80 lg:w-[20.5rem] lg:h-[26rem] transition duration-150 hover:scale-[1.1] hover:ease-in-out">
                 <img
                   src={img1}
                   alt="people"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="text-base">Redha Definto</p>
-              <p className="text-xs text-[#919191]">Backend Developer</p>
+              <div>
+                <p className="text-base">Redha Definto</p>
+                <p className="text-xs text-[#919191]">Backend Developer</p>
+              </div>
             </div>
           </div>
         </section>
