@@ -20,6 +20,7 @@ import AboutUs from "./Pages/AboutUs";
 import CommingSoon from "./components/CoomingSoon";
 import NotFound from "./components/NotFound";
 import Blog from "./Pages/Blog";
+import Favorite from "./Pages/Favorite";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -86,6 +87,7 @@ const router = createBrowserRouter([
     ),
   },
 
+  { path: "/favorite", element: <Favorite /> },
   { path: "/blog", element: <Blog /> },
   { path: "/about", element: <AboutUs /> },
   { path: "/commingsoon", element: <CommingSoon /> },
