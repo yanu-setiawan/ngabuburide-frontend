@@ -19,6 +19,7 @@ import PrivateRoute from "./utils/wrapper/privateRoute";
 import AboutUs from "./Pages/AboutUs";
 import CommingSoon from "./components/CoomingSoon";
 import NotFound from "./components/NotFound";
+import Blog from "./Pages/Blog";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -84,6 +85,8 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
+
+  { path: "/blog", element: <Blog /> },
   { path: "/about", element: <AboutUs /> },
   { path: "/commingsoon", element: <CommingSoon /> },
   { path: "/notfound", element: <NotFound /> },
