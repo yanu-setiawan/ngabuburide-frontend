@@ -1,30 +1,84 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { createProduct } from "../../../utils/https/products";
+import { useSelector } from "react-redux";
+import ModalMsg from "../../ModalMsg";
+import Loader from "../../Loader";
 // import Shape from "../../../assets/Shape.svg";
 
 function SellingOrder() {
-  const [form, setForm] = useState({});
-  const [fileForm, setFileForm] = useState([]);
+  const controller = useMemo(() => new AbortController(), []);
+  const userState = useSelector((state) => state.user);
 
-  const onChangeFile = (event) => {
-    const files = Array.from(event.target.files);
-    setFileForm([...fileForm, ...files]);
-  };
+  const [showModal, setShow] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  // const [fileForm, setFileForm] = useState([]);
+  const [form, setForm] = useState({});
+
+  const [fileSatu, setSatu] = useState("");
+  const [fileDua, setDua] = useState("");
+  const [fileTiga, setTiga] = useState("");
+  const [fileEmpat, setEmpat] = useState("");
+
   // const onChangeFile = (event) => {
-  //   setFileForm((file) => {
-  //     return [...file, event.target.files];
-  //   });
-  //   // setFileForm(event.target.files);
+  //   const files = Array.from(event.target.files);
+  //   setFileForm([...fileForm, ...files]);
   // };
+  const onChangeFile = (event) => {
+    if (fileSatu === "") return setSatu(event.target.files[0]);
+    if (fileDua === "") return setDua(event.target.files[0]);
+    if (fileTiga === "") return setTiga(event.target.files[0]);
+    setEmpat(event.target.files[0]);
+  };
   const onChangeForm = (event) => {
     setForm((form) => {
       return {
         ...form,
+        seller_id: userState.data.id,
         [event.target.name]: event.target.value,
       };
     });
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log(form);
+    // console.log(fileForm);
+    if (
+      fileSatu === "" ||
+      !form.brand ||
+      !form.category_id ||
+      !form.color ||
+      !form.condition ||
+      !form.description ||
+      form.description === "" ||
+      !form.price ||
+      form.price === "" ||
+      !form.prod_name ||
+      form.prod_name === "" ||
+      !form.stock ||
+      form.stock === ""
+    ) {
+      return setShow(true);
+    }
+    setLoading(true);
+    try {
+      const result = await createProduct(
+        fileSatu,
+        fileDua,
+        fileTiga,
+        fileEmpat,
+        form,
+        controller
+      );
+      console.log(result.data.msg);
+      // setFileForm([]);
+      setForm({});
+      setSatu("");
+      setDua("");
+      setTiga("");
+      setEmpat("");
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -59,11 +113,6 @@ function SellingOrder() {
                     className="textarea textarea-bordered h-[10.3rem] w-full p-5 border border-greyBord placeholder:flex items-start pb-24"
                     placeholder="Description of Product"
                   ></textarea>
-                  {/* <input
-                    type="text"
-                    className=" h-[10.3rem] w-full p-5 border border-greyBord placeholder:flex items-start pb-24"
-                    placeholder="Description of Product"
-                  /> */}
                 </label>
               </form>
             </div>
@@ -146,7 +195,7 @@ function SellingOrder() {
                     <input
                       id="ikea"
                       type="radio"
-                      name="brands"
+                      name="brand"
                       value="IKEA"
                       onChange={onChangeForm}
                       className="hidden"
@@ -163,7 +212,7 @@ function SellingOrder() {
                     <input
                       id="north_oxford"
                       type="radio"
-                      name="brands"
+                      name="brand"
                       value="NORTH OXFORD"
                       onChange={onChangeForm}
                       className="hidden"
@@ -180,7 +229,7 @@ function SellingOrder() {
                     <input
                       id="informa"
                       type="radio"
-                      name="brands"
+                      name="brand"
                       value="INFORMA"
                       onChange={onChangeForm}
                       className="hidden"
@@ -197,7 +246,7 @@ function SellingOrder() {
                     <input
                       id="sweet_house"
                       type="radio"
-                      name="brands"
+                      name="brand"
                       value="SWEET HOUSE"
                       onChange={onChangeForm}
                       className="hidden"
@@ -214,7 +263,7 @@ function SellingOrder() {
                     <input
                       id="mr_poppins"
                       type="radio"
-                      name="brands"
+                      name="brand"
                       value="MR.POPPINS 1929"
                       onChange={onChangeForm}
                       className="hidden"
@@ -518,19 +567,51 @@ function SellingOrder() {
           <section className="flex flex-col mt-[5rem]">
             <h1 className=" font-bold text-2xl mb-7">Photo Of Goods</h1>
             <section className="flex gap-4 flex-wrap">
-              {/* <div className=" w-[12.5rem] h-[12.5rem]"></div> */}
-              {fileForm.map((file, idx) => (
-                <div
-                  key={idx}
-                  className="w-40 border border-blackSec h-40 overflow-hidden"
-                >
-                  <img
-                    src={URL.createObjectURL(file)}
-                    alt=""
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+              <div
+                className={`${
+                  fileSatu === "" && "hidden"
+                } w-40 border border-blackSec h-40 overflow-hidden`}
+              >
+                <img
+                  src={fileSatu === "" ? "" : URL.createObjectURL(fileSatu)}
+                  alt=""
+                  className="object-cover"
+                />
+              </div>
+              <div
+                className={`${
+                  fileDua === "" && "hidden"
+                } w-40 border border-blackSec h-40 overflow-hidden`}
+              >
+                <img
+                  src={fileDua === "" ? "" : URL.createObjectURL(fileDua)}
+                  alt=""
+                  className="object-cover"
+                />
+              </div>
+              <div
+                className={`${
+                  fileTiga === "" && "hidden"
+                } w-40 border border-blackSec h-40 overflow-hidden`}
+              >
+                <img
+                  src={fileTiga === "" ? "" : URL.createObjectURL(fileTiga)}
+                  alt=""
+                  className="object-cover"
+                />
+              </div>
+              <div
+                className={`${
+                  fileEmpat === "" && "hidden"
+                } w-40 border border-blackSec h-40 overflow-hidden`}
+              >
+                <img
+                  src={fileEmpat === "" ? "" : URL.createObjectURL(fileEmpat)}
+                  alt=""
+                  className="object-cover"
+                />
+              </div>
+
               <section className="flex relative justify-center flex-col items-center lg:justify-normal lg:flex-row gap-4 overflow-hidden">
                 <label
                   htmlFor="file"
@@ -539,7 +620,7 @@ function SellingOrder() {
                   <input
                     type="file"
                     id="file"
-                    multiple={true}
+                    multiple={false}
                     onChange={onChangeFile}
                     className="hidden"
                   />
@@ -548,43 +629,28 @@ function SellingOrder() {
                     Add Photo
                   </p>
                 </label>
-                {/* <label
-                  htmlFor="avatar"
-                  className=" w-[12.5rem] h-[12.5rem] flex justify-center items-center hover:bg-opacity-50  z-20 top-[1.9rem] cursor-pointer  border-[3px] border-dashed p-5 border-greyBord "
-                >
-                  <input
-                    type="file"
-                    multiple={false}
-                    id="avatar"
-                    name="avatar"
-                    onChange={onChangeFile}
-                    className=" rounded-m inset-0  cursor-pointer z-30  opacity-0 "
-                  />
-                </label>
-                <span className=" opacity-100 cursor-pointer flex justify-center absolute w-max items-center flex-col gap-8 lg:translate-x-[3.5rem]  ">
-                  <img src={Shape} alt="" className="w-8" /> */}
-                {/* <img
-                    src={fileForm ? URL.createObjectURL(fileForm) : Shape}
-                    alt=""
-                    className={`${fileForm ? "pt-8 w-[12.5rem]" : "w-8"}`}
-                  /> */}
-                {/* <p className=" text-base  text-greyFont font-bold">
-                    Add Photo
-                  </p>
-                </span> */}
               </section>
             </section>
-            <div className=" mt-8">
-              <button
-                onClick={handleSubmit}
-                className="btn bg-blackSec flex w-full lg:w-[13.125rem] h-[4.375rem] gap-3 border-none justify-center items-center"
-              >
-                <p className="text-white font-bold">Sell Product</p>
-              </button>
-            </div>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <div className=" mt-8">
+                <button
+                  onClick={handleSubmit}
+                  className="btn bg-blackSec flex w-full lg:w-[13.125rem] h-[4.375rem] gap-3 border-none justify-center items-center"
+                >
+                  <p className="text-white font-bold">Sell Product</p>
+                </button>
+              </div>
+            )}
           </section>
         </section>
       </section>
+      <ModalMsg
+        isOpen={showModal}
+        onclose={() => setShow(false)}
+        msg="Semua Data Belum Terisi"
+      />
     </>
   );
 }
