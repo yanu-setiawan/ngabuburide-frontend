@@ -16,6 +16,7 @@ function DataNotFound() {
     </div>
   );
 }
+
 function CategoriesContent(props) {
   const handleClick = () => {
     const paramsName = props.name.toLowerCase();
@@ -63,11 +64,13 @@ function Product(props) {
       categories: dataParams.categories === info ? "" : info,
     });
   };
+
   const handleRangeParams = (event) => {
     // console.log(event.target.value);
     setRangePrice(event.target.value);
     // setDataParams({ ...dataParams, price: event.target.value });
   };
+
   const handleSubmitRange = () => {
     const checking = parseInt(dataParams.price) / 1000000;
     const newPriceParams = parseInt(rangePrice) * 1000000;
@@ -80,6 +83,7 @@ function Product(props) {
       setRangePrice(0);
     }
   };
+
   const handleColor = (info) => {
     setDataParams({
       ...dataParams,
@@ -153,7 +157,7 @@ function Product(props) {
         ) : (
           <>
             <section className="w-full h-full flex flex-col md:flex-row justify-center gap-12 lg:px-20 lg:py-16 ">
-              <div className="flex flex-col gap-10">
+              <div className="w-64 flex flex-col gap-10">
                 <div className="flex flex-col gap-4 ">
                   <h1 className="font-bold text-2xl mb-4">Categories</h1>
                   {countCategory.map((cat) => (
@@ -189,12 +193,89 @@ function Product(props) {
                     </button>
                   </div>
 
-                  <div className="flex flex-col gap-4">
-                    <h1 className="font-bold text-2xl">Brands</h1>
+                  <div className=" flex flex-col w-full mt-5 mb-10">
+                    <h1 className=" mb-5 mt-10 font-bold">Brands</h1>
+                    <div className=" flex flex-wrap justify-between gap-4">
+                      <div className="flex">
+                        <input
+                          id="ikea"
+                          type="radio"
+                          name="brands"
+                          className="hidden"
+                        />
+                        <label
+                          for="ikea"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          IKEA
+                        </label>
+                      </div>
+                      <div className="flex">
+                        <input
+                          id="north_oxford"
+                          type="radio"
+                          name="brands"
+                          className="hidden"
+                        />
+                        <label
+                          for="north_oxford"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          NORTH OXFORD
+                        </label>
+                      </div>
+                      <div className="flex">
+                        <input
+                          id="informa"
+                          type="radio"
+                          name="brands"
+                          className="hidden"
+                        />
+                        <label
+                          for="informa"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          INFORMA
+                        </label>
+                      </div>
+                      <div className="flex">
+                        <input
+                          id="sweet_house"
+                          type="radio"
+                          name="brands"
+                          className="hidden"
+                        />
+                        <label
+                          for="sweet_house"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          SWEET HOUSE
+                        </label>
+                      </div>
+                      <div className="flex">
+                        <input
+                          id="mr_poppins"
+                          type="radio"
+                          name="brands"
+                          className="hidden"
+                        />
+                        <label
+                          for="mr_poppins"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          MR.POPPINS 1929
+                        </label>
+                      </div>
+                    </div>
                   </div>
 
                   <div>
-                    <h1 className="font-bold text-2xl">Color</h1>
+                    <h1 className="font-bold text-2xl mb-4">Color</h1>
                     <div>
                       <div class="flex gap-5 items-center mr-4">
                         <span
