@@ -27,8 +27,27 @@ function Register() {
   };
   const handleRegister = async (event) => {
     event.preventDefault();
-    if (form.email === "" || form.password === "" || form.role_id === 0) {
-      setMsgModal("Input Empty .!");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (
+      form.email === "" ||
+      !emailRegex.test(form.email) ||
+      form.password === "" ||
+      form.password.length < 4 ||
+      form.role_id === 0
+    ) {
+      let errorMessage = "Invalid Input!";
+      if (form.email === "") {
+        errorMessage = "Email is required!";
+      } else if (!emailRegex.test(form.email)) {
+        errorMessage = "Email is invalid!";
+      } else if (form.password === "") {
+        errorMessage = "Password is required!";
+      } else if (form.password.length < 4) {
+        errorMessage = "password of at least 4 characters!";
+      } else if (form.role_id === 0) {
+        errorMessage = "Role is required!";
+      }
+      setMsgModal(errorMessage);
       setErrModal(true);
       return;
     }
