@@ -4,6 +4,8 @@ import Footer from "../../components/Footer";
 import arrow from "../../assets/icon-arrow-right.svg";
 import imgAbout from "../../assets/aboutus.png";
 import img1 from "../../assets/profile1.jpg";
+import img2 from "../../assets/profile2.jpg";
+import img3 from "../../assets/profile3.jpg";
 import testimoni from "../../assets/testimoni.png";
 
 function AboutUs() {
@@ -128,7 +130,7 @@ function AboutUs() {
             <div>
               <div className="md:w-64 md:h-80 lg:w-[22.5rem] lg:h-[28.125rem]">
                 <img
-                  src={img1}
+                  src={img3}
                   alt="people"
                   className="w-full h-full object-cover"
                 />
@@ -161,7 +163,7 @@ function AboutUs() {
             <div>
               <div className="md:w-64 md:h-80 lg:w-[22.5rem] lg:h-[28.125rem]">
                 <img
-                  src={img1}
+                  src={img2}
                   alt="people"
                   className="w-full h-full object-cover"
                 />
