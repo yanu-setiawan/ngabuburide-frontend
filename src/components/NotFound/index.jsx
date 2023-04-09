@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 
 function NotFound() {
+  useEffect(() => {
+    document.title = "RAZYR - Not Found";
+  }, []);
   return (
     <>
       <Header />

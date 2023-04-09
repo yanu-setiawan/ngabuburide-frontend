@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import arrow from "../../assets/icon-arrow-right.svg";
@@ -13,6 +13,9 @@ function Tracking() {
     setDetails(true);
     setTrack(false);
   };
+  useEffect(() => {
+    document.title = "RAZYR - Order Tracking";
+  }, []);
   return (
     <>
       <Header />

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import search from "../../assets/zoom.svg";
@@ -19,6 +19,9 @@ import tag from "../../assets/Background/tag.svg";
 import line from "../../assets/Medsos/Rectangle.svg";
 
 function Blog() {
+  useEffect(() => {
+    document.title = "RAZYR - Blog";
+  }, []);
   return (
     <>
       <Header />

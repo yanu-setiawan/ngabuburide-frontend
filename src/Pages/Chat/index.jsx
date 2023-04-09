@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -8,6 +8,9 @@ import pp2 from "../../assets/profile/pp2.png";
 import pp3 from "../../assets/profile/pp3.png";
 import path from "../../assets/Medsos/Path (1).svg";
 function Chat() {
+  useEffect(() => {
+    document.title = "RAZYR - Chat";
+  }, []);
   return (
     <>
       <Header />

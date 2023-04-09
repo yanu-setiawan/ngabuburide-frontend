@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import arrow from "../../assets/icon-arrow-right.svg";
@@ -11,6 +11,9 @@ import img5 from "../../assets/profile5.jpg";
 import testimoni from "../../assets/testimoni.png";
 
 function AboutUs() {
+  useEffect(() => {
+    document.title = "RAZYR - About Us";
+  }, []);
   return (
     <>
       <Header />
