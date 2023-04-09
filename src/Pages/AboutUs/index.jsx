@@ -7,6 +7,7 @@ import img1 from "../../assets/profile1.jpg";
 import img2 from "../../assets/profile2.jpg";
 import img3 from "../../assets/profile3.jpg";
 import img4 from "../../assets/profile4.jpg";
+import img5 from "../../assets/profile5.jpg";
 import testimoni from "../../assets/testimoni.png";
 
 function AboutUs() {
@@ -15,7 +16,7 @@ function AboutUs() {
       <Header />
       <main>
         <section className="relative">
-          <div className="absolute flex gap-4 px-20 pt-10">
+          <div className="absolute flex gap-4 px-4 lg:px-20 pt-10">
             <p>About</p>
             <img src={arrow} alt="icon-arrow" />
           </div>
@@ -137,7 +138,7 @@ function AboutUs() {
                 />
               </div>
               <div>
-                <p className="text-base">Afif Buchori</p>
+                <p className="text-base">M.Afif Buchori</p>
                 <p className="text-xs text-[#919191]">Fullstuck Developer</p>
               </div>
             </div>
@@ -176,14 +177,14 @@ function AboutUs() {
                 />
               </div>
               <div>
-                <p className="text-base">Abdul Rosyid</p>
+                <p className="text-base">Abdul Latif Rosyid</p>
                 <p className="text-xs text-[#919191]">Backend Developer</p>
               </div>
             </div>
             <div className="flex flex-col gap-5">
               <div className="w-64 h-80 md:w-64 md:h-80 lg:w-[20.5rem] lg:h-[26rem] transition duration-150 hover:scale-[1.1] hover:ease-in-out">
                 <img
-                  src={img1}
+                  src={img5}
                   alt="people"
                   className="w-full h-full object-cover"
                 />
@@ -197,7 +198,7 @@ function AboutUs() {
         </section>
         <section className="px-4 md:px-20 py-14 lg:px-32 lg:py-20 bg-[#F9F9F9]">
           <div className="flex flex-col items-center gap-10">
-            <p className="text-3xl text-center">
+            <p className="text-base lg:text-3xl text-center">
               “Gave 5 stars for excellent customer service. I had a couple of
               questions which they replied quickly to answer. If I could give
               multiple reasons for my rating it would also be for the design
