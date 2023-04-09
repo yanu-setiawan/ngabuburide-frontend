@@ -64,7 +64,7 @@ input[type="radio"]:checked + label {
     transition: 0.2s linear;
   }
   .nav-menu {
-    @apply md:w-80 pt-6 pr-4 md:p-10 flex flex-col gap-5 top-32 md:top-24  md:right-40 absolute md:bg-black text-white font-normal text-end md:text-start;
+    @apply md:w-80 pt-6 pr-4 md:p-10 flex flex-col gap-7 md:gap-8 top-32 md:top-24  md:right-40 absolute md:bg-black text-white font-normal text-end md:text-start;
     transition: 0.2s linear;
   }
   .nav-icon {

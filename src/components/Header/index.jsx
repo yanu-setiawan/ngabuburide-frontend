@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import icoSearch from "../../assets/icon-search.svg";
 import icoHeart from "../../assets/icon-love.svg";
 import icoCart from "../../assets/icon-cart.svg";
@@ -10,12 +10,15 @@ import { userAction } from "../../redux/slices/auth";
 
 import { searchAction } from "../../redux/slices/search";
 import { cartAction } from "../../redux/slices/cart";
+import { authLogout } from "../../utils/https/auth";
+import Loader from "../Loader";
+import { favoriteAction } from "../../redux/slices/favorite";
 
 function DropDownPages({ isOpen, onClose }) {
   return (
     <>
       {isOpen && (
-        <div className="md:w-72 flex flex-col gap-2 pl-8 py-3 md:p-10 top-28 md:absolute bg-black text-white font-normal">
+        <div className="md:w-72 flex flex-col gap-5 pl-4 md:pl-8 py-3 md:p-10 top-28 md:absolute md:bg-black text-white font-normal">
           <Link to={"/about"}>About Us</Link>
           <Link to={"/contact"}>Contact Us</Link>
           <Link to={"/commingsoon"} className="flex justify-between">
@@ -33,7 +36,7 @@ function DropDownShop({ isOpen, onClose }) {
   return (
     <>
       {isOpen && (
-        <div className="max-w-[700px] flex md:p-10 top-28 left-[40%] md:absolute bg-black text-white font-normal">
+        <div className="max-w-[700px] mt-4 md:mt-0 flex pl-4 md:p-10 top-28 left-[40%] md:absolute md:bg-black text-white font-normal">
           <section className="flex flex-col gap-5 mr-10">
             <Link to={"/product"}>Products</Link>
             <Link to={"/cart"}>Shopping Cart</Link>
@@ -43,7 +46,7 @@ function DropDownShop({ isOpen, onClose }) {
             <Link to={"/profile"}>My Account</Link>
             <Link to={"/tracking"}>Order Tracking</Link>
           </section>
-          <span className="w-96 h-52 flex justify-center items-center bg-white">
+          <span className="hidden w-96 h-52 md:flex justify-center items-center bg-white">
             <img src={imgGlass} alt="img-promo" />
             <div>
               <p className="text-black">Decorative Ceramic Accent Vases</p>
@@ -58,15 +61,34 @@ function DropDownShop({ isOpen, onClose }) {
 }
 
 function DropDownMenu({ isOpen, onToggle, onClose }) {
+  const controller = useMemo(() => new AbortController(), []);
   const stateStore = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    dispatch(userAction.authLogout());
-    dispatch(cartAction.resetCart());
+  const [isLoading, setLoading] = useState(false);
+
+  const handleLogout = async () => {
+    setLoading(true);
+    try {
+      const result = await authLogout(stateStore.token, controller);
+      console.log(result);
+      dispatch(userAction.authLogout());
+      dispatch(cartAction.resetCart());
+      dispatch(favoriteAction.resetFav());
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
+      {isLoading && (
+        <div className="w-screen h-screen fixed top-0 left-0 z-50 bg-slate-900/80 flex justify-center items-center">
+          <Loader />
+        </div>
+      )}
       {isOpen && (
         <div
           className={`nav-menu ${

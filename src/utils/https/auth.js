@@ -37,3 +37,11 @@ export const updateProfile = (token, form, file, controller) => {
     headers: { Authorization: `Bearer ${token}` },
   });
 };
+
+export const authLogout = (token, controller) => {
+  const url = `${baseUrl}auth/logout`;
+  return axios.patch(url, token, {
+    signal: controller.signal,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};

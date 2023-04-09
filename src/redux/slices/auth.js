@@ -10,6 +10,7 @@ const initialState = {
     address: null,
     role: null,
   },
+  favorite: [],
   isLoading: false,
   isRejected: false,
   isFulfilled: false,
@@ -32,6 +33,9 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    addFavorite: (prevState, action) => {
+      return initialState.favorite.push(action.payload);
+    },
     authLogout: () => {
       return initialState;
     },

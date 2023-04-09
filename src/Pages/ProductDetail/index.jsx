@@ -8,7 +8,7 @@ import imgRelate from "../../assets/Products/imgRelate.png";
 import rating from "../../assets/Rating.svg";
 import plus from "../../assets/plus.svg";
 import minus from "../../assets/minus.svg";
-import love from "../../assets/love.svg";
+// import love from "../../assets/love.svg";
 import delivery from "../../assets/delivery-fast.svg";
 import size from "../../assets/measurement.svg";
 import location from "../../assets/pin-check.svg";
@@ -18,27 +18,86 @@ import yt from "../../assets/Medsos/youtubeB.svg";
 import Loader from "../../components/Loader";
 import { getDetailProduct } from "../../utils/https/products";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../redux/slices/cart";
+import { addFavorite, getFavorite } from "../../utils/https/favorite";
+import { userAction } from "../../redux/slices/auth";
+// import { favoriteAction } from "../../redux/slices/favorite";
+
+function FavoriteComponent({ prodId, loved, setLoved }) {
+  const controller = useMemo(() => new AbortController(), []);
+  const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
+  const token = userState.token;
+  const [isFav, setFav] = useState(loved);
+  const handleClick = async () => {
+    try {
+      const result = await addFavorite(token, prodId, controller);
+      console.log(result);
+      setFav(true);
+      dispatch(userAction.addFavorite(prodId));
+    } catch (error) {
+      console.log(error);
+    }
+    // dispatch(favoriteAction.addFavThunk({ token, prodId }, controller))
+    //   .then((result) => {
+    //     console.log(result);
+    //     if (result.data.length > 0) {
+    //       setFav(true);
+    //     }
+    //   })
+    //   .catch((err) => console.log(err));
+  };
+  console.log(isFav);
+  return (
+    <div>
+      <button
+        onClick={handleClick}
+        className=" btn bg-blackSec font-bold w-[6rem] h-[3.8rem] text-2xl"
+      >
+        {loved ? (
+          <i className="bi bi-heart-fill"></i>
+        ) : (
+          <i className="bi bi-heart"></i>
+        )}
+      </button>
+    </div>
+  );
+}
 
 function ProductDetails() {
   const dispatch = useDispatch();
   const controller = useMemo(() => new AbortController(), []);
+  const userState = useSelector((state) => state.user);
+  const token = userState.token;
   const { id } = useParams();
 
   const [isLoading, setLoading] = useState(true);
   const [indexImg, setIndexImg] = useState(0);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [qty, setQty] = useState(1);
 
   const [dataProduct, setDataProduct] = useState({});
 
   const fetchingData = async () => {
     setLoading(true);
+    // dispatch(favoriteAction.getFavThunk({ token }, controller)).then(
+    //   (response) => {
+    //     console.log(response);
+    //   }
+    // );
     try {
       const result = await getDetailProduct(id, controller);
       // console.log(result.data.data[0]);
       setDataProduct(result.data.data[0]);
       setLoading(false);
+      const getFav = await getFavorite(token, controller);
+      // console.log(getFav);
+      const idToFind = 4;
+      const found = getFav.data.data.some((obj) => obj.id === idToFind);
+      console.log(found); // true/false
+
+      setIsFavorite(found);
     } catch (error) {
       console.log(error);
     }
@@ -165,11 +224,12 @@ function ProductDetails() {
                         Add To Cart
                       </button>
                     </div>
-                    <div>
+                    <FavoriteComponent prodId={id} loved={isFavorite} />
+                    {/* <div>
                       <button className=" btn bg-blackSec font-bold w-[6rem] h-[3.8rem]">
                         <img src={love} alt="" />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className=" text-xs leading-7">

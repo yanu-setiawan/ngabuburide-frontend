@@ -1,7 +1,26 @@
 import React from "react";
-import chair from "../../assets/chair.png";
+import { useDispatch, useSelector } from "react-redux";
+import { cartAction } from "../../redux/slices/cart";
+// import chair from "../../assets/chair.png";
 
-function cartCard() {
+function CartCard(props) {
+  const cartState = useSelector((state) => state.cart);
+  const cardCart = cartState.shoppingCart;
+  const dispatch = useDispatch();
+
+  const handleDecremen = () => {
+    if (props.qty === 1) return;
+    const data = { idx: props.idx, price: props.price };
+    dispatch(cartAction.decremenQty(data));
+  };
+  const handleIncremen = () => {
+    const data = { idx: props.idx, price: props.price };
+    dispatch(cartAction.incremenQty(data));
+  };
+
+  console.log(props.idx);
+  const imgUrl =
+    "https://res.cloudinary.com/dhikerrnk/image/upload/v1680940221/";
   return (
     <>
       <div className="flex flex-col gap-8 mb-10">
@@ -10,25 +29,37 @@ function cartCard() {
             <p>x</p>
             <div className="md:w-[4.313rem] md:h-[5.188rem]">
               <img
-                src={chair}
-                alt="chair"
+                src={imgUrl + props.img}
+                alt="images-product"
                 className="w-full h-full object-cover"
               />
             </div>
             <p className="w-28 md:w-52">Fabric Mid Century Chair</p>
           </div>
           <div className="w-32">
-            <p>Rp.10.000.000</p>
+            <p>Rp. {props.price.toLocaleString("id-ID")}</p>
           </div>
           <div className="mr-4 lg:mr-0">
-            <div className="flex gap-4">
-              <p>-</p>
-              <p>02</p>
-              <p>+</p>
+            <div className="flex flex-col-reverse md:flex-row gap-4">
+              <p
+                onClick={handleDecremen}
+                className="cursor-pointer font-black select-none btn btn-ghost"
+              >
+                -
+              </p>
+              <p className="min-w-[24px] flex justify-center items-center text-center">
+                {props.qty}
+              </p>
+              <p
+                onClick={handleIncremen}
+                className="cursor-pointer font-black select-none btn btn-ghost"
+              >
+                +
+              </p>
             </div>
           </div>
           <div className="w-32">
-            <p>Rp.100.000.000</p>
+            <p>Rp. {props.subtotal.toLocaleString("id-ID")}</p>
           </div>
         </div>
       </div>
@@ -36,4 +67,4 @@ function cartCard() {
   );
 }
 
-export default cartCard;
+export default CartCard;
