@@ -55,8 +55,8 @@ function Cart() {
           <section className="flex flex-col lg:flex-row px-4 py-10 lg:p-20 gap-4">
             <div className="flex flex-[2] justify-between px-4 py-4">
               <div className="w-full">
-                <div className="flex justify-between gap-14 text-xs lg:text-base md:gap-20 mb-10 ">
-                  <h2 className="mr-auto">PRODUCTS</h2>
+                <div className="flex justify-between gap-10 text-xs lg:text-base md:gap-20 mb-10 ">
+                  <h2 className="mr-auto md:mr-48">PRODUCTS</h2>
                   <h2 className="pl-4 md:pl-0">PRICE</h2>
                   <h2>QUANTITY</h2>
                   <h2 className="mr-10">TOTAL</h2>
@@ -90,7 +90,7 @@ function Cart() {
                   <p>Subtotal</p>
                   <p>Rp. {subtotalOnCart.toLocaleString("id-ID")}</p>
                 </div>
-                <div className="flex justify-between">
+                <div className="w-full flex justify-between">
                   <p>Shipping</p>
                   <div>
                     <div className="flex gap-4">
