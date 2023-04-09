@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import chair from "../../../assets/chair.png";
 
 function MyOrder() {
+  useEffect(() => {
+    document.title = "RAZYR - My Order";
+  });
   return (
     <>
       <section className=" flex w-full flex-col">

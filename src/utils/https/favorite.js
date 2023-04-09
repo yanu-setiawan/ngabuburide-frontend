@@ -16,8 +16,17 @@ export const addFavorite = (token, prodId, controller) => {
 
 export const getFavorite = (token, controller) => {
   const url = `${baseUrl}favorite`;
-  console.log(token);
+  // console.log(token);
   return axios.get(url, {
+    signal: controller.signal,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+export const deleteFavorite = (token, prodId, controller) => {
+  const url = `${baseUrl}favorite/${prodId}`;
+  // console.log(token);
+  return axios.delete(url, {
     signal: controller.signal,
     headers: { Authorization: `Bearer ${token}` },
   });

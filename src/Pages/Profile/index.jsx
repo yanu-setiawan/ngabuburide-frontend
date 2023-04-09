@@ -21,7 +21,7 @@ function Profile() {
     document.title = "RAZYR - Profile";
   }, []);
 
-  console.log(stateUser.data.role);
+  // console.log(stateUser.data.role);
 
   return (
     <>
@@ -62,6 +62,7 @@ function Profile() {
                   </p>
                 </div>
                 <div
+                  onClick={() => setShowContent(3)}
                   className={`w-max ${
                     showContent === 3 && "border-b-2 border-greyBord"
                   } md:p-3`}
@@ -74,8 +75,9 @@ function Profile() {
             )}
 
             <div
+              onClick={() => setShowContent(4)}
               className={`flex w-max ${
-                showContent === 3 && "border-b-2 border-greyBord"
+                showContent === 4 && "border-b-2 border-greyBord"
               } md:p-3`}
             >
               <p className="text-base md:text-[1.4rem] lg:text-[2rem] w-max cursor-pointer">
@@ -84,14 +86,10 @@ function Profile() {
               </p>
             </div>
           </section>
-
-          {/* <EditProfile /> */}
-          {/* <MyProduct /> */}
-          {/* <SellingOrder /> */}
-          {/* <MyOrder /> */}
-
           {showContent === 1 && <EditProfile />}
           {showContent === 2 && <MyProduct />}
+          {showContent === 3 && <SellingOrder />}
+          {showContent === 4 && <MyOrder />}
         </section>
       </section>
       <Footer />
