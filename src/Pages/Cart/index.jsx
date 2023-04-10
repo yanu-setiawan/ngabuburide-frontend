@@ -37,7 +37,7 @@ function Cart() {
       // payment_id: 1,
       notes: "",
       status_id: 1,
-      products: dataShoppingCart,
+      product: dataShoppingCart,
     };
     setDataCheckout(data);
     setIsCheckout(true);
@@ -45,7 +45,7 @@ function Cart() {
 
   useEffect(() => {
     document.title = "RAZYR - Cart";
-  });
+  }, [isCheckout]);
   // console.log(cartState.shoppingCart);
   // console.log(shippingMed);
 
@@ -60,7 +60,7 @@ function Cart() {
       {isLoading ? (
         <Loader />
       ) : isCheckout ? (
-        <CartPayment data={dataCheckout} />
+        <CartPayment data={dataCheckout} onClose={() => setIsCheckout(false)} />
       ) : (
         <main>
           <section className="relative">
@@ -92,8 +92,8 @@ function Cart() {
                 ) : (
                   cartState.shoppingCart.map((prod, idx) => (
                     <CartCard
-                      key={prod.id}
-                      id={prod.id}
+                      key={prod.prod_id}
+                      id={prod.prod_id}
                       idx={idx}
                       img={prod.img}
                       price={prod.price}

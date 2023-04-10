@@ -39,7 +39,7 @@ function Login() {
       return;
     }
 
-    console.log(form);
+    // console.log(form);
     setLoading(true);
     dispatch(
       userAction.loginThunk(
@@ -48,7 +48,7 @@ function Login() {
       )
     )
       .then((res) => {
-        console.log(res.payload);
+        // console.log(res.payload);
         if (res.payload.message === "Request failed with status code 401") {
           setLoading(false);
           setMsgModal(res.payload.response.data.msg);

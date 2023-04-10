@@ -124,7 +124,7 @@ function ProductDetails() {
     const data = {
       qty: qty,
       size_id: 1,
-      id: parseInt(dataProduct.id),
+      prod_id: parseInt(dataProduct.id),
       img: dataProduct.image[0],
       price: dataProduct.price,
       prodName: dataProduct.prod_name,
