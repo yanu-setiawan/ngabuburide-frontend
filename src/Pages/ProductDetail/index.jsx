@@ -123,7 +123,8 @@ function ProductDetails() {
   const handleAddtoCart = () => {
     const data = {
       qty: qty,
-      id: parseInt(dataProduct.id),
+      size_id: 1,
+      prod_id: parseInt(dataProduct.id),
       img: dataProduct.image[0],
       price: dataProduct.price,
       prodName: dataProduct.prod_name,

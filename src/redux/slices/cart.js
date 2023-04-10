@@ -10,7 +10,7 @@ const cartSlice = createSlice({
   reducers: {
     addtoCard: (prevState, action) => {
       const existIdx = prevState.shoppingCart.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item.prod_id === action.payload.prod_id
       );
       if (existIdx !== -1) {
         const existItem = prevState.shoppingCart[existIdx];
@@ -61,6 +61,13 @@ const cartSlice = createSlice({
         updatedItem,
         ...prevState.shoppingCart.slice(idx + 1),
       ];
+      return { ...prevState, shoppingCart: updatedCart };
+    },
+    deleteItem: (prevState, action) => {
+      const itemId = action.payload;
+      const updatedCart = prevState.shoppingCart.filter(
+        (item) => item.id !== itemId
+      );
       return { ...prevState, shoppingCart: updatedCart };
     },
     resetCart: () => {
