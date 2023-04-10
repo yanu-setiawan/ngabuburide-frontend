@@ -156,7 +156,7 @@ function Product(props) {
           <Loader />
         ) : (
           <>
-            <section className="w-full h-full flex flex-col md:flex-row justify-center gap-12 px-4 lg:px-20 lg:py-16 ">
+            <section className="w-full h-full flex flex-col gap-10 md:flex-row justify-center px-4 lg:px-20 lg:py-16 ">
               <div className="w-full md:w-48 lg:w-64 flex flex-col gap-10">
                 <div className="flex flex-col gap-4 ">
                   <h1 className="font-bold text-2xl mb-4">Categories</h1>
@@ -421,7 +421,7 @@ function Product(props) {
                   <div>image</div>
                 </div>
               </div>
-              <div>
+              <div className="lg:w-[57.399rem]">
                 <div className="flex justify-between mb-10">
                   <p>
                     Showing 1-{metaData.total} of {metaData.total} Results
@@ -444,7 +444,7 @@ function Product(props) {
                   <DataNotFound />
                 ) : (
                   <>
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-content-between">
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 ">
                       {dataProducts.map((product) => (
                         <Card
                           key={product.id}
