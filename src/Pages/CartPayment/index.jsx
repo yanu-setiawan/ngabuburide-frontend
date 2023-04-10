@@ -1,12 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import arrow from "../../assets/icon-arrow-right.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createTransaction } from "../../utils/https/transactions";
 import Loader from "../../components/Loader";
+import { cartAction } from "../../redux/slices/cart";
 
 function CartPayment(props) {
   const controller = useMemo(() => new AbortController(), []);
   const userState = useSelector((state) => state.user.data);
+  const dispatch = useDispatch();
 
   const [isLoading, setLoading] = useState(false);
 
@@ -37,8 +39,10 @@ function CartPayment(props) {
     setLoading(true);
     try {
       const result = await createTransaction(dataCheckout, controller);
-      console.log(result);
+      // console.log(result);
       setLoading(false);
+      dispatch(cartAction.resetCart());
+      props.onClose();
     } catch (error) {
       console.log(error);
     }
@@ -53,9 +57,10 @@ function CartPayment(props) {
       <section className="relative">
         <div className="absolute flex gap-4 px-20 pt-10 z-10">
           <p onClick={props.onClose} className="cursor-pointer">
-            Checkout
+            Cart
           </p>
           <img src={arrow} alt="icon-arrow" />
+          <p>Checkout</p>
         </div>
         <div className=" hero-login w-full h-[15.6rem] opacity-20 flex justify-center items-center "></div>
         <div className=" absolute flex justify-center items-center text-center flex-col top-16 w-full ">
