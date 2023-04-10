@@ -11,6 +11,7 @@ import Bitmap from "../../assets/Medsos/Bitmap.svg";
 import Bitmap2 from "../../assets/Medsos/Bitmap (1).svg";
 import Bitmap3 from "../../assets/Medsos/Bitmap (2).svg";
 import Bitmap4 from "../../assets/Medsos/Bitmap (3).svg";
+import { Link } from "react-router-dom";
 
 function DisplayProducts(props) {
   return (
@@ -29,7 +30,9 @@ function DisplayProducts(props) {
             <p>{props.desc}</p>
             <div className="w-1/2 flex items-center">
               <span className="w-full h-[2px] border border-black"></span>
-              <button className="btn btn-ghost">shop now</button>
+              <button className="btn btn-ghost">
+                <Link to={"/product"}>shop now</Link>
+              </button>
             </div>
           </div>
         </div>
@@ -40,7 +43,9 @@ function DisplayProducts(props) {
             <p>{props.desc}</p>
             <div className="w-1/2 flex items-center">
               <span className="w-full h-[2px] border border-black"></span>
-              <button className="btn btn-ghost">shop now</button>
+              <button className="btn btn-ghost">
+                <Link to={"/product"}>shop now</Link>
+              </button>
             </div>
           </div>
           <span className="flex-1 md:w-[640px] md:pl-24">
