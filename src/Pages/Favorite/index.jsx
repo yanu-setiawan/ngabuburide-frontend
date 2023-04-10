@@ -1,24 +1,39 @@
 import React, { useEffect, useMemo, useState } from "react";
-// import ImgProduct2 from "../../assets/product2.png";
 import CheckStock from "../../assets/check-circle-08.svg";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { getFavorite } from "../../utils/https/favorite";
 import { useSelector } from "react-redux";
+import Loader from "../../components/Loader";
 
 function Favorite() {
   const controller = useMemo(() => new AbortController(), []);
   const stateStore = useSelector((state) => state.user);
-  const stateCart = useSelector((state) => state.cart);
+  // const stateCart = useSelector((state) => state.cart);
   const [favorite, setFavorite] = useState({});
-  console.log(stateCart);
+  const [isLoading, setLoading] = useState(true);
   const imgUrl =
     "https://res.cloudinary.com/dhikerrnk/image/upload/v1680940221/";
+  // const fetching = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const getFav = await getFavorite(stateStore.token, controller);
+  //     // console.log(getFav.data.data);
+  //     setFavorite(getFav.data.data);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const fetching = async () => {
+    if (!favorite.length) {
+      setLoading(true);
+    }
     try {
       const getFav = await getFavorite(stateStore.token, controller);
-      console.log(getFav.data.data);
       setFavorite(getFav.data.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -28,6 +43,7 @@ function Favorite() {
     document.title = "RAZYR - Favorite";
     fetching();
   });
+
   return (
     <>
       <Header />
@@ -55,50 +71,58 @@ function Favorite() {
               </div>
             </section>
             <section className=" flex flex-col gap-10">
-              {favorite.map((data, i) => (
-                <section key={i} className=" flex w-full">
-                  <div className=" flex  w-[45%] flex-col ">
-                    <div className=" flex gap-[0.5rem] md:gap-10">
-                      <div className=" h-20 w-20 md:w-[8.8rem] md:h-[8.8rem]  lg:h-[10.8rem] lg:w-[10.7rem]">
-                        <img
-                          className=" w-full h-full"
-                          src={imgUrl + data.image}
-                          alt=""
-                        />
+              {isLoading ? (
+                <Loader />
+              ) : (
+                <>
+                  {favorite.map((data, i) => (
+                    <section key={i} className=" flex w-full">
+                      <div className=" flex  w-[45%] flex-col ">
+                        <div className=" flex gap-[0.5rem] md:gap-10">
+                          <div className=" h-20 w-20 md:w-[8.8rem] md:h-[8.8rem]  lg:h-[10.8rem] lg:w-[10.7rem]">
+                            <img
+                              className=" w-full h-full"
+                              src={imgUrl + data.image}
+                              alt=""
+                            />
+                          </div>
+                          <div className=" text-xs md:text-sm flex justify-center items-center">
+                            <p>{data.prod_name}</p>
+                          </div>
+                        </div>
                       </div>
-                      <div className=" text-xs md:text-sm flex justify-center items-center">
-                        <p>{data.prod_name}</p>
+                      <div className=" w-[20%] flex justify-center lg:justify-normal">
+                        <div className="flex gap-[0.39rem]">
+                          <div className="  flex items-center ">
+                            <img
+                              className=" w-[0.94rem] h-[0.94rem] flex items-center"
+                              src={CheckStock}
+                              alt=""
+                            />
+                          </div>
+                          <div className=" text-xs flex items-center  font-medium text-[#262626]">
+                            {data.stock}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className=" w-[20%] flex justify-center lg:justify-normal">
-                    <div className="flex gap-[0.39rem]">
-                      <div className="  flex items-center ">
-                        <img
-                          className=" w-[0.94rem] h-[0.94rem] flex items-center"
-                          src={CheckStock}
-                          alt=""
-                        />
+                      <div className=" w-[35%] flex justify-center lg:justify-normal md:pl-4 lg:pl-0 items-center">
+                        <div className=" flex flex-col md:flex-row items-center  justify-between w-full">
+                          <div className=" font-bold text-xs md:text-lg flex items-center">
+                            <p>Rp. {data.price.toLocaleString("id-ID")}</p>
+                          </div>
+                          <div>
+                            <button className="btn bg-blackSec flex w-full lg:w-[7rem] xl:w-[12.5rem] h-[3.75rem] gap-3 border-none justify-center items-center hover:bg-red-500">
+                              <p className="text-white font-bold">
+                                Add To Cart
+                              </p>
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                      <div className=" text-xs flex items-center  font-medium text-[#262626]">
-                        {data.stock}
-                      </div>
-                    </div>
-                  </div>
-                  <div className=" w-[35%] flex justify-center lg:justify-normal md:pl-4 lg:pl-0 items-center">
-                    <div className=" flex flex-col md:flex-row items-center  justify-between w-full">
-                      <div className=" font-bold text-xs md:text-lg flex items-center">
-                        <p>Rp. {data.price.toLocaleString("id-ID")}</p>
-                      </div>
-                      <div>
-                        <button className="btn bg-blackSec flex w-full lg:w-[7rem] xl:w-[12.5rem] h-[3.75rem] gap-3 border-none justify-center items-center hover:bg-red-500">
-                          <p className="text-white font-bold">Add To Cart</p>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              ))}
+                    </section>
+                  ))}
+                </>
+              )}
             </section>
           </section>
         </section>
