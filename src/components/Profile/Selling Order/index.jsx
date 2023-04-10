@@ -612,7 +612,11 @@ function SellingOrder() {
                 />
               </div>
 
-              <section className="flex relative justify-center flex-col items-center lg:justify-normal lg:flex-row gap-4 overflow-hidden">
+              <section
+                className={`${
+                  fileEmpat !== "" && "hidden"
+                } flex relative justify-center flex-col items-center lg:justify-normal lg:flex-row gap-4 overflow-hidden`}
+              >
                 <label
                   htmlFor="file"
                   className="relative text-greyBord cursor-pointer"
@@ -649,7 +653,7 @@ function SellingOrder() {
       <ModalMsg
         isOpen={showModal}
         onclose={() => setShow(false)}
-        msg="Semua Data Belum Terisi"
+        msg="All data should not be empty"
       />
     </>
   );
