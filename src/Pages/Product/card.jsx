@@ -8,7 +8,7 @@ function Card(props) {
   const navigate = useNavigate();
   const imgUrl =
     "https://res.cloudinary.com/dhikerrnk/image/upload/v1680940221/";
-  console.log(props.id, imgUrl + props.img);
+  // console.log(props.id, imgUrl + props.img);
   return (
     <>
       <div
