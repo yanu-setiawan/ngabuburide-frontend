@@ -14,6 +14,16 @@ export const authLogin = (email, password, controller) => {
   return axios.post(url, body, { signal: controller.signal });
 };
 
+export const authForgot = (email, controller) => {
+  const url = `${baseUrl}auth/otp`;
+  return axios.patch(url, { email }, { signal: controller.signal });
+};
+export const changePwdByOtp = (email, otp, newPwd, controller) => {
+  const url = `${baseUrl}auth/forgot`;
+  const body = { email, otp, newPassword: newPwd };
+  return axios.patch(url, body, { signal: controller.signal });
+};
+
 export const getProfile = (token, controller) => {
   const url = `${baseUrl}profile`;
   return axios.get(url, {

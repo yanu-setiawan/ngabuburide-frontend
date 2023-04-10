@@ -136,6 +136,7 @@ function Header(props) {
   //   dispatch(searchAction.addSearch(inputSearch));
   // };
   const fetching = async () => {
+    if (!stateStore.token) return;
     try {
       const getFav = await getFavorite(stateStore.token, controller);
       // console.log(getFav.data.data);
