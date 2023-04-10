@@ -6,21 +6,43 @@ import CartCard from "./cartCard";
 import Loader from "../../components/Loader";
 import { useSelector } from "react-redux";
 import ModalMsg from "../../components/ModalMsg";
+import CartPayment from "../CartPayment";
 
 function Cart() {
   const cartState = useSelector((state) => state.cart);
+  const userId = useSelector((state) => state.user.data.id);
 
   const [showModal, setShowModal] = useState(false);
   const [msgModal, setMsgModal] = useState("");
   const [isLoading, setLoading] = useState(false);
+  const [isCheckout, setIsCheckout] = useState(false);
   const [shippingMed, setShipping] = useState(0);
+  const [dataCheckout, setDataCheckout] = useState({});
 
   const handleCheckout = () => {
     if (shippingMed === 0) {
       setMsgModal("Shipping Method Not Set");
       setShowModal(true);
+      return;
     }
+    console.log(cartState);
+    const dataShoppingCart = cartState.shoppingCart.map((item) => {
+      const { img, prodName, subtotal, price, ...newItem } = item;
+      // if (img || prodName) console.log("");
+      return newItem;
+    });
+    const data = {
+      user_id: userId,
+      promo_id: 1,
+      // payment_id: 1,
+      notes: "",
+      status_id: 1,
+      products: dataShoppingCart,
+    };
+    setDataCheckout(data);
+    setIsCheckout(true);
   };
+
   useEffect(() => {
     document.title = "RAZYR - Cart";
   });
@@ -37,6 +59,8 @@ function Cart() {
       <Header />
       {isLoading ? (
         <Loader />
+      ) : isCheckout ? (
+        <CartPayment data={dataCheckout} />
       ) : (
         <main>
           <section className="relative">
