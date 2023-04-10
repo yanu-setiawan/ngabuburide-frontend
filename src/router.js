@@ -21,6 +21,8 @@ import CommingSoon from "./components/CoomingSoon";
 import NotFound from "./components/NotFound";
 import Blog from "./Pages/Blog";
 import Favorite from "./Pages/Favorite";
+import EditProducts from "./Pages/EditProduct";
+import ContactUs from "./Pages/ContactUs";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -86,8 +88,16 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
-
+  {
+    path: "/edit-product",
+    element: (
+      <PrivateRoute>
+        <EditProducts />
+      </PrivateRoute>
+    ),
+  },
   { path: "/favorite", element: <Favorite /> },
+  { path: "/contact", element: <ContactUs /> },
   { path: "/blog", element: <Blog /> },
   { path: "/about", element: <AboutUs /> },
   { path: "/commingsoon", element: <CommingSoon /> },
