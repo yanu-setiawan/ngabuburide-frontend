@@ -15,6 +15,7 @@ import location from "../../assets/pin-check.svg";
 import fb from "../../assets/Medsos/facebookB.svg";
 import tweet from "../../assets/Medsos/twitterB.svg";
 import yt from "../../assets/Medsos/youtubeB.svg";
+import review1 from "../../assets/profile-review.png";
 import Loader from "../../components/Loader";
 import { getDetailProduct } from "../../utils/https/products";
 import { useParams } from "react-router-dom";
@@ -87,6 +88,8 @@ function ProductDetails() {
   const [qty, setQty] = useState(1);
 
   const [dataProduct, setDataProduct] = useState({});
+  const [review, setReview] = useState(false);
+  const [description, setDescription] = useState(true);
 
   const fetchingData = async () => {
     setLoading(true);
@@ -142,6 +145,16 @@ function ProductDetails() {
   // console.log(dataProduct);
   const imgUrl =
     "https://res.cloudinary.com/dhikerrnk/image/upload/v1680940221/";
+
+  const handelDescription = () => {
+    setDescription(true);
+    setReview(false);
+  };
+
+  const handleReview = () => {
+    setDescription(false);
+    setReview(true);
+  };
 
   return (
     <>
@@ -302,53 +315,176 @@ function ProductDetails() {
             </section>
             <section className=" flex mt-[3rem] lg:mt-32 mb-[4.5rem]">
               <ul className=" flex text-[11px] gap-5 md:text-sm md:gap-11 lg:gap-14 xl:gap-[4.4rem] font-bold lg:text-[1.1rem] xl:text-[1.6rem] py-4 ">
-                <li className=" border-b-[5px] border-blackSec pb-4 w-max">
+                <li
+                  className={
+                    description
+                      ? "border-b-[5px] border-blackSec pb-4 w-max cursor-pointer select-none"
+                      : "pb-4 w-max cursor-pointer select-none"
+                  }
+                  onClick={handelDescription}
+                >
                   Description
                 </li>
-                <li className=" pb-4 md:w-max">Review</li>
-                <li className=" pb-4 md:w-max">Additional Information</li>
-                <li className=" pb-4 md:w-max">About Brand</li>
-                <li className=" pb-4 md:w-max">Shipping & Delivery</li>
+                <li
+                  className={
+                    review
+                      ? "border-b-[5px] border-blackSec pb-4 w-max cursor-pointer select-none"
+                      : "pb-4 w-max cursor-pointer select-none"
+                  }
+                  onClick={handleReview}
+                >
+                  Review
+                </li>
+                <li className=" pb-4 md:w-max cursor-pointer select-none">
+                  Additional Information
+                </li>
+                <li className=" pb-4 md:w-max cursor-pointer select-none">
+                  About Brand
+                </li>
+                <li className=" pb-4 md:w-max cursor-pointer select-none">
+                  Shipping & Delivery
+                </li>
               </ul>
             </section>
-            <section className=" flex w-full flex-col lg:flex-row lg:gap-[3.8rem]">
-              <div className=" lg:w-[50%]">
-                <img src={imgProd} alt="" />
-              </div>
-              <div className=" lg:w-[50%] flex flex-col gap-10 ">
-                <div className=" text-sm text-greySec">
-                  <p>
-                    Donec accumsan auctor iaculis. Sed suscipit arcu ligula, at
-                    egestas magna molestie a. Proin ac ex maximus, ultrices
-                    justo eget, sodales orci. Aliquam egestas libero ac turpis
-                    pharetra, in vehicula lacus scelerisque. Vestibulum ut sem
-                    laoreet, feugiat tellus at, hendrerit arcu..
-                  </p>
+            {description && (
+              <section className=" flex w-full flex-col lg:flex-row lg:gap-[3.8rem]">
+                <div className=" lg:w-[50%]">
+                  <img src={imgProd} alt="" />
                 </div>
-                <div className="">
-                  <ol className=" text-sm leading-6 flex flex-col gap-5">
-                    <li>
+                <div className=" lg:w-[50%] flex flex-col gap-10 ">
+                  <div className=" text-sm text-greySec">
+                    <p>
+                      Donec accumsan auctor iaculis. Sed suscipit arcu ligula,
+                      at egestas magna molestie a. Proin ac ex maximus, ultrices
+                      justo eget, sodales orci. Aliquam egestas libero ac turpis
+                      pharetra, in vehicula lacus scelerisque. Vestibulum ut sem
+                      laoreet, feugiat tellus at, hendrerit arcu..
+                    </p>
+                  </div>
+                  <div className="">
+                    <ol className=" text-sm leading-6 flex flex-col gap-5">
+                      <li>
+                        Maecenas eu ante a elit tempus fermentum. Aliquam
+                        commodo tincidunt semper
+                      </li>
+                      <li>
+                        Maecenas eu ante a elit tempus fermentum. Aliquam
+                        commodo tincidunt semper
+                      </li>
+                    </ol>
+                  </div>
+                  <div className=" leading-6 text-sm text-greySec mt-2">
+                    <p>
+                      Nunc lacus elit, faucibus ac laoreet sed, dapibus ac mi.
+                      Maecenas eu ante a elit tempus fermentum. Aliquam
+                      commodoMaecenas eu ante a elit tempus fermentum. Aliquam
+                      commodo tincidunt semper tincidunt semper. Phasellus accum
                       Maecenas eu ante a elit tempus fermentum. Aliquam commodo
                       tincidunt semper
-                    </li>
-                    <li>
-                      Maecenas eu ante a elit tempus fermentum. Aliquam commodo
-                      tincidunt semper
-                    </li>
-                  </ol>
+                    </p>
+                  </div>
                 </div>
-                <div className=" leading-6 text-sm text-greySec mt-2">
-                  <p>
-                    Nunc lacus elit, faucibus ac laoreet sed, dapibus ac mi.
-                    Maecenas eu ante a elit tempus fermentum. Aliquam
-                    commodoMaecenas eu ante a elit tempus fermentum. Aliquam
-                    commodo tincidunt semper tincidunt semper. Phasellus accum
-                    Maecenas eu ante a elit tempus fermentum. Aliquam commodo
-                    tincidunt semper
-                  </p>
+              </section>
+            )}
+            {review && (
+              <section className="w-full lg:pl-52  lg:w-[64rem]">
+                <div className="w-full flex flex-col gap-10 border-b-2 pb-10 mb-10">
+                  <div className="lg:w-[42rem] flex gap-10 items-center">
+                    <div className="lg:w-[15rem] lg:h-[7rem] rounded-full bg-slate-400">
+                      <img
+                        src={review1}
+                        alt="review"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <p>
+                        “Theme is very flexible and easy to use. Perfect for us.
+                        Customer support has been excellent and answered every
+                        question we've thrown at them with 12 hours.”
+                      </p>
+                      <div className="flex mt-8 gap-4 items-center  ">
+                        <p className="text-xs text-[#989898]">
+                          35 mins ago, 15 November 2019
+                        </p>
+                        <p>Reply</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="md:ml-32 lg:ml-40 w-[42-rem] flex  gap-10 items-center">
+                    <div className="lg:w-[15rem] lg:h-[7rem] rounded-full bg-slate-400">
+                      <img
+                        src={review1}
+                        alt="review"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <p>
+                        “Theme is very flexible and easy to use. Perfect for us.
+                        Customer support has been excellent and answered every
+                        question we've thrown at them with 12 hours.”
+                      </p>
+                      <div className="flex mt-8 gap-4 items-center  ">
+                        <p className="text-xs text-[#989898]">
+                          35 mins ago, 15 November 2019
+                        </p>
+                        <p>Reply</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </section>
+                <div className="w-full flex flex-col gap-10 border-b-2 pb-10 mb-10">
+                  <div className="lg:w-[42rem] flex gap-10 items-center">
+                    <div className="lg:w-[15rem] lg:h-[7rem] rounded-full bg-slate-400">
+                      <img
+                        src={review1}
+                        alt="review"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <p>
+                        “Theme is very flexible and easy to use. Perfect for us.
+                        Customer support has been excellent and answered every
+                        question we've thrown at them with 12 hours.”
+                      </p>
+                      <div className="flex mt-8 gap-4 items-center  ">
+                        <p className="text-xs text-[#989898]">
+                          35 mins ago, 15 November 2019
+                        </p>
+                        <p>Reply</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full flex flex-col gap-10 border-b-2 pb-10 mb-10">
+                  <div className="lg:w-[42rem] flex gap-10 items-center">
+                    <div className="lg:w-[15rem] lg:h-[7rem] rounded-full bg-slate-400">
+                      <img
+                        src={review1}
+                        alt="review"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <p>
+                        “Theme is very flexible and easy to use. Perfect for us.
+                        Customer support has been excellent and answered every
+                        question we've thrown at them with 12 hours.”
+                      </p>
+                      <div className="flex mt-8 gap-4 items-center  ">
+                        <p className="text-xs text-[#989898]">
+                          35 mins ago, 15 November 2019
+                        </p>
+                        <p>Reply</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
             <section className=" mt-20">
               <h1 className=" text-[2rem] md:text-5xl text-center flex justify-center items-center">
                 Related Products
