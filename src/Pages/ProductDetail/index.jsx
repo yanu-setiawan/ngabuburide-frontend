@@ -18,7 +18,7 @@ import yt from "../../assets/Medsos/youtubeB.svg";
 import review1 from "../../assets/profile-review.png";
 import Loader from "../../components/Loader";
 import { getDetailProduct } from "../../utils/https/products";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../redux/slices/cart";
 import {
@@ -26,20 +26,30 @@ import {
   deleteFavorite,
   getFavorite,
 } from "../../utils/https/favorite";
+import ModalMsg from "../../components/ModalMsg";
+
 // import { userAction } from "../../redux/slices/auth";
 // import { favoriteAction } from "../../redux/slices/favorite";
 
 function FavoriteComponent({ prodId, loved, setLoved }) {
   const controller = useMemo(() => new AbortController(), []);
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
   const token = userState.token;
+  const [msgModal, setMsgModal] = useState("");
+  const [isErrModal, setErrModal] = useState(false);
   const handleClick = async () => {
     try {
       if (loved) {
         const result = await deleteFavorite(token, prodId, controller);
         console.log(result.data.msg);
         setLoved();
+        return;
+      }
+      if (!token) {
+        setMsgModal("Please log in first");
+        setErrModal(true);
         return;
       }
       const result = await addFavorite(token, prodId, controller);
@@ -59,6 +69,9 @@ function FavoriteComponent({ prodId, loved, setLoved }) {
     //   .catch((err) => console.log(err));
   };
   // console.log(isFav);
+  const redirect = () => {
+    navigate("/login");
+  };
   return (
     <div>
       <button
@@ -71,6 +84,16 @@ function FavoriteComponent({ prodId, loved, setLoved }) {
           <i className="bi bi-heart"></i>
         )}
       </button>
+      {isErrModal && (
+        <ModalMsg
+          msg={msgModal}
+          isOpen={isErrModal}
+          onclose={() => {
+            setErrModal(false);
+            redirect();
+          }}
+        />
+      )}
     </div>
   );
 }
