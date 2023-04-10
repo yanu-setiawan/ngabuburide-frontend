@@ -31,6 +31,24 @@ import ModalMsg from "../../components/ModalMsg";
 // import { userAction } from "../../redux/slices/auth";
 // import { favoriteAction } from "../../redux/slices/favorite";
 
+function ModaltoCart({ showAdd, closeShow }) {
+  useEffect(() => {
+    setTimeout(() => {
+      closeShow();
+    }, 4000);
+  });
+  return (
+    <div
+      className={`fixed ${
+        showAdd ? "top-[20%]" : "top-[-10px]"
+      } transition-all left-[25%] md:left-[35%] z-[5] w-1/2 md:w-[30%] mt-auto flex bg-green-500/60 p-5 md:text-2xl justify-between text-primary shadow-lg shadow-green-500/60`}
+    >
+      PRODUCT ADD TO CART
+      <i className="bi bi-info-circle"></i>
+    </div>
+  );
+}
+
 function FavoriteComponent({ prodId, loved, setLoved }) {
   const controller = useMemo(() => new AbortController(), []);
   const navigate = useNavigate();
@@ -108,6 +126,7 @@ function ProductDetails() {
   const [isLoading, setLoading] = useState(true);
   const [indexImg, setIndexImg] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isModaltoCart, setModaltoCart] = useState(false);
   const [qty, setQty] = useState(1);
 
   const [dataProduct, setDataProduct] = useState({});
@@ -156,8 +175,9 @@ function ProductDetails() {
       prodName: dataProduct.prod_name,
       subtotal: qty * dataProduct.price,
     };
-    console.log(data);
+    // console.log(data);
     dispatch(cartAction.addtoCard(data));
+    setModaltoCart(true);
   };
 
   const handleQtyDecrement = () => {
@@ -182,6 +202,10 @@ function ProductDetails() {
   return (
     <>
       <Header loved={isFavorite} />
+      <ModaltoCart
+        showAdd={isModaltoCart}
+        closeShow={() => setModaltoCart(false)}
+      />
       {isLoading ? (
         <Loader />
       ) : (
