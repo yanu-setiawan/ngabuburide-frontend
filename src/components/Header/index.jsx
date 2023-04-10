@@ -205,7 +205,7 @@ function Header(props) {
           >
             <img src={icoSearch} alt="icon-search" />
           </span>
-          <span className="relative cursor-pointer">
+          <Link to={"/favorite"} className="relative cursor-pointer">
             <img src={icoHeart} alt="icon-search" />
             <h2
               className={`${
@@ -214,7 +214,7 @@ function Header(props) {
             >
               {countFavorite}
             </h2>
-          </span>
+          </Link>
           <Link to={"/cart"} className="relative cursor-pointer">
             <img src={icoCart} alt="icon-search" />
             <h2
