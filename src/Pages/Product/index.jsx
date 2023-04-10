@@ -36,7 +36,7 @@ function CategoriesContent(props) {
   );
 }
 
-function Product(props) {
+function Product() {
   const controller = useMemo(() => new AbortController(), []);
   // const searchState = useSelector((state) => state.search);
 
@@ -567,56 +567,30 @@ function Product(props) {
                       tabIndex={0}
                       className="dropdown-content menu p-2 shadow bg-blackSec text-white rounded-box w-52"
                     >
-                      {dataProducts.length < 1 ? (
-                        <>
-                          <button
-                            className="btn"
-                            id="ascending"
-                            onClick={handleSorting}
-                          >
-                            Latest Product
-                          </button>
-                          <button
-                            className="btn"
-                            id="ascending"
-                            onClick={handleSorting}
-                          >
-                            More Expensive
-                          </button>
-                          <button
-                            className="btn"
-                            id="descending"
-                            onClick={handleSorting}
-                          >
-                            More Cheap
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <button
-                            className="btn"
-                            id="ascending"
-                            onClick={handleSorting}
-                            value={dataProducts[0].id}
-                          >
-                            Latest Product
-                          </button>
-                          <button
-                            className="btn"
-                            id="ascending"
-                            onClick={handleSorting}
-                          >
-                            More Expensive
-                          </button>
-                          <button
-                            className="btn"
-                            id="descending"
-                            onClick={handleSorting}
-                          >
-                            More Cheap
-                          </button>
-                        </>
-                      )}
+                      <button
+                        className="btn"
+                        id="ascending"
+                        onClick={handleSorting}
+                        value={"id"}
+                      >
+                        Latest Product
+                      </button>
+                      <button
+                        className="btn"
+                        id="descending"
+                        onClick={handleSorting}
+                        value={"price"}
+                      >
+                        More Expensive
+                      </button>
+                      <button
+                        className="btn"
+                        id="ascending"
+                        onClick={handleSorting}
+                        value={"price"}
+                      >
+                        More Cheap
+                      </button>
                     </ul>
                   </div>
                 </div>
