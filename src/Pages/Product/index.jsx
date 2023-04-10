@@ -36,12 +36,13 @@ function CategoriesContent(props) {
   );
 }
 
-function Product(props) {
+function Product() {
   const controller = useMemo(() => new AbortController(), []);
   // const searchState = useSelector((state) => state.search);
 
   const [isLoading, setLoading] = useState(true);
 
+  const [sortingInfo, setSortingInfo] = useState();
   const [dataParams, setDataParams] = useSearchParams({
     brand: "",
     color: "",
@@ -150,6 +151,16 @@ function Product(props) {
   const fetchingData = async () => {
     setLoading(true);
     const newPar = new URLSearchParams(dataParams);
+
+    const sortingName = Object.fromEntries(dataParams).column;
+    const sortingDesc = Object.fromEntries(dataParams).order;
+    console.log("tes");
+    if (sortingName === "price" && sortingDesc === "ascending")
+      setSortingInfo("MORE CHEAP");
+    if (sortingName === "price" && sortingDesc === "descending")
+      setSortingInfo("More Expensive");
+    else setSortingInfo("");
+
     try {
       const result = await getDataProducts(newPar, controller);
       // console.log(result.data);
@@ -189,7 +200,8 @@ function Product(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [dataParams]
   );
-  console.log(dataProducts);
+
+  // console.log(dataProducts);
   return (
     <>
       <Header setSearch={handleSetSearch} />
@@ -561,62 +573,36 @@ function Product(props) {
                   </p>
                   <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost m-1">
-                      Short By
+                      Sort By {sortingInfo}
                     </label>
                     <ul
                       tabIndex={0}
                       className="dropdown-content menu p-2 shadow bg-blackSec text-white rounded-box w-52"
                     >
-                      {dataProducts.length < 1 ? (
-                        <>
-                          <button
-                            className="btn"
-                            id="ascending"
-                            onClick={handleSorting}
-                          >
-                            Latest Product
-                          </button>
-                          <button
-                            className="btn"
-                            id="ascending"
-                            onClick={handleSorting}
-                          >
-                            More Expensive
-                          </button>
-                          <button
-                            className="btn"
-                            id="descending"
-                            onClick={handleSorting}
-                          >
-                            More Cheap
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <button
-                            className="btn"
-                            id="ascending"
-                            onClick={handleSorting}
-                            value={dataProducts[0].id}
-                          >
-                            Latest Product
-                          </button>
-                          <button
-                            className="btn"
-                            id="ascending"
-                            onClick={handleSorting}
-                          >
-                            More Expensive
-                          </button>
-                          <button
-                            className="btn"
-                            id="descending"
-                            onClick={handleSorting}
-                          >
-                            More Cheap
-                          </button>
-                        </>
-                      )}
+                      <button
+                        className="btn"
+                        id="ascending"
+                        onClick={handleSorting}
+                        value={"id"}
+                      >
+                        Latest Product
+                      </button>
+                      <button
+                        className="btn"
+                        id="descending"
+                        onClick={handleSorting}
+                        value={"price"}
+                      >
+                        More Expensive
+                      </button>
+                      <button
+                        className="btn"
+                        id="ascending"
+                        onClick={handleSorting}
+                        value={"price"}
+                      >
+                        More Cheap
+                      </button>
                     </ul>
                   </div>
                 </div>
