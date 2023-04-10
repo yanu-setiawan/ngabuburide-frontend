@@ -151,7 +151,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
     <img src="./public/favicon.ico" alt="Logo" width="80" height="80">
   </a>
 
-  <h2 align="center">Ngabuburide Team</h2>
+  <h2 align="center">RAZYR FURNITURE</h2>
 
   <p align="center">
     <a href="#">View Demo</a>
@@ -318,13 +318,13 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 
 ## Deployment
 
-[Vercel deploy link](https://razyr-store.vercel.app/)
+[Vercel deploy Link](https://razyr-store.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Related Projects
 
-[dream furniture backend](https://ngabuburide-be.vercel.app)
+[Razyr Furniture Backend](https://ngabuburide-be.vercel.app)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -341,33 +341,33 @@ If you aren't satisfied with the build tool and configuration choices, you can `
   <table>
     <tr>
       <td align="center">
-        <a href="">
-          <img width="100" ; src="" alt="pic_default"><br/>
+        <a href="https://github.com/afif-buchori">
+          <br/>
           <sub><b>M Afif Buchori</b></sub>
         </a>
         </td>
         <td align="center">
-        <a href="https://github.com/zainulrofa">
-          <img width="100" ; src="" alt="pic_default"><br/>
+        <a href="https://github.com/zikriaulia28">
+          <br/>
           <sub><b>Zikri Aulia</b></sub>
         </a>
         </td>
         <td align="center">
-        <a href="https://github.com/farisan">
-          <img width="100" ; src="" alt="pic_default"><br/>
+        <a href="https://github.com/yanu-setiawan?">
+          <br/>
           <sub><b>Yanu Setiawan</b></sub>
         </a>
         </td>
         <td align="center">
-        <a href="https://github.com/rivalalfalah">
-          <img width="100" ; src="" alt="pic_default"><br/>
+        <a href="https://github.com/redhadefinto">
+          <br/>
           <sub><b>Redha Definto</b></sub>
         </a>
         </td>
         <td align="center">
-        <a href="https://github.com/luqmanito">
-          <img width="100" ; src="" alt="pic_default"><br/>
-          <sub><b>Abdul Latif Rosyid</b></sub>
+        <a href="https://github.com/abdulrosid21">
+          <br/>
+          <sub><b>Abdul Latif Rosid</b></sub>
         </a>
         </td>
   </table>
