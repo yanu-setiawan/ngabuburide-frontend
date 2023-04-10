@@ -342,31 +342,31 @@ If you aren't satisfied with the build tool and configuration choices, you can `
     <tr>
       <td align="center">
         <a href="https://github.com/afif-buchori">
-          <br/>
+          <img width="100" ; src="./src/assets/Readme/defaultPP.jpg" alt="pic_default"><br/>
           <sub><b>M Afif Buchori</b></sub>
         </a>
         </td>
         <td align="center">
         <a href="https://github.com/zikriaulia28">
-          <br/>
+          <img width="100" ; src="./src/assets/Readme/defaultPP.jpg" alt="pic_default"><br/>
           <sub><b>Zikri Aulia</b></sub>
         </a>
         </td>
         <td align="center">
         <a href="https://github.com/yanu-setiawan?">
-          <br/>
+          <img width="100" ; src="./src/assets/Readme/defaultPP.jpg" alt="pic_default"><br/>
           <sub><b>Yanu Setiawan</b></sub>
         </a>
         </td>
         <td align="center">
         <a href="https://github.com/redhadefinto">
-          <br/>
+          <img width="100" ; src="./src/assets/Readme/defaultPP.jpg" alt="pic_default"><br/>
           <sub><b>Redha Definto</b></sub>
         </a>
         </td>
         <td align="center">
         <a href="https://github.com/abdulrosid21">
-          <br/>
+          <img width="100" ; src="./src/assets/Readme/defaultPP.jpg" alt="pic_default"><br/>
           <sub><b>Abdul Latif Rosid</b></sub>
         </a>
         </td>
