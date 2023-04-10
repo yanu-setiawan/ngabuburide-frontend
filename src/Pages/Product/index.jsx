@@ -6,7 +6,8 @@ import Card from "./card";
 import { getDataProducts, getMetaCategories } from "../../utils/https/products";
 import Loader from "../../components/Loader";
 import arrow from "../../assets/icon-arrow-right.svg";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 // import { searchAction } from "../../redux/slices/search";
 
 function DataNotFound() {
@@ -37,17 +38,17 @@ function CategoriesContent(props) {
 
 function Product(props) {
   const controller = useMemo(() => new AbortController(), []);
-  const searchState = useSelector((state) => state.search);
+  // const searchState = useSelector((state) => state.search);
 
   const [isLoading, setLoading] = useState(true);
 
-  const [dataParams, setDataParams] = useState({
+  const [dataParams, setDataParams] = useSearchParams({
     brand: "",
     color: "",
     price: "",
     order: "",
     categories: "",
-    keyword: searchState.search,
+    keyword: "",
     page: "",
     limit: "",
   });
@@ -57,26 +58,70 @@ function Product(props) {
   const [dataProducts, setDataProducts] = useState([]);
   const [countCategory, setCountCategory] = useState([]);
   const [rangePrice, setRangePrice] = useState(0);
+  const [brand, setBrand] = useState();
+  const [allColor, setAllColor] = useState(true);
 
   const handleCategoryParams = (info) => {
+    const params = Object.fromEntries(dataParams);
     setDataParams({
-      ...dataParams,
+      ...params,
       categories: dataParams.categories === info ? "" : info,
     });
   };
 
+  const handleBrand = (e) => {
+    setBrand(e.target.id);
+    const params = Object.fromEntries(dataParams);
+    setDataParams({
+      ...params,
+      brand: e.target.id,
+    });
+  };
+
+  const allCategories = () => {
+    const params = Object.fromEntries(dataParams);
+    setDataParams({
+      ...params,
+      categories: "",
+      keyword: "",
+    });
+  };
+
   const handleRangeParams = (event) => {
-    // console.log(event.target.value);
     setRangePrice(event.target.value);
-    // setDataParams({ ...dataParams, price: event.target.value });
+  };
+
+  const handleSetSearch = (value) => {
+    const params = Object.fromEntries(dataParams);
+    setDataParams({
+      ...params,
+      keyword: value,
+    });
+  };
+
+  const handleAllBrand = (e) => {
+    setBrand(e.target.id);
+    const params = Object.fromEntries(dataParams);
+    setDataParams({
+      ...params,
+      brand: "",
+    });
   };
 
   const handleSubmitRange = () => {
     const checking = parseInt(dataParams.price) / 1000000;
+    const params = Object.fromEntries(dataParams);
     const newPriceParams = parseInt(rangePrice) * 1000000;
-    console.log(rangePrice, checking);
+    // console.log(rangePrice, checking);
+    if (newPriceParams === 0) {
+      setDataParams({
+        ...params,
+        price: "",
+      });
+      return;
+    }
     setDataParams({
-      ...dataParams,
+      ...params,
       price: parseInt(rangePrice) === checking ? "" : `0-${newPriceParams}`,
     });
     if (parseInt(rangePrice) === checking) {
@@ -85,9 +130,20 @@ function Product(props) {
   };
 
   const handleColor = (info) => {
+    const params = Object.fromEntries(dataParams);
     setDataParams({
-      ...dataParams,
+      ...params,
       color: dataParams.color === info ? "" : info,
+    });
+  };
+
+  const handleSorting = (e) => {
+    e.preventDefault();
+    const params = Object.fromEntries(dataParams);
+    setDataParams({
+      ...params,
+      order: e.target.id,
+      column: e.target.value,
     });
   };
 
@@ -99,10 +155,11 @@ function Product(props) {
       // console.log(result.data);
       setMetaData({ ...metaData, total: result.data.totalData });
       setDataProducts(result.data.data);
-      setLoading(false);
       // dispatch(searchAction.resetSearch());
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -122,21 +179,20 @@ function Product(props) {
     () => {
       document.title = "RAZYR - Products";
       window.scrollTo(0, 0);
-      const queryParams = new URLSearchParams(dataParams);
-      props.setSearchParams(Object.fromEntries(queryParams));
+      // const queryParams = new URLSearchParams(dataParams);
+      // props.setSearchParams(Object.fromEntries(queryParams));
+      // setLoading(true)
       fetchingData();
       fetchingMetaCategories();
+      // setLoading(false)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [dataParams, searchState.search]
+    [dataParams]
   );
-
-  // console.log(countCategory);
-  console.log(dataParams);
-  console.log(searchState.search);
+  console.log(dataProducts);
   return (
     <>
-      <Header />
+      <Header setSearch={handleSetSearch} />
       <main className="">
         <section className="relative">
           <div className="absolute flex gap-4 px-20 pt-10">
@@ -156,10 +212,13 @@ function Product(props) {
           <Loader />
         ) : (
           <>
-            <section className="w-full h-full flex flex-col gap-10 md:flex-row justify-center px-4 lg:px-20 lg:py-16 ">
+            <section className="w-full h-full flex flex-col md:flex-row justify-center gap-12 px-4 lg:px-20 lg:py-16 ">
               <div className="w-full md:w-48 lg:w-64 flex flex-col gap-10">
                 <div className="flex flex-col gap-4 ">
                   <h1 className="font-bold text-2xl mb-4">Categories</h1>
+                  <p onClick={allCategories} className="cursor-pointer">
+                    All
+                  </p>
                   {countCategory.map((cat) => (
                     <CategoriesContent
                       key={cat.category_name}
@@ -196,12 +255,32 @@ function Product(props) {
                   <div className=" flex flex-col w-full mt-5 mb-10">
                     <h1 className=" mb-5 mt-10 font-bold">Brands</h1>
                     <div className=" flex flex-wrap justify-between gap-4">
+                      <div className="flex w-full">
+                        <input
+                          id="all"
+                          type="radio"
+                          name="brands"
+                          className="hidden"
+                          value={brand}
+                          onChange={handleAllBrand}
+                          checked={!brand || brand === "all"}
+                        />
+                        <label
+                          for="all"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          ALL
+                        </label>
+                      </div>
                       <div className="flex">
                         <input
                           id="ikea"
                           type="radio"
                           name="brands"
                           className="hidden"
+                          onChange={handleBrand}
+                          checked={brand === "ikea"}
                         />
                         <label
                           for="ikea"
@@ -217,6 +296,8 @@ function Product(props) {
                           type="radio"
                           name="brands"
                           className="hidden"
+                          onChange={handleBrand}
+                          checked={brand === "north_oxford"}
                         />
                         <label
                           for="north_oxford"
@@ -232,6 +313,8 @@ function Product(props) {
                           type="radio"
                           name="brands"
                           className="hidden"
+                          onChange={handleBrand}
+                          checked={brand === "informa"}
                         />
                         <label
                           for="informa"
@@ -247,6 +330,8 @@ function Product(props) {
                           type="radio"
                           name="brands"
                           className="hidden"
+                          onChange={handleBrand}
+                          checked={brand === "sweet_house"}
                         />
                         <label
                           for="sweet_house"
@@ -262,6 +347,8 @@ function Product(props) {
                           type="radio"
                           name="brands"
                           className="hidden"
+                          onChange={handleBrand}
+                          checked={brand === "mr_poppins"}
                         />
                         <label
                           for="mr_poppins"
@@ -277,9 +364,32 @@ function Product(props) {
                   <div>
                     <h1 className="font-bold text-2xl mb-4">Color</h1>
                     <div>
-                      <div class="flex gap-5 items-center mr-4">
+                      <div class="flex gap-5 items-center mr-4 flex-wrap">
+                        <input
+                          id="all-color"
+                          type="radio"
+                          name="brands"
+                          className="hidden"
+                          onChange={() => {
+                            handleColor("");
+                            setAllColor(true);
+                          }}
+                          checked={allColor === true}
+                          // checked
+                        />
+                        <label
+                          for="all-color"
+                          className="flex items-center cursor-pointer"
+                        >
+                          <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                          ALL
+                        </label>
+                        <br />
                         <span
-                          onClick={() => handleColor("brown")}
+                          onClick={() => {
+                            handleColor("brown");
+                            setAllColor(false);
+                          }}
                           className="bg-amber-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
                           {dataParams.color === "brown" && (
@@ -287,7 +397,10 @@ function Product(props) {
                           )}
                         </span>
                         <span
-                          onClick={() => handleColor("blue")}
+                          onClick={() => {
+                            handleColor("blue");
+                            setAllColor(false);
+                          }}
                           className="bg-blue-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
                           {dataParams.color === "blue" && (
@@ -295,7 +408,10 @@ function Product(props) {
                           )}
                         </span>
                         <span
-                          onClick={() => handleColor("grey")}
+                          onClick={() => {
+                            handleColor("grey");
+                            setAllColor(false);
+                          }}
                           className="bg-slate-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
                           {dataParams.color === "grey" && (
@@ -303,7 +419,10 @@ function Product(props) {
                           )}
                         </span>
                         <span
-                          onClick={() => handleColor("green")}
+                          onClick={() => {
+                            handleColor("green");
+                            setAllColor(false);
+                          }}
                           className="bg-green-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
                           {dataParams.color === "green" && (
@@ -311,8 +430,22 @@ function Product(props) {
                           )}
                         </span>
                         <span
-                          onClick={() => handleColor("orange")}
+                          onClick={() => {
+                            handleColor("orange");
+                            setAllColor(false);
+                          }}
                           className="bg-orange-600 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
+                        >
+                          {dataParams.color === "orange" && (
+                            <i className="bi bi-check text-white text-lg"></i>
+                          )}
+                        </span>
+                        <span
+                          onClick={() => {
+                            handleColor("black");
+                            setAllColor(false);
+                          }}
+                          className="bg-black w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
                           {dataParams.color === "orange" && (
                             <i className="bi bi-check text-white text-lg"></i>
@@ -421,7 +554,7 @@ function Product(props) {
                   <div>image</div>
                 </div>
               </div>
-              <div className="lg:w-[57.399rem]">
+              <div>
                 <div className="flex justify-between mb-10">
                   <p>
                     Showing 1-{metaData.total} of {metaData.total} Results
@@ -434,9 +567,56 @@ function Product(props) {
                       tabIndex={0}
                       className="dropdown-content menu p-2 shadow bg-blackSec text-white rounded-box w-52"
                     >
-                      <button className="btn">Latest Product</button>
-                      <button className="btn">More Expensive</button>
-                      <button className="btn">More Cheap</button>
+                      {dataProducts.length < 1 ? (
+                        <>
+                          <button
+                            className="btn"
+                            id="ascending"
+                            onClick={handleSorting}
+                          >
+                            Latest Product
+                          </button>
+                          <button
+                            className="btn"
+                            id="ascending"
+                            onClick={handleSorting}
+                          >
+                            More Expensive
+                          </button>
+                          <button
+                            className="btn"
+                            id="descending"
+                            onClick={handleSorting}
+                          >
+                            More Cheap
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            className="btn"
+                            id="ascending"
+                            onClick={handleSorting}
+                            value={dataProducts[0].id}
+                          >
+                            Latest Product
+                          </button>
+                          <button
+                            className="btn"
+                            id="ascending"
+                            onClick={handleSorting}
+                          >
+                            More Expensive
+                          </button>
+                          <button
+                            className="btn"
+                            id="descending"
+                            onClick={handleSorting}
+                          >
+                            More Cheap
+                          </button>
+                        </>
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -444,7 +624,7 @@ function Product(props) {
                   <DataNotFound />
                 ) : (
                   <>
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 ">
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-content-between">
                       {dataProducts.map((product) => (
                         <Card
                           key={product.id}
