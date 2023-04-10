@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import icoSearch from "../../assets/icon-search.svg";
 import icoHeart from "../../assets/icon-love.svg";
 import icoCart from "../../assets/icon-cart.svg";
@@ -8,7 +8,7 @@ import imgGlass from "../../assets/glass.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../../redux/slices/auth";
 
-import { searchAction } from "../../redux/slices/search";
+// import { searchAction } from "../../redux/slices/search";
 import { cartAction } from "../../redux/slices/cart";
 import { authLogout } from "../../utils/https/auth";
 import Loader from "../Loader";
@@ -126,15 +126,15 @@ function Header(props) {
   const controller = useMemo(() => new AbortController(), []);
   const stateStore = useSelector((state) => state.user);
   const stateCart = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [linkPages, setLinkPages] = useState(0);
   const [isToggle, setIsToggle] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
   const [countFavorite, setCountFav] = useState(0);
-  const handleSearch = () => {
-    dispatch(searchAction.addSearch(inputSearch));
-  };
+  // const handleSearch = () => {
+  //   dispatch(searchAction.addSearch(inputSearch));
+  // };
   const fetching = async () => {
     if (!stateStore.token) return;
     try {
@@ -205,7 +205,7 @@ function Header(props) {
           >
             <img src={icoSearch} alt="icon-search" />
           </span>
-          <Link to={"/favorite"} className="relative cursor-pointer">
+          <span className="relative cursor-pointer">
             <img src={icoHeart} alt="icon-search" />
             <h2
               className={`${
@@ -214,7 +214,7 @@ function Header(props) {
             >
               {countFavorite}
             </h2>
-          </Link>
+          </span>
           <Link to={"/cart"} className="relative cursor-pointer">
             <img src={icoCart} alt="icon-search" />
             <h2
@@ -251,17 +251,38 @@ function Header(props) {
       <div
         className={`nav-search ${isSearch ? "top-2 md:top-36" : "top-[-7rem]"}`}
       >
-        <button onClick={handleSearch} className="btn">
-          <i className="bi bi-search text-white"></i>
-        </button>
-        <input
-          type="text"
-          name="search"
-          value={inputSearch}
-          onChange={(e) => setInputSearch(e.target.value)}
-          placeholder="Search*"
-          className="input input-bordered input-secondary w-full"
-        />
+        {props.setSearch ? (
+          <>
+            <button
+              onClick={() => {
+                props.setSearch(inputSearch);
+              }}
+              className="btn"
+            >
+              <i className="bi bi-search text-white"></i>
+            </button>
+            <input
+              type="text"
+              name="search"
+              value={inputSearch}
+              onChange={(e) => setInputSearch(e.target.value)}
+              placeholder="Search*"
+              className="input input-bordered input-secondary w-full"
+            />
+          </>
+        ) : (
+          <>
+            <button className="btn">
+              <i className="bi bi-search text-white"></i>
+            </button>
+            <input
+              type="text"
+              name="search"
+              placeholder="Search*"
+              className="input input-bordered input-secondary w-full"
+            />
+          </>
+        )}
       </div>
       <section className="w-full h-16 md:h-28"></section>
     </>
