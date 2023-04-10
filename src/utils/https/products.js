@@ -19,6 +19,11 @@ export const getDetailProduct = (id, controller) => {
   return axios.get(url, { signal: controller.signal });
 };
 
+export const getMySelling = (id, controller) => {
+  const url = `${baseUrl}product/user/${id}`;
+  return axios.get(url, { signal: controller.signal });
+};
+
 export const createProduct = (
   fileSatu,
   fileDua,
