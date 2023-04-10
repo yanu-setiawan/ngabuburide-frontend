@@ -66,7 +66,7 @@ const cartSlice = createSlice({
     deleteItem: (prevState, action) => {
       const itemId = action.payload;
       const updatedCart = prevState.shoppingCart.filter(
-        (item) => item.id !== itemId
+        (item) => item.prod_id !== itemId
       );
       return { ...prevState, shoppingCart: updatedCart };
     },

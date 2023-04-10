@@ -1,11 +1,25 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import ImgProduct2 from "../../../assets/product2.png";
 import CheckStock from "../../../assets/check-circle-08.svg";
+import { useSelector } from "react-redux";
+import { getMySelling } from "../../../utils/https/products";
 
 function MyProduct() {
+  const controller = useMemo(() => new AbortController(), []);
+  const userState = useSelector((state) => state.user.data);
+
+  const fetching = async () => {
+    try {
+      const result = await getMySelling(userState.id, controller);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     document.title = "RAZYR - My Products";
+    fetching();
   });
   return (
     <>

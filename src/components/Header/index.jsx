@@ -19,14 +19,25 @@ function DropDownPages({ isOpen, onClose }) {
   return (
     <>
       {isOpen && (
-        <div className="md:w-72 flex flex-col gap-5 pl-4 md:pl-8 py-3 md:p-10 top-28 md:absolute md:bg-black text-white font-normal">
-          <Link to={"/about"}>About Us</Link>
-          <Link to={"/contact"}>Contact Us</Link>
-          <Link to={"/commingsoon"} className="flex justify-between">
+        <div className="md:w-72 flex flex-col gap-5 pl-4 md:pl-8 py-3 md:p-10 top-28 md:absolute md:bg-black text-white/60 font-normal">
+          <Link to={"/about"} className="hover:text-white">
+            About Us
+          </Link>
+          <Link to={"/contact"} className="hover:text-white">
+            Contact Us
+          </Link>
+          <Link
+            to={"/commingsoon"}
+            className="flex justify-between hover:text-white"
+          >
             Comming Soon <i className="bi bi-caret-right"></i>
           </Link>
-          <Link to={"/notfound"}>404 Page</Link>
-          <Link to={"/faq"}>FAQ Page</Link>
+          <Link to={"/notfound"} className="hover:text-white">
+            404 Page
+          </Link>
+          <Link to={"/faq"} className="hover:text-white">
+            FAQ Page
+          </Link>
         </div>
       )}
     </>
@@ -37,15 +48,26 @@ function DropDownShop({ isOpen, onClose }) {
   return (
     <>
       {isOpen && (
-        <div className="max-w-[700px] mt-4 md:mt-0 flex pl-4 md:p-10 top-28 left-[40%] md:absolute md:bg-black text-white font-normal">
+        <div className="max-w-[700px] mt-4 md:mt-0 flex pl-4 md:p-10 top-28 left-[40%] md:absolute md:bg-black text-white/60 font-normal">
           <section className="flex flex-col gap-5 mr-10">
-            <Link to={"/product"}>Products</Link>
-            <Link to={"/cart"}>Shopping Cart</Link>
-            <Link to={"/checkout"} className="flex justify-between">
+            <Link to={"/product"} className="hover:text-white">
+              Products
+            </Link>
+            <Link to={"/cart"} className="hover:text-white">
+              Shopping Cart
+            </Link>
+            <Link
+              to={"/checkout"}
+              className="flex justify-between hover:text-white"
+            >
               Check Out
             </Link>
-            <Link to={"/profile"}>My Account</Link>
-            <Link to={"/tracking"}>Order Tracking</Link>
+            <Link to={"/profile"} className="hover:text-white">
+              My Account
+            </Link>
+            <Link to={"/tracking"} className="hover:text-white">
+              Order Tracking
+            </Link>
           </section>
           <span className="hidden w-96 h-52 md:flex justify-center items-center bg-white">
             <img src={imgGlass} alt="img-promo" />
@@ -227,7 +249,7 @@ function Header(props) {
           </Link>
         </div>
         <div
-          className="relative hidden md:block h-fit btn btn-ghost md:py-4 ml-14 cursor-pointer"
+          className="relative hidden md:block h-fit btn btn-ghost md:py-4 md:ml-4 xl:ml-14 cursor-pointer"
           onClick={() => setLinkPages(linkPages === 3 ? 0 : 3)}
         >
           <img src={icoMenu} alt="icon-menu" />

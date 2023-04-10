@@ -19,9 +19,10 @@ function EditProfile() {
   const [isLoading, setLoading] = useState(true);
   const [canEdit, setCanEdit] = useState(false);
   const [modal, setModal] = useState(false);
+  const [reset, setReset] = useState(false);
   const [dataProfile, setDataProfile] = useState();
   const [imgFile, setImgFile] = useState("");
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState();
 
   const onChangeForm = (event) => {
     setForm((form) => {
@@ -37,10 +38,18 @@ function EditProfile() {
     console.log(form);
     if (Object.keys(form).length === 0) return console.log("INPUT KOSONG");
     try {
-      const result = await updateProfile(token, form, imgFile, controller);
+      const newForm = {};
+      Object.keys(form).forEach((key) => {
+        if (!dataProfile.hasOwnProperty(key)) {
+          newForm[key] = form[key];
+        } else if (dataProfile[key] !== form[key]) {
+          newForm[key] = form[key];
+        }
+      });
+      console.log(newForm);
+      const result = await updateProfile(token, newForm, imgFile, controller);
       console.log(result);
-      setForm({});
-      setLoading(false);
+      setReset(!reset);
     } catch (error) {
       console.log(error);
     }
@@ -52,6 +61,7 @@ function EditProfile() {
       const result = await getProfile(token, controller);
       if (result.status === 200) {
         setDataProfile(result.data.data[0]);
+        setForm(result.data.data[0]);
         setLoading(false);
       }
     } catch (error) {
@@ -59,10 +69,11 @@ function EditProfile() {
     }
   };
   useEffect(() => {
-    fetching();
     document.title = "RAZYR - Profile";
+    fetching();
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reset]);
   // console.log(dataProfile);
   // console.log(stateUser);
 
@@ -142,7 +153,44 @@ function EditProfile() {
                 <i className="bi bi-pencil-square text-3xl"></i>
               </button>
               <div className=" flex flex-col px-[3.8rem] py-10 border-b border-greyBord">
-                <label htmlFor="gender" className=" ml-4 text-greySec ">
+                <p className="ml-5">Gender</p>
+                <span className="flex gap-10 mt-6 ml-5">
+                  <input
+                    id="MALE"
+                    type="radio"
+                    name="gender"
+                    value="MALE"
+                    checked={form.gender === "MALE"}
+                    onChange={onChangeForm}
+                    disabled={!canEdit}
+                    className="hidden"
+                  />
+                  <label
+                    for="MALE"
+                    className="flex items-center cursor-pointer"
+                  >
+                    <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                    MALE
+                  </label>
+                  <input
+                    id="FEMALE"
+                    type="radio"
+                    name="gender"
+                    value="FEMALE"
+                    checked={form.gender === "FEMALE"}
+                    onChange={onChangeForm}
+                    disabled={!canEdit}
+                    className="hidden"
+                  />
+                  <label
+                    for="FEMALE"
+                    className="flex items-center cursor-pointer"
+                  >
+                    <span className="w-4 h-4 inline-block mr-1 border border-blackSec"></span>
+                    FEMALE
+                  </label>
+                </span>
+                {/* <label htmlFor="gender" className=" ml-4 text-greySec ">
                   Gender
                 </label>
                 <input
@@ -152,26 +200,44 @@ function EditProfile() {
                   type="text"
                   id="gender"
                   name="gender"
-                  value={form.gender ? form.gender : dataProfile.gender}
+                  value={form.gender}
                   disabled={!canEdit}
                   onChange={onChangeForm}
                   placeholder="unset*"
-                />
+                /> */}
               </div>
               <div className=" flex flex-col px-[3.8rem] py-10 border-b border-greyBord">
-                <label htmlFor="email" className=" ml-4 text-greySec ">
-                  Your Email
+                <label htmlFor="address" className=" ml-4 text-greySec ">
+                  Your Adress
                 </label>
                 <input
                   className={`p-4 text-2xl text-blackSec outline-none ${
                     canEdit && "border-b-2"
                   }`}
                   type="text"
-                  id="email"
-                  name="email"
-                  value={form.email ? form.email : dataProfile.email}
+                  id="address"
+                  name="address"
+                  value={form.address}
                   onChange={onChangeForm}
                   disabled={!canEdit}
+                  placeholder="unset*"
+                />
+              </div>
+              <div className=" flex flex-col px-[3.8rem] py-10 border-b border-greyBord">
+                <label htmlFor="phone" className=" ml-4 text-greySec ">
+                  Your Phone Number
+                </label>
+                <input
+                  className={`p-4 text-2xl text-blackSec outline-none ${
+                    canEdit && "border-b-2"
+                  }`}
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  value={form.phone}
+                  onChange={onChangeForm}
+                  disabled={!canEdit}
+                  placeholder="unset*"
                 />
               </div>
               {stateUser.data.role === 2 && (
@@ -187,11 +253,7 @@ function EditProfile() {
                       type="text"
                       id="store-name"
                       name="store_name"
-                      value={
-                        form.store_name
-                          ? form.store_name
-                          : dataProfile.store_name
-                      }
+                      value={form.store_name}
                       onChange={onChangeForm}
                       disabled={!canEdit}
                       placeholder="set your store name*"
@@ -208,11 +270,7 @@ function EditProfile() {
                       type="text"
                       id="store-desc"
                       name="store_desc"
-                      value={
-                        form.store_desc
-                          ? form.store_desc
-                          : dataProfile.store_desc
-                      }
+                      value={form.store_desc}
                       onChange={onChangeForm}
                       disabled={!canEdit}
                       placeholder="set your store description*"
