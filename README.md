@@ -166,7 +166,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=react,javascript,html,css" />
+    <img src="https://skillicons.dev/icons?i=react,javascript,html,css,redux,tailwind,vercel" />
   </a>
 </p>
 
