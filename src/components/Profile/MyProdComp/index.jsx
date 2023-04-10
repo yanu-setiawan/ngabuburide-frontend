@@ -52,7 +52,10 @@ function MyProduct() {
                 <div className=" font-bold text-xs md:text-lg flex items-center">
                   <p>IDR.2.000.000</p>
                 </div>
-                <div>
+                <div className=" flex flex-col gap-7">
+                  <button className="btn bg-blackSec flex w-full lg:w-[7rem] xl:w-[12.5rem] h-[3.75rem] gap-3 border-none justify-center items-center">
+                    <p className="text-white font-bold">Edit</p>
+                  </button>
                   <button className="btn bg-redBtn flex w-full lg:w-[7rem] xl:w-[12.5rem] h-[3.75rem] gap-3 border-none justify-center items-center hover:bg-red-500">
                     <p className="text-white font-bold">Delete</p>
                   </button>

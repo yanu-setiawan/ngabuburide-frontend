@@ -567,50 +567,52 @@ function SellingOrder() {
           <section className="flex flex-col mt-[5rem]">
             <h1 className=" font-bold text-2xl mb-7">Photo Of Goods</h1>
             <section className="flex gap-4 flex-wrap">
-              <div
-                className={`${
-                  fileSatu === "" && "hidden"
-                } w-40 border border-blackSec h-40 overflow-hidden`}
-              >
-                <img
-                  src={fileSatu === "" ? "" : URL.createObjectURL(fileSatu)}
-                  alt=""
-                  className="object-cover"
-                />
-              </div>
-              <div
-                className={`${
-                  fileDua === "" && "hidden"
-                } w-40 border border-blackSec h-40 overflow-hidden`}
-              >
-                <img
-                  src={fileDua === "" ? "" : URL.createObjectURL(fileDua)}
-                  alt=""
-                  className="object-cover"
-                />
-              </div>
-              <div
-                className={`${
-                  fileTiga === "" && "hidden"
-                } w-40 border border-blackSec h-40 overflow-hidden`}
-              >
-                <img
-                  src={fileTiga === "" ? "" : URL.createObjectURL(fileTiga)}
-                  alt=""
-                  className="object-cover"
-                />
-              </div>
-              <div
-                className={`${
-                  fileEmpat === "" && "hidden"
-                } w-40 border border-blackSec h-40 overflow-hidden`}
-              >
-                <img
-                  src={fileEmpat === "" ? "" : URL.createObjectURL(fileEmpat)}
-                  alt=""
-                  className="object-cover"
-                />
-              </div>
+              <section className=" flex gap-5 items-center">
+                <div
+                  className={`${
+                    fileSatu === "" && "hidden"
+                  } w-40 border border-blackSec h-40 overflow-hidden`}
+                >
+                  <img
+                    src={fileSatu === "" ? "" : URL.createObjectURL(fileSatu)}
+                    alt=""
+                    className="object-cover"
+                  />
+                </div>
+                <div
+                  className={`${
+                    fileDua === "" && "hidden"
+                  } w-40 border border-blackSec h-40 overflow-hidden`}
+                >
+                  <img
+                    src={fileDua === "" ? "" : URL.createObjectURL(fileDua)}
+                    alt=""
+                    className="object-cover"
+                  />
+                </div>
+                <div
+                  className={`${
+                    fileTiga === "" && "hidden"
+                  } w-40 border border-blackSec h-40 overflow-hidden`}
+                >
+                  <img
+                    src={fileTiga === "" ? "" : URL.createObjectURL(fileTiga)}
+                    alt=""
+                    className="object-cover"
+                  />
+                </div>
+                <div
+                  className={`${
+                    fileEmpat === "" && "hidden"
+                  } w-40 border border-blackSec h-40 overflow-hidden`}
+                >
+                  <img
+                    src={fileEmpat === "" ? "" : URL.createObjectURL(fileEmpat)}
+                    alt=""
+                    className="object-cover"
+                  />
+                </div>
+              </section>
 
               <section className="flex relative justify-center flex-col items-center lg:justify-normal lg:flex-row gap-4 overflow-hidden">
                 <label
