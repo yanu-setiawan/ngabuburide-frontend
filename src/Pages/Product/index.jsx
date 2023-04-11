@@ -554,7 +554,7 @@ function Product() {
                   <div>image</div>
                 </div>
               </div>
-              <div className="w-[56.625rem]">
+              <div className="lg:w-[56.625rem]">
                 <div className="flex justify-between mb-10">
                   <p>
                     Showing 1-{metaData.total} of {metaData.total} Results
@@ -598,7 +598,7 @@ function Product() {
                   <DataNotFound />
                 ) : (
                   <>
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-content-between">
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
                       {dataProducts.map((product) => (
                         <Card
                           key={product.id}
