@@ -60,6 +60,7 @@ function Product() {
   const [rangePrice, setRangePrice] = useState(0);
   const [brand, setBrand] = useState();
   const [allColor, setAllColor] = useState(true);
+  const [sortingInfo, setSortInfo] = useState("")
 
   const handleCategoryParams = (info) => {
     const params = Object.fromEntries(dataParams);
@@ -150,6 +151,14 @@ function Product() {
   const fetchingData = async () => {
     setLoading(true);
     const newPar = new URLSearchParams(dataParams);
+    console.log(Object.fromEntries(dataParams));
+    if(Object.fromEntries(dataParams).column === "price" && Object.fromEntries(dataParams).order === "descending")
+    setSortInfo("MORE EXPENSIVE")
+    if(Object.fromEntries(dataParams).column === "price" && Object.fromEntries(dataParams).order === "ascending")
+    setSortInfo("MORE CHEAP")
+    if(Object.fromEntries(dataParams).column === "id" && Object.fromEntries(dataParams).order === "ascending")
+    setSortInfo("LATES")
+    else setSortInfo("")
     try {
       const result = await getDataProducts(newPar, controller);
       // console.log(result.data);
@@ -189,7 +198,7 @@ function Product() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [dataParams]
   );
-  console.log(dataProducts);
+  // console.log(dataProducts);
   return (
     <>
       <Header setSearch={handleSetSearch} />
@@ -222,7 +231,7 @@ function Product() {
                   {countCategory.map((cat) => (
                     <CategoriesContent
                       key={cat.category_name}
-                      dataPar={dataParams.categories}
+                      dataPar={Object.fromEntries(dataParams).categories}
                       onClick={handleCategoryParams}
                       name={cat.category_name}
                       count={cat.totaldata}
@@ -392,7 +401,7 @@ function Product() {
                           }}
                           className="bg-amber-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "brown" && (
+                          {Object.fromEntries(dataParams).color === "brown" && (
                             <i className="bi bi-check text-white  text-lg"></i>
                           )}
                         </span>
@@ -403,7 +412,7 @@ function Product() {
                           }}
                           className="bg-blue-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "blue" && (
+                          {Object.fromEntries(dataParams).color === "blue" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>
@@ -414,7 +423,7 @@ function Product() {
                           }}
                           className="bg-slate-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "grey" && (
+                          {Object.fromEntries(dataParams).color === "grey" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>
@@ -425,7 +434,7 @@ function Product() {
                           }}
                           className="bg-green-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "green" && (
+                          {Object.fromEntries(dataParams).color === "green" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>
@@ -436,7 +445,7 @@ function Product() {
                           }}
                           className="bg-orange-600 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "orange" && (
+                          {Object.fromEntries(dataParams).color === "orange" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>
@@ -447,7 +456,7 @@ function Product() {
                           }}
                           className="bg-black w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "orange" && (
+                          {Object.fromEntries(dataParams).color === "black" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>
@@ -561,7 +570,7 @@ function Product() {
                   </p>
                   <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost m-1">
-                      Short By
+                      Sort By {sortingInfo}
                     </label>
                     <ul
                       tabIndex={0}
