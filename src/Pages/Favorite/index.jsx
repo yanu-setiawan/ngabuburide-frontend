@@ -1,19 +1,27 @@
 import React, { useEffect, useMemo, useState } from "react";
-import CheckStock from "../../assets/check-circle-08.svg";
+import Card from "./cardFavorite";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { getFavorite } from "../../utils/https/favorite";
 import { useSelector } from "react-redux";
 import Loader from "../../components/Loader";
 
+function DataNotFound() {
+  return (
+    <div className="w-full h-[50vh] flex justify-center items-center text-4xl md:text-6xl font-bold text-center">
+      DATA NOT FOUND
+    </div>
+  );
+}
+
 function Favorite() {
   const controller = useMemo(() => new AbortController(), []);
   const stateStore = useSelector((state) => state.user);
   // const stateCart = useSelector((state) => state.cart);
-  const [favorite, setFavorite] = useState({});
+  const [favorite, setFavorite] = useState([]);
+  // const [countFavorite, setCountFavorite] = useState(0);
   const [isLoading, setLoading] = useState(true);
-  const imgUrl =
-    "https://res.cloudinary.com/dhikerrnk/image/upload/v1680940221/";
+
   // const fetching = async () => {
   //   setLoading(true);
   //   try {
@@ -27,22 +35,25 @@ function Favorite() {
   // };
 
   const fetching = async () => {
-    if (!favorite.length) {
-      setLoading(true);
-    }
+    setLoading(true);
     try {
       const getFav = await getFavorite(stateStore.token, controller);
-      setFavorite(getFav.data.data);
-      setLoading(false);
+      const result = getFav.data.data;
+      setFavorite(result);
+      // setCountFavorite(result.length);
+      // console.log(result);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     document.title = "RAZYR - Favorite";
     fetching();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stateStore.token, controller]);
 
   return (
     <>
@@ -70,60 +81,32 @@ function Favorite() {
                 <p>Price</p>
               </div>
             </section>
-            <section className=" flex flex-col gap-10">
-              {isLoading ? (
-                <Loader />
-              ) : (
-                <>
-                  {favorite.map((data, i) => (
-                    <section key={i} className=" flex w-full">
-                      <div className=" flex  w-[45%] flex-col ">
-                        <div className=" flex gap-[0.5rem] md:gap-10">
-                          <div className=" h-20 w-20 md:w-[8.8rem] md:h-[8.8rem]  lg:h-[10.8rem] lg:w-[10.7rem]">
-                            <img
-                              className=" w-full h-full"
-                              src={imgUrl + data.image}
-                              alt=""
-                            />
-                          </div>
-                          <div className=" text-xs md:text-sm flex justify-center items-center">
-                            <p>{data.prod_name}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className=" w-[20%] flex justify-center lg:justify-normal">
-                        <div className="flex gap-[0.39rem]">
-                          <div className="  flex items-center ">
-                            <img
-                              className=" w-[0.94rem] h-[0.94rem] flex items-center"
-                              src={CheckStock}
-                              alt=""
-                            />
-                          </div>
-                          <div className=" text-xs flex items-center  font-medium text-[#262626]">
-                            {data.stock}
-                          </div>
-                        </div>
-                      </div>
-                      <div className=" w-[35%] flex justify-center lg:justify-normal md:pl-4 lg:pl-0 items-center">
-                        <div className=" flex flex-col md:flex-row items-center  justify-between w-full">
-                          <div className=" font-bold text-xs md:text-lg flex items-center">
-                            <p>Rp. {data.price.toLocaleString("id-ID")}</p>
-                          </div>
-                          <div>
-                            <button className="btn bg-blackSec flex w-full lg:w-[7rem] xl:w-[12.5rem] h-[3.75rem] gap-3 border-none justify-center items-center hover:bg-red-500">
-                              <p className="text-white font-bold">
-                                Add To Cart
-                              </p>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-                  ))}
-                </>
-              )}
-            </section>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <>
+                <section className=" flex flex-col gap-10">
+                  {favorite.length < 1 ? (
+                    <DataNotFound />
+                  ) : (
+                    <>
+                      {favorite.map((data) => (
+                        <Card
+                          fetching={fetching}
+                          key={data.id}
+                          id={data.id}
+                          prod_id={data.prod_id}
+                          prod_name={data.prod_name}
+                          image={data.image}
+                          price={data.price}
+                          stock={data.stock}
+                        />
+                      ))}
+                    </>
+                  )}
+                </section>
+              </>
+            )}
           </section>
         </section>
       </section>

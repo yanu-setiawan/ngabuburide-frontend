@@ -42,7 +42,6 @@ function Product() {
 
   const [isLoading, setLoading] = useState(true);
 
-  const [sortingInfo, setSortingInfo] = useState();
   const [dataParams, setDataParams] = useSearchParams({
     brand: "",
     color: "",
@@ -151,16 +150,6 @@ function Product() {
   const fetchingData = async () => {
     setLoading(true);
     const newPar = new URLSearchParams(dataParams);
-
-    const sortingName = Object.fromEntries(dataParams).column;
-    const sortingDesc = Object.fromEntries(dataParams).order;
-    console.log("tes");
-    if (sortingName === "price" && sortingDesc === "ascending")
-      setSortingInfo("MORE CHEAP");
-    if (sortingName === "price" && sortingDesc === "descending")
-      setSortingInfo("More Expensive");
-    else setSortingInfo("");
-
     try {
       const result = await getDataProducts(newPar, controller);
       // console.log(result.data);
@@ -200,8 +189,7 @@ function Product() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [dataParams]
   );
-
-  // console.log(dataProducts);
+  console.log(dataProducts);
   return (
     <>
       <Header setSearch={handleSetSearch} />
@@ -405,7 +393,7 @@ function Product() {
                           className="bg-amber-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
                           {dataParams.color === "brown" && (
-                            <i className="bi bi-check text-white text-lg"></i>
+                            <i className="bi bi-check text-white  text-lg"></i>
                           )}
                         </span>
                         <span
@@ -566,14 +554,14 @@ function Product() {
                   <div>image</div>
                 </div>
               </div>
-              <div>
+              <div className="w-[56.625rem]">
                 <div className="flex justify-between mb-10">
                   <p>
                     Showing 1-{metaData.total} of {metaData.total} Results
                   </p>
                   <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost m-1">
-                      Sort By {sortingInfo}
+                      Short By
                     </label>
                     <ul
                       tabIndex={0}

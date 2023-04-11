@@ -96,7 +96,15 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
-  { path: "/favorite", element: <Favorite /> },
+  {
+    path: "/favorite",
+    element: (
+      <PrivateRoute>
+        <Favorite />
+      </PrivateRoute>
+    ),
+  },
+  // { path: "/favorite", element: <Favorite /> },
   { path: "/contact", element: <ContactUs /> },
   { path: "/blog", element: <Blog /> },
   { path: "/about", element: <AboutUs /> },

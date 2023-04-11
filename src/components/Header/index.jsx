@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import icoSearch from "../../assets/icon-search.svg";
 import icoHeart from "../../assets/icon-love.svg";
 import icoCart from "../../assets/icon-cart.svg";
@@ -171,7 +171,8 @@ function Header(props) {
   useEffect(() => {
     fetching();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.loved]);
+  }, [props.loved, countFavorite]);
+  console.log(countFavorite);
   return (
     <>
       <nav className="fixed top-0 left-0 z-40 bg-white w-full h-16 md:h-28 flex items-center px-4 md:px-10 border-b border-black">
