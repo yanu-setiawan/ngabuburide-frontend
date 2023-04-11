@@ -24,6 +24,11 @@ export const getMySelling = (id, controller) => {
   return axios.get(url, { signal: controller.signal });
 };
 
+export const deleteMySelling = (id, controller) => {
+  const url = `${baseUrl}product/delete/${id}`;
+  return axios.delete(url, { signal: controller.signal });
+};
+
 export const createProduct = (
   fileSatu,
   fileDua,

@@ -203,7 +203,7 @@ function Blog() {
               <img src={banner} alt="" />
             </section>
           </section>
-          <section className="flex flex-col">
+          <section className="flex flex-col w-full">
             <section className=" flex flex-col gap-6">
               <div className=" flex">
                 <img src={bgBlog1} alt="" />
