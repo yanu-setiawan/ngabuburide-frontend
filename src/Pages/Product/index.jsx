@@ -60,7 +60,7 @@ function Product() {
   const [rangePrice, setRangePrice] = useState(0);
   const [brand, setBrand] = useState();
   const [allColor, setAllColor] = useState(true);
-  const [sortingInfo, setSortInfo] = useState("")
+  const [sortingInfo, setSortInfo] = useState("");
 
   const handleCategoryParams = (info) => {
     const params = Object.fromEntries(dataParams);
@@ -152,13 +152,22 @@ function Product() {
     setLoading(true);
     const newPar = new URLSearchParams(dataParams);
     console.log(Object.fromEntries(dataParams));
-    if(Object.fromEntries(dataParams).column === "price" && Object.fromEntries(dataParams).order === "descending")
-    setSortInfo("MORE EXPENSIVE")
-    if(Object.fromEntries(dataParams).column === "price" && Object.fromEntries(dataParams).order === "ascending")
-    setSortInfo("MORE CHEAP")
-    if(Object.fromEntries(dataParams).column === "id" && Object.fromEntries(dataParams).order === "ascending")
-    setSortInfo("LATES")
-    else setSortInfo("")
+    if (
+      Object.fromEntries(dataParams).column === "price" &&
+      Object.fromEntries(dataParams).order === "descending"
+    )
+      setSortInfo("MORE EXPENSIVE");
+    if (
+      Object.fromEntries(dataParams).column === "price" &&
+      Object.fromEntries(dataParams).order === "ascending"
+    )
+      setSortInfo("MORE CHEAP");
+    if (
+      Object.fromEntries(dataParams).column === "id" &&
+      Object.fromEntries(dataParams).order === "ascending"
+    )
+      setSortInfo("LATES");
+    else setSortInfo("");
     try {
       const result = await getDataProducts(newPar, controller);
       // console.log(result.data);
@@ -204,7 +213,7 @@ function Product() {
       <Header setSearch={handleSetSearch} />
       <main className="">
         <section className="relative">
-          <div className="absolute flex gap-4 px-20 pt-10">
+          <div className="absolute flex gap-4 px-4 lg:px-20 pt-10">
             <p>Shop</p>
             <img src={arrow} alt="icon-arrow" />
             <p>Shop Right Sidebar</p>
@@ -445,7 +454,8 @@ function Product() {
                           }}
                           className="bg-orange-600 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {Object.fromEntries(dataParams).color === "orange" && (
+                          {Object.fromEntries(dataParams).color ===
+                            "orange" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>

@@ -21,15 +21,37 @@ function Tracking() {
       <Header />
       <main>
         <section className="relative">
-          <div className="absolute flex gap-4 px-20 pt-10">
-            <p>Cart</p>
-            <img src={arrow} alt="icon-arrow" />
+          <div className="absolute flex gap-4 px-4 lg:px-20 pt-10">
+            {track && (
+              <>
+                <p>Tracking</p>
+                <img src={arrow} alt="icon-arrow" />
+              </>
+            )}
+            {details && (
+              <>
+                <p>Tracking</p>
+                <img src={arrow} alt="icon-arrow" />
+                <p>Tracking Detail</p>
+              </>
+            )}
           </div>
           <div className=" hero-login w-full h-[15.6rem] opacity-20 flex justify-center items-center "></div>
           <div className=" absolute flex justify-center items-center text-center flex-col top-16 w-full ">
-            <h1 className=" text-[3.5rem] text-blackSec">Your Cart</h1>
+            {track && (
+              <>
+                <h1 className=" text-[3.5rem] text-blackSec">Order Tracking</h1>
+              </>
+            )}
+            {details && (
+              <>
+                <h1 className=" text-[3.5rem] text-blackSec">
+                  Tracking Detail
+                </h1>
+              </>
+            )}
             <p className=" text-[1rem] text-blackSec">
-              Buy everything in your cart now!
+              Track where your order arrived
             </p>
           </div>
         </section>

@@ -67,35 +67,37 @@ function CartCard(props) {
         msg={`Are you sure want to delete ${props.prodName}`}
       />
       <div className="flex flex-col gap-8 mb-10">
-        <div className="flex gap-2 md:gap-8 lg:gap-12 text-xs lg:text-base flex-row items-center justify-between">
+        <div className="flex gap-2 md:gap-2 lg:gap-12 text-xs lg:text-base flex-row items-center justify-between">
           <div className="relative flex flex-wrap md:flex-nowrap justify-center items-center gap-4 lg:gap-4 md:w-fit">
             <button
               onClick={() => setValidate(true)}
-              className="absolute hover:scale-150 transition-all hover:text-red-600 -left-8"
+              className="absolute hover:scale-150 transition-all hover:text-red-600 -left-5 lg:-left-8"
             >
-              <i className="bi bi-x-circle"></i>
+              <i className="bi bi-x-circle text-sm lg:text-lg"></i>
             </button>
-            <div className="md:w-[4.313rem] md:h-[5.188rem]">
+            <div className="w-20 h-16 mr-7 md:mr-0 md:w-[4.313rem] md:h-[5.188rem]">
               <img
                 src={imgUrl + props.img}
                 alt="images-product"
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="w-28 md:w-52">{props.prodName}</p>
+            <p className="w-16 md:w-44 text-sm md:text-lg">{props.prodName}</p>
           </div>
-          <div className="w-max">
-            <p>Rp. {props.price.toLocaleString("id-ID")}</p>
+          <div className="w-32 ml-4">
+            <p className="text-sm md:text-lg">
+              Rp. {props.price.toLocaleString("id-ID")}
+            </p>
           </div>
-          <div className="mr-4 lg:mr-0">
-            <div className="flex md:flex-row">
+          <div className="">
+            <div className="flex md:flex-row text-sm md:text-lg">
               <p
                 onClick={handleDecremen}
                 className="cursor-pointer font-black select-none btn btn-ghost"
               >
                 -
               </p>
-              <p className="min-w-[24px] flex justify-center items-center text-center">
+              <p className=" md:w-10 flex justify-center items-center text-center text-sm md:text-lg">
                 {props.qty}
               </p>
               <p
@@ -106,8 +108,10 @@ function CartCard(props) {
               </p>
             </div>
           </div>
-          <div className="w-32">
-            <p>Rp. {props.subtotal.toLocaleString("id-ID")}</p>
+          <div className="w-32 ml-4">
+            <p className="text-sm md:text-lg">
+              Rp. {props.subtotal.toLocaleString("id-ID")}
+            </p>
           </div>
         </div>
       </div>
