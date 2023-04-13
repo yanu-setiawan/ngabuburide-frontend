@@ -129,7 +129,7 @@ function Home() {
       ))}
       <section className=" w-full  bg-[#161616] flex flex-col px-20 py-16 lg:px-[8.7rem] lg:py-[5.8rem]">
         <div className="w-full flex justify-center items-center flex-col gap-9">
-          <p className=" text-lg font-PlayFairDisplay w-[89%] text-center text-white lg:text-3xl lg:leading-[55px]">
+          <p className=" text-lg font-PlayFairDisplay md:w-[89%] text-center text-white lg:text-3xl lg:leading-[55px]">
             Gave 5 stars for excellent customer service. I had a couple of
             questions which they replied quickly to answer. If I could give
             multiple reasons for my rating it would also be for the design
@@ -141,7 +141,7 @@ function Home() {
             Trevor Rivera - CEO IKEA
           </p>
         </div>
-        <div className="w-full gap-[10.4rem] flex-wrap flex flex-col md:flex-row sm:grid sm:grid-cols-2 md:flex justify-center justify-items-center items-center mt-32 mb-3">
+        <div className="w-full gap-10 md:gap-[10.4rem] flex-wrap flex flex-col md:flex-row sm:grid sm:grid-cols-2 md:flex justify-center justify-items-center items-center mt-32 mb-3">
           <div className="our-partner-img h-[8.9rem] ">
             <img src={Bitmap} alt="" className="w-full" />
           </div>

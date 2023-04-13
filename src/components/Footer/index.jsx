@@ -14,7 +14,7 @@ function Footer() {
     <footer className="bg-blackSec">
       <section className=" w-full p-6 md:p-[5rem] flex gap-14 xl:gap-[9.3rem] flex-col lg:flex-row  justify-around">
         <div className="">
-          <p className=" font-bold text-white text-[3.75rem] mb-[1rem]">
+          <p className=" font-bold text-white text-3xl md:text-5xl mb-[1rem]">
             RAZYR
           </p>
           <p className="text-[1.125rem]  text-greyFont mb-[2rem] ">
@@ -37,7 +37,7 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="mid-content flex gap-8 md:gap-[5rem] xl:gap-[9.313rem] pt-3 ">
+        <div className="mid-content flex gap-20 md:gap-[5rem] xl:gap-[9.313rem] pt-3 ">
           <div className="content-detail flex-col gap-3">
             <h2 className="font-bold text-white text-lg pb-9">COMPANY</h2>
             <ol className="flex flex-col  text-greyFont font-normal text-sm gap-8 w-max">
