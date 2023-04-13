@@ -110,6 +110,8 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
 
   useEffect(() => {
     if (
+      location.pathname === "/login" ||
+      location.pathname === "/register" ||
       location.pathname === "/profile" ||
       location.pathname === "/chat" ||
       location.pathname === "/notification"
@@ -136,8 +138,28 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
         >
           {stateStore.token === null ? (
             <>
-              <Link to={"/login"}>Login</Link>
-              <Link to={"/register"}>Register</Link>
+              <Link to={"/login"}>
+                Login
+                {location.pathname === "/login" && (
+                  <>
+                    <i className="bi bi-circle-fill absolute right-28 lg:right-10 text-red-600 opacity-20"></i>
+                    {showDelay && (
+                      <i className="bi bi-circle absolute right-28 lg:right-10 animate-ping text-red-600"></i>
+                    )}
+                  </>
+                )}
+              </Link>
+              <Link to={"/register"}>
+                Register
+                {location.pathname === "/register" && (
+                  <>
+                    <i className="bi bi-circle-fill absolute right-28 lg:right-10 text-red-600 opacity-20"></i>
+                    {showDelay && (
+                      <i className="bi bi-circle absolute right-28 lg:right-10 animate-ping text-red-600"></i>
+                    )}
+                  </>
+                )}
+              </Link>
             </>
           ) : (
             <>
