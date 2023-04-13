@@ -8,7 +8,7 @@ import icoMenu from "../../assets/menu.svg";
 import imgGlass from "../../assets/glass.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../../redux/slices/auth";
-
+import { useLocation } from "react-router-dom";
 // import { searchAction } from "../../redux/slices/search";
 import { cartAction } from "../../redux/slices/cart";
 import { authLogout } from "../../utils/https/auth";
@@ -89,7 +89,8 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
   const stateStore = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  const [showDelay, setShowDelay] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
   const handleLogout = async () => {
@@ -106,6 +107,20 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (
+      location.pathname === "/profile" ||
+      location.pathname === "/chat" ||
+      location.pathname === "/notification"
+    ) {
+      const timeout = setTimeout(() => {
+        setShowDelay(true);
+      }, 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [location.pathname]);
+
   return (
     <>
       {isLoading && (
@@ -126,14 +141,41 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
             </>
           ) : (
             <>
-              <Link to={"/profile"}>Profile</Link>
-              <Link to={"/chat"}>Chat</Link>
+              <Link to={"/profile"}>
+                Profile
+                {location.pathname === "/profile" && (
+                  <>
+                    <i className="bi bi-circle-fill absolute right-28 lg:right-10 text-red-600 opacity-20"></i>
+                    {showDelay && (
+                      <i className="bi bi-circle absolute right-28 lg:right-10 animate-ping text-red-600"></i>
+                    )}
+                  </>
+                )}
+              </Link>
+              <Link to={"/chat"}>
+                Chat
+                {location.pathname === "/chat" && (
+                  <>
+                    <i className="bi bi-circle-fill absolute right-28 lg:right-10 text-red-600 opacity-20"></i>
+                    {showDelay && (
+                      <i className="bi bi-circle absolute right-28 lg:right-10 animate-ping text-red-600"></i>
+                    )}
+                  </>
+                )}
+              </Link>
               <Link
                 to={"/notification"}
                 className="flex justify-between relative"
               >
                 Notification{" "}
-                <i className="bi bi-circle-fill absolute right-28 md:static text-red-600"></i>
+                {location.pathname === "/notification" && (
+                  <>
+                    <i className="bi bi-circle-fill absolute right-28 lg:right-10 text-red-600 opacity-20"></i>
+                    {showDelay && (
+                      <i className="bi bi-circle absolute right-28 lg:right-10 animate-ping text-red-600"></i>
+                    )}
+                  </>
+                )}
               </Link>
               <Link onClick={handleLogout}>Logout</Link>
             </>
