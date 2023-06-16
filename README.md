@@ -141,7 +141,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
 
-
 <a id="readme-top"></a>
 
 <!-- PROJECT LOGO -->
@@ -154,11 +153,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   <h2 align="center">RAZYR FURNITURE</h2>
 
   <p align="center">
-    <a href="#">View Demo</a>
+    <a href="https://razyr-store.vercel.app/">View Demo</a>
     ·
-    <a href="#">Report Bug</a>
+    <a href="https://github.com/teamNgabuburide/ngabuburide-frontend/issues">Report Bug</a>
     ·
-    <a href="#">Request Feature</a>
+    <a href="https://github.com/teamNgabuburide/ngabuburide-frontend/pulls">Request Feature</a>
   </p>
 </div>
 
@@ -173,59 +172,57 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ABOUT THE PROJECT -->
-# About The Project 
 
-## Contents
+# About The Project
 
-- [Features](#features)
-- [Run Application](#how-to-run-the-application)
-- [Contributing](#contributing)
-- [Deployment](#deployment)
-- [Related Projects](#related-projects)
-- [Contributors](#authors)
+### Built With
+
+- [![React][React.js]][React-url]
+- [![Tailwind][Tailwind-CSS]][Tailwind-url]
+- [![Redux][Redux]][Redux-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Features
 
 ### Customer
 
 - Auth
-    - Login
-    - Logout
+  - Login
+  - Logout
 - User
-    - Register
-    - Forgot Password
-    - Edit Profile
+  - Register
+  - Forgot Password
+  - Edit Profile
 - Product
 - Transaction
 
 ### Seller
 
 - Auth
-    - Login
-    - Logout
+  - Login
+  - Logout
 - User
-    - Register
-    - Forgot Password
-    - Edit Profile
+  - Register
+  - Forgot Password
+  - Edit Profile
 - Product
-    - Add Product
-    - Edit Product
+  - Add Product
+  - Edit Product
 - Transaction
-
 
 <!-- GETTING STARTED -->
 <!-- # Getting Started -->
 
-<!-- 
- ## Prerequisites 
+<!--
+ ## Prerequisites
 -->
 
 ## How to Run the Application
+
 <!-- ## Installation -->
 
-
- 
- ### 1. Clone this repository
+### 1. Clone this repository
 
 Clone this repository by run the following code:
 
@@ -265,7 +262,6 @@ You may also see any lint errors in the console.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- USAGE -->
 <!--
 # Usage
@@ -300,19 +296,15 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
-
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
-
-
 
 1. Fork the Project
 2. Create your new Branch ( `git checkout -b ...` )
 3. Commit your Changes ( `git commit -m '...'` )
 4. Push to the Branch ( `git push origin ...` )
 5. Open a Pull Request
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -322,18 +314,22 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Related Projects
-
-[Razyr Furniture Backend](https://ngabuburide-be.vercel.app)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Documentation
 
-<img width="500" src="./src/assets/Readme/read1.png" alt="Landing page">
-<img width="500" src="./src/assets/Readme/read2.png" alt="Landing page">
-<img width="500" src="./src/assets/Readme/read3.png" alt="Landing page">
-<img width="500" src="./src/assets/Readme/read4.png" alt="Landing page">
+<div>
+  <img width="500" src="./src/assets/Readme/read1.png" alt="Landing page">
+  <img width="500" src="./src/assets/Readme/read2.png" alt="Landing page">
+</div>
+<div>
+  <img width="500" src="./src/assets/Readme/read3.png" alt="Landing page">
+  <img width="500" src="./src/assets/Readme/read4.png" alt="Landing page">
+</div>
+
+## Related Projects
+
+[Razyr Furniture Backend](https://github.com/teamNgabuburide/ngabuburide-be)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Contributors
 
@@ -345,7 +341,7 @@ If you aren't satisfied with the build tool and configuration choices, you can `
           <img width="100" ; src="./src/assets/Readme/defaultPP.jpg" alt="pic_default"><br/>
           <sub><b>M Afif Buchori</b></sub>
         </a>
-        </td>
+      </td>
         <td align="center">
         <a href="https://github.com/zikriaulia28">
           <img width="100" ; src="./src/assets/Readme/defaultPP.jpg" alt="pic_default"><br/>
@@ -382,6 +378,10 @@ Your Name - []() -->
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
-
-
 <p align="center"> <samp><i>&copy; 2023 TeamNgabuburide </i></samp> </p>
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Tailwind-CSS]: https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
+[Tailwind-url]: https://tailwindcss.com/
+[Redux]: https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white
+[Redux-url]: https://redux.js.org/
