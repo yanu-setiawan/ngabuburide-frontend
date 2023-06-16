@@ -167,12 +167,12 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 ## Documentation
 
 <div>
-  <img width="500" src="./src/assets/Readme/read1.png" alt="Landing page">
-  <img width="500" src="./src/assets/Readme/read2.png" alt="Landing page">
+  <img width="400" src="./src/assets/Readme/read1.png" alt="Landing page">
+  <img width="400" src="./src/assets/Readme/read2.png" alt="Landing page">
 </div>
 <div>
-  <img width="500" src="./src/assets/Readme/read3.png" alt="Landing page">
-  <img width="500" src="./src/assets/Readme/read4.png" alt="Landing page">
+  <img width="400" src="./src/assets/Readme/read3.png" alt="Landing page">
+  <img width="400" src="./src/assets/Readme/read4.png" alt="Landing page">
 </div>
 
 ## Related Projects
