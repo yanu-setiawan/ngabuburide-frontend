@@ -61,7 +61,7 @@ function Cart() {
       ) : ( */}
       <main>
         <section className="relative">
-          <div className="absolute flex gap-4 px-20 pt-10">
+          <div className="absolute flex gap-4 px-4 lg:px-20 pt-10">
             <p>Cart</p>
             <img src={arrow} alt="icon-arrow" />
           </div>
@@ -74,10 +74,10 @@ function Cart() {
           </div>
         </section>
         <section className="flex flex-col lg:flex-row px-4 py-10 lg:p-20 gap-4">
-          <div className="flex flex-[2] justify-between px-4 py-4">
+          <div className="flex flex-[2] justify-between px-2 py-4">
             <div className="w-full">
-              <div className="flex justify-between gap-10 text-xs lg:text-base md:gap-20 mb-10 ">
-                <h2 className="mr-auto md:mr-48">PRODUCTS</h2>
+              <div className="flex justify-between gap-10 text-sm font-bold md:text-lg lg:text-2xl md:gap-10 mb-10 ">
+                <h2 className="mr-auto md:mr-28">PRODUCTS</h2>
                 <h2 className="pl-4 md:pl-0">PRICE</h2>
                 <h2>QUANTITY</h2>
                 <h2 className="mr-10">TOTAL</h2>
@@ -104,14 +104,14 @@ function Cart() {
           </div>
           <div className="flex-1">
             <div className="bg-[#F9F9F9] flex flex-col gap-10 px-6 py-6">
-              <div>
+              <div className="md:text-2xl font-bold">
                 <p>Cart Total</p>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between md:text-xl">
                 <p>Subtotal</p>
                 <p>Rp. {subtotalOnCart.toLocaleString("id-ID")}</p>
               </div>
-              <div className="w-full flex justify-between">
+              <div className="w-full flex justify-between md:text-xl">
                 <p>Shipping</p>
                 <div>
                   <div className="flex gap-4">
@@ -143,7 +143,7 @@ function Cart() {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between border-t-2 pt-4">
+              <div className="flex justify-between border-t-2 pt-4 md:text-xl">
                 <p>Total Price</p>
                 <p>Rp. {grandTotal.toLocaleString("id-ID")}</p>
               </div>
@@ -151,7 +151,7 @@ function Cart() {
             <button
               onClick={handleCheckout}
               disabled={cartState.shoppingCart.length === 0}
-              className="btn w-full h-16 bg-[#262626] text-white grid place-items-center"
+              className="btn w-full h-16 bg-[#262626] text-white grid place-items-center md:text-xl"
             >
               Procced To Check Out
             </button>

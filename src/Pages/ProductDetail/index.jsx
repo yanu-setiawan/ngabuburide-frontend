@@ -27,6 +27,7 @@ import {
   getFavorite,
 } from "../../utils/https/favorite";
 import ModalMsg from "../../components/ModalMsg";
+import { Link } from "react-router-dom";
 
 // import { userAction } from "../../redux/slices/auth";
 // import { favoriteAction } from "../../redux/slices/favorite";
@@ -213,7 +214,9 @@ function ProductDetails() {
           <section className=" flex gap-4 font-bold py-10 px-[1rem] md:px-8 lg:px-20">
             <p>Shop</p>
             <img src={arrow} alt="" />
-            <p>Shop Right Sidebar</p>
+            <Link to={"/product"}>
+              <p>Shop Right Sidebar</p>
+            </Link>
             <img src={arrow} alt="" />
             <p>Product</p>
           </section>
@@ -238,16 +241,20 @@ function ProductDetails() {
                     onClick={() => setIndexImg(idx)}
                     className=" flex w-14 h-14 md:w-24 md:h-24 lg:w-[6.75rem] lg:h-[6.75rem]  xl:w-[8.75rem] xl:h-[8.375rem] cursor-pointer"
                   >
-                    <img src={imgUrl + img} alt="" />
+                    <img
+                      src={imgUrl + img}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 ))}
               </section>
               <section className=" flex  justify-center">
-                <div className=" lg:w-[43.875rem] xl:w-[61.875rem] h-[50.313]">
+                <div className=" lg:w-[43.875rem] xl:w-[61.875rem] h-[50.313rem]">
                   <img
                     src={imgUrl + dataProduct.image[indexImg]}
                     alt=""
-                    className=" w-full"
+                    className=" w-full h-full object-cover"
                   />
                 </div>
               </section>

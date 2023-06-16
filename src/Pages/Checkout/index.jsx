@@ -92,7 +92,7 @@ function Checkout() {
       <ModalMsg isOpen={showModal} />
       <main>
         <section className="relative">
-          <div className="absolute flex gap-4 px-20 pt-10 z-10">
+          <div className="absolute flex gap-4 px-4 lg:px-20 pt-10">
             <Link to={"/cart"} className="cursor-pointer">
               Cart
             </Link>

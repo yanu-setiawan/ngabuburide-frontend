@@ -42,7 +42,6 @@ function Product() {
 
   const [isLoading, setLoading] = useState(true);
 
-  const [sortingInfo, setSortingInfo] = useState();
   const [dataParams, setDataParams] = useSearchParams({
     brand: "",
     color: "",
@@ -61,6 +60,7 @@ function Product() {
   const [rangePrice, setRangePrice] = useState(0);
   const [brand, setBrand] = useState();
   const [allColor, setAllColor] = useState(true);
+  const [sortingInfo, setSortInfo] = useState("");
 
   const handleCategoryParams = (info) => {
     const params = Object.fromEntries(dataParams);
@@ -151,16 +151,23 @@ function Product() {
   const fetchingData = async () => {
     setLoading(true);
     const newPar = new URLSearchParams(dataParams);
-
-    const sortingName = Object.fromEntries(dataParams).column;
-    const sortingDesc = Object.fromEntries(dataParams).order;
-    console.log("tes");
-    if (sortingName === "price" && sortingDesc === "ascending")
-      setSortingInfo("MORE CHEAP");
-    if (sortingName === "price" && sortingDesc === "descending")
-      setSortingInfo("More Expensive");
-    else setSortingInfo("");
-
+    console.log(Object.fromEntries(dataParams));
+    if (
+      Object.fromEntries(dataParams).column === "price" &&
+      Object.fromEntries(dataParams).order === "descending"
+    )
+      setSortInfo("MORE EXPENSIVE");
+    if (
+      Object.fromEntries(dataParams).column === "price" &&
+      Object.fromEntries(dataParams).order === "ascending"
+    )
+      setSortInfo("MORE CHEAP");
+    if (
+      Object.fromEntries(dataParams).column === "id" &&
+      Object.fromEntries(dataParams).order === "ascending"
+    )
+      setSortInfo("LATES");
+    else setSortInfo("");
     try {
       const result = await getDataProducts(newPar, controller);
       // console.log(result.data);
@@ -200,14 +207,13 @@ function Product() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [dataParams]
   );
-
   // console.log(dataProducts);
   return (
     <>
       <Header setSearch={handleSetSearch} />
       <main className="">
         <section className="relative">
-          <div className="absolute flex gap-4 px-20 pt-10">
+          <div className="absolute flex gap-4 px-4 lg:px-20 pt-10">
             <p>Shop</p>
             <img src={arrow} alt="icon-arrow" />
             <p>Shop Right Sidebar</p>
@@ -234,7 +240,7 @@ function Product() {
                   {countCategory.map((cat) => (
                     <CategoriesContent
                       key={cat.category_name}
-                      dataPar={dataParams.categories}
+                      dataPar={Object.fromEntries(dataParams).categories}
                       onClick={handleCategoryParams}
                       name={cat.category_name}
                       count={cat.totaldata}
@@ -404,8 +410,8 @@ function Product() {
                           }}
                           className="bg-amber-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "brown" && (
-                            <i className="bi bi-check text-white text-lg"></i>
+                          {Object.fromEntries(dataParams).color === "brown" && (
+                            <i className="bi bi-check text-white  text-lg"></i>
                           )}
                         </span>
                         <span
@@ -415,7 +421,7 @@ function Product() {
                           }}
                           className="bg-blue-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "blue" && (
+                          {Object.fromEntries(dataParams).color === "blue" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>
@@ -426,7 +432,7 @@ function Product() {
                           }}
                           className="bg-slate-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "grey" && (
+                          {Object.fromEntries(dataParams).color === "grey" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>
@@ -437,7 +443,7 @@ function Product() {
                           }}
                           className="bg-green-800 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "green" && (
+                          {Object.fromEntries(dataParams).color === "green" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>
@@ -448,7 +454,8 @@ function Product() {
                           }}
                           className="bg-orange-600 w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "orange" && (
+                          {Object.fromEntries(dataParams).color ===
+                            "orange" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>
@@ -459,7 +466,7 @@ function Product() {
                           }}
                           className="bg-black w-5 h-5 rounded-full cursor-pointer flex justify-center items-center"
                         >
-                          {dataParams.color === "orange" && (
+                          {Object.fromEntries(dataParams).color === "black" && (
                             <i className="bi bi-check text-white text-lg"></i>
                           )}
                         </span>
@@ -566,7 +573,7 @@ function Product() {
                   <div>image</div>
                 </div>
               </div>
-              <div>
+              <div className="lg:w-[56.625rem]">
                 <div className="flex justify-between mb-10">
                   <p>
                     Showing 1-{metaData.total} of {metaData.total} Results
@@ -610,7 +617,7 @@ function Product() {
                   <DataNotFound />
                 ) : (
                   <>
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-content-between">
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
                       {dataProducts.map((product) => (
                         <Card
                           key={product.id}

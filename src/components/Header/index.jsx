@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import icoSearch from "../../assets/icon-search.svg";
 import icoHeart from "../../assets/icon-love.svg";
 import icoCart from "../../assets/icon-cart.svg";
@@ -8,7 +8,7 @@ import icoMenu from "../../assets/menu.svg";
 import imgGlass from "../../assets/glass.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../../redux/slices/auth";
-
+import { useLocation } from "react-router-dom";
 // import { searchAction } from "../../redux/slices/search";
 import { cartAction } from "../../redux/slices/cart";
 import { authLogout } from "../../utils/https/auth";
@@ -89,7 +89,8 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
   const stateStore = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  const [showDelay, setShowDelay] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
   const handleLogout = async () => {
@@ -106,6 +107,22 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (
+      location.pathname === "/login" ||
+      location.pathname === "/register" ||
+      location.pathname === "/profile" ||
+      location.pathname === "/chat" ||
+      location.pathname === "/notification"
+    ) {
+      const timeout = setTimeout(() => {
+        setShowDelay(true);
+      }, 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [location.pathname]);
+
   return (
     <>
       {isLoading && (
@@ -121,19 +138,66 @@ function DropDownMenu({ isOpen, onToggle, onClose }) {
         >
           {stateStore.token === null ? (
             <>
-              <Link to={"/login"}>Login</Link>
-              <Link to={"/register"}>Register</Link>
+              <Link to={"/login"}>
+                Login
+                {location.pathname === "/login" && (
+                  <>
+                    <i className="bi bi-circle-fill absolute right-28 lg:right-10 text-red-600 opacity-20"></i>
+                    {showDelay && (
+                      <i className="bi bi-circle absolute right-28 lg:right-10 animate-ping text-red-600"></i>
+                    )}
+                  </>
+                )}
+              </Link>
+              <Link to={"/register"}>
+                Register
+                {location.pathname === "/register" && (
+                  <>
+                    <i className="bi bi-circle-fill absolute right-28 lg:right-10 text-red-600 opacity-20"></i>
+                    {showDelay && (
+                      <i className="bi bi-circle absolute right-28 lg:right-10 animate-ping text-red-600"></i>
+                    )}
+                  </>
+                )}
+              </Link>
             </>
           ) : (
             <>
-              <Link to={"/profile"}>Profile</Link>
-              <Link to={"/chat"}>Chat</Link>
+              <Link to={"/profile"}>
+                Profile
+                {location.pathname === "/profile" && (
+                  <>
+                    <i className="bi bi-circle-fill absolute right-28 lg:right-10 text-red-600 opacity-20"></i>
+                    {showDelay && (
+                      <i className="bi bi-circle absolute right-28 lg:right-10 animate-ping text-red-600"></i>
+                    )}
+                  </>
+                )}
+              </Link>
+              <Link to={"/chat"}>
+                Chat
+                {location.pathname === "/chat" && (
+                  <>
+                    <i className="bi bi-circle-fill absolute right-28 lg:right-10 text-red-600 opacity-20"></i>
+                    {showDelay && (
+                      <i className="bi bi-circle absolute right-28 lg:right-10 animate-ping text-red-600"></i>
+                    )}
+                  </>
+                )}
+              </Link>
               <Link
                 to={"/notification"}
                 className="flex justify-between relative"
               >
                 Notification{" "}
-                <i className="bi bi-circle-fill absolute right-28 md:static text-red-600"></i>
+                {location.pathname === "/notification" && (
+                  <>
+                    <i className="bi bi-circle-fill absolute right-28 lg:right-10 text-red-600 opacity-20"></i>
+                    {showDelay && (
+                      <i className="bi bi-circle absolute right-28 lg:right-10 animate-ping text-red-600"></i>
+                    )}
+                  </>
+                )}
               </Link>
               <Link onClick={handleLogout}>Logout</Link>
             </>
@@ -172,7 +236,8 @@ function Header(props) {
   useEffect(() => {
     fetching();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.loved]);
+  }, [props.loved, countFavorite]);
+  console.log(countFavorite);
   return (
     <>
       <nav className="fixed top-0 left-0 z-40 bg-white w-full h-16 md:h-28 flex items-center px-4 md:px-10 border-b border-black">
